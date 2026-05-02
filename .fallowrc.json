@@ -5,6 +5,14 @@
     "src/routeTree.gen.ts",
     "**/*.d.ts"
   ],
+  "ignoreDependencies": [
+    "@codemirror/commands",
+    "@codemirror/lang-markdown",
+    "@codemirror/language",
+    "@codemirror/state",
+    "@codemirror/view",
+    "@tanstack/router-devtools"
+  ],
   "rules": {
     "unused-files": "error",
     "unused-exports": "error",
