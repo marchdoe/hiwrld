@@ -45,11 +45,11 @@ Pre-launch follow-ups for [hiwrld.com](https://hiwrld.com).
 ## Code quality
 
 - [ ] **Remove `useWindowWidth` dead code** — `src/hooks/useWindowWidth.ts` is not imported anywhere; leftover from the removed narrow-screen auto-force-write mode.
-- [ ] **Drawer close on document navigation** — clicking a document link in the slide-in panel navigates correctly but leaves the drawer open. Pass an `onClose` callback through `DocumentMenu` → `DocumentMenuItem`.
+- [ ] **Drawer close on document navigation** — `closeMenu` exists in `WritePane` but is not passed into `DocumentMenu`. Pass it as an `onClose` prop to `<DocumentMenu currentDocId={docId} onClose={closeMenu} />`, thread it through to `DocumentMenuItem`, and call it on the `<Link onClick>` handler.
 
 ## Out of scope for v1 (parking-lot ideas)
 
-- **MathJax** — removed for first release; can re-add via npm + dynamic-import on first `$$…$$` detection.
+- **MathJax** — removed for first release; can re-add via pnpm + dynamic-import on first `$$…$$` detection.
 - **Subresource Integrity (SRI)** — no third-party CDN scripts at runtime; add hashes if a CDN script ever returns.
 - **Cross-browser testing** — currently Chromium only; Firefox and WebKit passes would improve confidence.
 - **Accessibility audit** — axe-core integration with Playwright would catch regressions automatically.
