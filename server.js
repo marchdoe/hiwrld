@@ -20,11 +20,7 @@ export function createApp({ distDir = join(__dirname, 'dist') } = {}) {
           'style-src': ["'self'", "'unsafe-inline'"],
           'img-src': ["'self'", 'data:', 'https:'],
           'frame-src': ['https://www.youtube.com', 'https://www.youtube-nocookie.com'],
-          'connect-src': [
-            "'self'",
-            'https://*.supabase.co',
-            'wss://*.supabase.co',
-          ],
+          'connect-src': ["'self'", 'https://*.supabase.co', 'wss://*.supabase.co'],
           'frame-ancestors': ["'none'"],
           'base-uri': ["'self'"],
           'form-action': ["'self'"],

@@ -27,7 +27,7 @@ describe('useDocuments', () => {
     const { result } = renderHook(() => useDocuments());
     act(() => result.current.add('newid1'));
     expect(result.current.docs).toEqual([{ id: 'newid1', title: '' }]);
-    expect(JSON.parse(localStorage.getItem('hiwrld.bookmarks')!)).toEqual([
+    expect(JSON.parse(localStorage.getItem('hiwrld.bookmarks') ?? 'null')).toEqual([
       { id: 'newid1', title: '' },
     ]);
   });

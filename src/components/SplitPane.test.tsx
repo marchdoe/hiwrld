@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import * as useDocumentModule from '../hooks/useDocument';
@@ -78,7 +78,7 @@ describe('SplitPane', () => {
     mockDocument({ setBody });
     mockDocuments();
     render(<SplitPane docId="abc1234" mode={null} />);
-    const textarea = document.querySelector<HTMLTextAreaElement>('.document-textarea')!;
+    const textarea = screen.getByRole('textbox');
     await userEvent.type(textarea, 'a');
     expect(setBody).toHaveBeenCalled();
   });

@@ -26,8 +26,8 @@ const nths: Record<number, string> = {
 export function generateTitle(body: string, created: Date = new Date()): string {
   const m = body.match(/^\s{0,3}#{1,6}\s+(.+?)\s*#*\s*$/m);
   if (m?.[1]) return m[1].trim();
-  const day = days[created.getDay()]!;
-  const month = months[created.getMonth()]!;
+  const day = days[created.getDay()] ?? '';
+  const month = months[created.getMonth()] ?? '';
   const date = created.getDate();
   const nth = nths[date] ?? 'th';
   return `Untitled - ${day}, ${month} ${date}${nth}, ${created.getFullYear()}`;

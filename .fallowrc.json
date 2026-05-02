@@ -1,10 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
   "entry": ["src/main.tsx", "server.js"],
-  "ignorePatterns": [
-    "src/routeTree.gen.ts",
-    "**/*.d.ts"
-  ],
+  "ignorePatterns": ["src/routeTree.gen.ts", "**/*.d.ts"],
   "ignoreDependencies": [
     "@codemirror/commands",
     "@codemirror/lang-markdown",

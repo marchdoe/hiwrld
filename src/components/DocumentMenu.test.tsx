@@ -51,7 +51,7 @@ describe('DocumentMenu', () => {
   it('calls remove() when delete button is clicked', async () => {
     const { remove } = mockDocs([{ id: 'a', title: 'A' }]);
     render(<DocumentMenu currentDocId="current" />);
-    await userEvent.click(document.querySelector('.document-menu-item-delete-button')!);
+    await userEvent.click(screen.getByLabelText('Delete Document'));
     expect(remove).toHaveBeenCalledWith('a');
   });
 });
