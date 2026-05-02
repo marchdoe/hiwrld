@@ -1,17 +1,5 @@
 import { expect, test } from '@playwright/test';
-
-async function fillTextarea(page, text) {
-  await page.locator('.document-textarea').fill(text);
-}
-
-// Helper: navigate to '/' and wait for the app to redirect to the doc path URL,
-// then return { page, url } so callers can capture the assigned document URL.
-async function openDoc(context) {
-  const page = await context.newPage();
-  await page.goto('/');
-  await page.waitForURL(/\/[A-Za-z0-9]{7}$/);
-  return { page, url: page.url() };
-}
+import { fillTextarea, openDoc } from './helpers.js';
 
 test.describe('persistence', () => {
   test('content survives a full reload via localStorage', async ({ page, context }) => {
@@ -31,9 +19,8 @@ test.describe('persistence', () => {
     context,
   }) => {
     // Creator page: create a doc and type
-    const { page: creator } = await openDoc(context);
+    const { page: creator, url } = await openDoc(context);
     await fillTextarea(creator, 'pre-existing content');
-    const url = creator.url();
     await creator.waitForTimeout(800);
     await creator.close();
 

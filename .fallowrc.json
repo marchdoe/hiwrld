@@ -1,14 +1,16 @@
 {
   "$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
   "entry": ["src/main.tsx", "server.js"],
-  "ignorePatterns": ["src/routeTree.gen.ts", "**/*.d.ts"],
+  "ignorePatterns": ["src/routeTree.gen.ts", "**/*.d.ts", "__mocks__/**"],
   "ignoreDependencies": [
     "@codemirror/commands",
     "@codemirror/lang-markdown",
     "@codemirror/language",
     "@codemirror/state",
     "@codemirror/view",
-    "@tanstack/router-devtools"
+    "@tanstack/router-devtools",
+    "@supabase/__mocks__",
+    "@tanstack/__mocks__"
   ],
   "rules": {
     "unused-files": "error",

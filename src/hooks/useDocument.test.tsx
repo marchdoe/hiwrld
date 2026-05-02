@@ -12,6 +12,19 @@ function wrapper({ children }: { children: ReactNode }) {
   return <QueryClientProvider client={client}>{children}</QueryClientProvider>;
 }
 
+async function setup(overrides: { body?: string; title?: string } = {}) {
+  setDoc('abc1234', {
+    id: 'abc1234',
+    body: '',
+    title: '',
+    created: new Date().toISOString(),
+    ...overrides,
+  });
+  const hook = renderHook(() => useDocument('abc1234'), { wrapper });
+  await waitFor(() => expect(hook.result.current.isLoading).toBe(false));
+  return hook;
+}
+
 describe('useDocument', () => {
   beforeEach(() => {
     resetStore();
@@ -19,34 +32,18 @@ describe('useDocument', () => {
   });
 
   it('starts loading then resolves body from Supabase', async () => {
-    setDoc('abc1234', {
-      id: 'abc1234',
-      body: '# Hello',
-      title: 'Hello',
-      created: new Date().toISOString(),
-    });
-    const { result } = renderHook(() => useDocument('abc1234'), { wrapper });
-    await waitFor(() => expect(result.current.isLoading).toBe(false));
+    const { result } = await setup({ body: '# Hello', title: 'Hello' });
     expect(result.current.body).toBe('# Hello');
   });
 
   it('derives title from H1 in body', async () => {
-    setDoc('abc1234', {
-      id: 'abc1234',
-      body: '# My Title',
-      title: 'My Title',
-      created: new Date().toISOString(),
-    });
-    const { result } = renderHook(() => useDocument('abc1234'), { wrapper });
-    await waitFor(() => expect(result.current.isLoading).toBe(false));
+    const { result } = await setup({ body: '# My Title', title: 'My Title' });
     expect(result.current.title).toBe('My Title');
   });
 
   it('setBody updates body and schedules a debounced save', async () => {
     vi.useFakeTimers();
-    setDoc('abc1234', { id: 'abc1234', body: '', title: '', created: new Date().toISOString() });
-    const { result } = renderHook(() => useDocument('abc1234'), { wrapper });
-    await waitFor(() => expect(result.current.isLoading).toBe(false));
+    const { result } = await setup();
 
     act(() => result.current.setBody('new body'));
     expect(result.current.body).toBe('new body');
@@ -60,14 +57,7 @@ describe('useDocument', () => {
   });
 
   it('updates live when a remote change arrives via Supabase channel', async () => {
-    setDoc('abc1234', {
-      id: 'abc1234',
-      body: 'initial',
-      title: 'Untitled',
-      created: new Date().toISOString(),
-    });
-    const { result } = renderHook(() => useDocument('abc1234'), { wrapper });
-    await waitFor(() => expect(result.current.isLoading).toBe(false));
+    const { result } = await setup({ body: 'initial', title: 'Untitled' });
 
     act(() =>
       setDoc('abc1234', {

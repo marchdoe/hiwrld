@@ -1,25 +1,12 @@
 import { expect, test } from '@playwright/test';
+import { fillTextarea, openDoc } from './helpers.js';
 
 // All scenarios use multiple pages within ONE context so they share
 // BroadcastChannel + localStorage. (Different contexts are isolated.)
 
-async function fillTextarea(page, text) {
-  await page.locator('.document-textarea').fill(text);
-}
-
-// Helper: navigate to '/' and wait for the app to redirect to the doc path URL,
-// then return the page so subsequent pages can join the same document.
-async function openDoc(context) {
-  const page = await context.newPage();
-  await page.goto('/');
-  await page.waitForURL(/\/[A-Za-z0-9]{7}$/);
-  return page;
-}
-
 test.describe('concurrent edits — last-write-wins via BroadcastChannel', () => {
   test('read replication: A types, B observes within 1s', async ({ context }) => {
-    const a = await openDoc(context);
-    const url = a.url();
+    const { page: a, url } = await openDoc(context);
 
     const b = await context.newPage();
     await b.goto(url);
@@ -29,8 +16,7 @@ test.describe('concurrent edits — last-write-wins via BroadcastChannel', () =>
   });
 
   test('simultaneous typing: state converges across both clients', async ({ context }) => {
-    const a = await openDoc(context);
-    const url = a.url();
+    const { page: a, url } = await openDoc(context);
     const b = await context.newPage();
     await b.goto(url);
 
@@ -48,8 +34,7 @@ test.describe('concurrent edits — last-write-wins via BroadcastChannel', () =>
   });
 
   test('rapid alternation: A, B, A, B → both end on the same string', async ({ context }) => {
-    const a = await openDoc(context);
-    const url = a.url();
+    const { page: a, url } = await openDoc(context);
     const b = await context.newPage();
     await b.goto(url);
 
@@ -68,8 +53,7 @@ test.describe('concurrent edits — last-write-wins via BroadcastChannel', () =>
   });
 
   test("late joiner: B opens URL fresh and sees A's content", async ({ context }) => {
-    const a = await openDoc(context);
-    const url = a.url();
+    const { page: a, url } = await openDoc(context);
     await fillTextarea(a, 'typed before B joined');
     await a.waitForTimeout(800); // let debounced save fire
 
@@ -81,8 +65,7 @@ test.describe('concurrent edits — last-write-wins via BroadcastChannel', () =>
   });
 
   test('three-way: convergence scales past two clients', async ({ context }) => {
-    const a = await openDoc(context);
-    const url = a.url();
+    const { page: a, url } = await openDoc(context);
     const b = await context.newPage();
     await b.goto(url);
     const c = await context.newPage();
@@ -103,8 +86,7 @@ test.describe('concurrent edits — last-write-wins via BroadcastChannel', () =>
   });
 
   test('disconnect / reconnect: B catches up after A keeps typing', async ({ context }) => {
-    const a = await openDoc(context);
-    const url = a.url();
+    const { page: a, url } = await openDoc(context);
     const b = await context.newPage();
     await b.goto(url);
 

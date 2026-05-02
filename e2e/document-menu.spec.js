@@ -1,7 +1,18 @@
 import { expect, test } from '@playwright/test';
+import { fillTextarea } from './helpers.js';
 
-async function fillTextarea(page, text) {
-  await page.locator('.document-textarea').fill(text);
+// Sets up two documents and leaves the page on the second one.
+async function createTwoDocuments(page, firstText, secondText) {
+  await page.goto('/');
+  await page.waitForURL(/\/[A-Za-z0-9]{7}$/);
+  const firstDocUrl = page.url();
+  await fillTextarea(page, firstText);
+  await page.waitForTimeout(800);
+  await page.locator('.add-button').click();
+  await page.waitForURL((u) => u.href !== firstDocUrl);
+  await fillTextarea(page, secondText);
+  await page.waitForTimeout(800);
+  return firstDocUrl;
 }
 
 test.describe('document menu', () => {
@@ -27,16 +38,7 @@ test.describe('document menu', () => {
   });
 
   test('clicking a menu item switches to that document', async ({ page }) => {
-    await page.goto('/');
-    await page.waitForURL(/\/[A-Za-z0-9]{7}$/);
-    const firstDocUrl = page.url();
-    await fillTextarea(page, '# Doc One');
-    await page.waitForTimeout(800);
-
-    await page.locator('.add-button').click();
-    await page.waitForURL((u) => u.href !== firstDocUrl);
-    await fillTextarea(page, '# Doc Two');
-    await page.waitForTimeout(800);
+    await createTwoDocuments(page, '# Doc One', '# Doc Two');
 
     await page.locator('.menu-button').click();
     await expect(page.locator('.document-menu')).toBeVisible();
@@ -46,15 +48,7 @@ test.describe('document menu', () => {
   });
 
   test('delete button removes a document from the menu', async ({ page }) => {
-    await page.goto('/');
-    await page.waitForURL(/\/[A-Za-z0-9]{7}$/);
-    const firstDocUrl = page.url();
-    await fillTextarea(page, '# Keep');
-    await page.waitForTimeout(800);
-    await page.locator('.add-button').click();
-    await page.waitForURL((u) => u.href !== firstDocUrl);
-    await fillTextarea(page, '# Delete');
-    await page.waitForTimeout(800);
+    await createTwoDocuments(page, '# Keep', '# Delete');
 
     await page.locator('.menu-button').click();
     await expect(page.locator('.document-menu')).toBeVisible();
