@@ -94,6 +94,8 @@ The app detects `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` at build time. 
 | `pnpm check:write` | Apply all Biome auto-fixes |
 | `pnpm lint` | Biome lint only |
 | `pnpm format` | Biome format with `--write` |
+| `pnpm analyze` | Fallow dead code + complexity audit |
+| `pnpm analyze:ci` | Fallow audit in JSON mode (used by CI) |
 
 ## Testing
 
@@ -134,6 +136,7 @@ The multi-tab e2e tests lock in **last-write-wins** convergence — all clients 
 | Server | Express 5 + helmet + compression (ESM) |
 | Bundler | Vite 7 |
 | Linter / formatter | Biome 2 |
+| Code analysis | Fallow 2 (dead code, duplication, complexity) |
 | UI | React 19 + TanStack Router v1 |
 | Data fetching | TanStack Query v5 |
 | Editor | CodeMirror 6 (`@codemirror/lang-markdown`) |
