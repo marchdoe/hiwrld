@@ -1,10 +1,10 @@
 server:
-	npm run server
+	pnpm server
 
 dev:
-	npm run dev
+	pnpm dev
 
 build:
-	npm run build
+	pnpm build
 
 .PHONY: server dev build

@@ -18,8 +18,8 @@ Best edited by one person at a time, but anyone with the URL can read along in r
 ## Quick start
 
 ```bash
-npm install
-npm run dev          # Vite dev server → http://localhost:5173
+pnpm install
+pnpm dev             # Vite dev server → http://localhost:5173
 ```
 
 No backend configuration required. Without Supabase, documents persist in localStorage and multi-tab editing within the same browser syncs via BroadcastChannel. Cross-device persistence requires a Supabase project (see below).
@@ -76,7 +76,7 @@ Both values are in your Supabase project under **Settings → API**.
 ### 5. Restart the dev server
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 The app detects `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` at build time. When both are present, it switches from localStorage to Supabase for all reads, writes, and realtime subscriptions.
@@ -85,25 +85,25 @@ The app detects `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` at build time. 
 
 | Script | What it does |
 |---|---|
-| `npm run dev` | Vite dev server with HMR on port 5173 |
-| `npm run build` | Production build to `dist/` |
-| `npm run preview` | Preview the production bundle locally |
-| `npm run server` | Express 5 static server (serves `dist/` on port 2000) |
-| `npm start` | Alias for `npm run server` |
-| `npm run check` | Biome lint + format check (no writes) |
-| `npm run check:write` | Apply all Biome auto-fixes |
-| `npm run lint` | Biome lint only |
-| `npm run format` | Biome format with `--write` |
+| `pnpm dev` | Vite dev server with HMR on port 5173 |
+| `pnpm build` | Production build to `dist/` |
+| `pnpm preview` | Preview the production bundle locally |
+| `pnpm server` | Express 5 static server (serves `dist/` on port 2000) |
+| `pnpm start` | Alias for `pnpm server` |
+| `pnpm check` | Biome lint + format check (no writes) |
+| `pnpm check:write` | Apply all Biome auto-fixes |
+| `pnpm lint` | Biome lint only |
+| `pnpm format` | Biome format with `--write` |
 
 ## Testing
 
 ```bash
-npm run test          # Vitest unit + integration (jsdom)
-npm run test:watch    # Vitest in watch mode
-npm run test:coverage # With v8 coverage report
-npm run test:e2e      # Playwright end-to-end (auto-builds + serves dist/)
-npm run test:e2e:ui   # Playwright UI mode
-npm run test:all      # Vitest then Playwright
+pnpm test             # Vitest unit + integration (jsdom)
+pnpm test:watch       # Vitest in watch mode
+pnpm test:coverage    # With v8 coverage report
+pnpm test:e2e         # Playwright end-to-end (auto-builds + serves dist/)
+pnpm test:e2e:ui      # Playwright UI mode
+pnpm test:all         # Vitest then Playwright
 ```
 
 ### What's covered
