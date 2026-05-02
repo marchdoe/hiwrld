@@ -1,7 +1,12 @@
+import type { Page } from '@playwright/test';
 import { expect, test } from '@playwright/test';
-import { fillTextarea } from './helpers.js';
+import { fillTextarea } from './helpers';
 
-async function assertNotAlertedAndStripped(page, markdown, htmlPattern) {
+async function assertNotAlertedAndStripped(
+  page: Page,
+  markdown: string,
+  htmlPattern: RegExp
+): Promise<void> {
   await page.goto('/');
   let alerted = false;
   page.on('dialog', async (d) => {
@@ -15,7 +20,7 @@ async function assertNotAlertedAndStripped(page, markdown, htmlPattern) {
   expect(html).not.toMatch(htmlPattern);
 }
 
-async function assertStripped(page, markdown, htmlPattern) {
+async function assertStripped(page: Page, markdown: string, htmlPattern: RegExp): Promise<void> {
   await page.goto('/');
   await fillTextarea(page, markdown);
   await page.waitForTimeout(500);

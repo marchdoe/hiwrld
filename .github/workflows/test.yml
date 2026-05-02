@@ -33,7 +33,6 @@ jobs:
       - name: Vitest
         id: vitest
         run: pnpm test:coverage
-        continue-on-error: true
 
       - name: Playwright
         id: playwright

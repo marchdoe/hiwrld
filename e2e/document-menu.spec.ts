@@ -1,8 +1,13 @@
+import type { Page } from '@playwright/test';
 import { expect, test } from '@playwright/test';
-import { fillTextarea } from './helpers.js';
+import { fillTextarea } from './helpers';
 
 // Sets up two documents and leaves the page on the second one.
-async function createTwoDocuments(page, firstText, secondText) {
+async function createTwoDocuments(
+  page: Page,
+  firstText: string,
+  secondText: string
+): Promise<void> {
   await page.goto('/');
   await page.waitForURL(/\/[A-Za-z0-9]{7}$/);
   const firstDocUrl = page.url();
@@ -12,7 +17,6 @@ async function createTwoDocuments(page, firstText, secondText) {
   await page.waitForURL((u) => u.href !== firstDocUrl);
   await fillTextarea(page, secondText);
   await page.waitForTimeout(800);
-  return firstDocUrl;
 }
 
 test.describe('document menu', () => {

@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { fillTextarea, openDoc } from './helpers.js';
+import { fillTextarea, openDoc } from './helpers';
 
 // All scenarios use multiple pages within ONE context so they share
 // BroadcastChannel + localStorage. (Different contexts are isolated.)

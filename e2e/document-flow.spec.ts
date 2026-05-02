@@ -1,8 +1,5 @@
 import { expect, test } from '@playwright/test';
-
-async function fillTextarea(page, text) {
-  await page.locator('.document-textarea').fill(text);
-}
+import { fillTextarea } from './helpers';
 
 test.describe('document flow', () => {
   test('landing redirects to a doc URL with a 7-char id', async ({ page }) => {

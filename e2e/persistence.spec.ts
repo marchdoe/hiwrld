@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { fillTextarea, openDoc } from './helpers.js';
+import { fillTextarea, openDoc } from './helpers';
 
 test.describe('persistence', () => {
   test('content survives a full reload via localStorage', async ({ page, context }) => {
