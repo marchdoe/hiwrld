@@ -24,7 +24,7 @@ function writeDocs(docs: BookmarkEntry[]): void {
   window.dispatchEvent(new CustomEvent(BOOKMARKS_CHANGED));
 }
 
-interface UseDocumentsResult {
+export interface UseDocumentsResult {
   docs: BookmarkEntry[];
   add: (id: string) => void;
   remove: (id: string) => void;

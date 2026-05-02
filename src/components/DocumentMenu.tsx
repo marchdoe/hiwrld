@@ -3,7 +3,7 @@ import { useDocuments } from '../hooks/useDocuments';
 import { generateDocumentId } from '../lib/generateId';
 import { DocumentMenuItem } from './DocumentMenuItem';
 
-interface DocumentMenuProps {
+export interface DocumentMenuProps {
   currentDocId: string;
 }
 

@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router';
 
-interface DocumentMenuItemProps {
+export interface DocumentMenuItemProps {
   id: string;
   title: string;
   onDelete: (id: string) => void;

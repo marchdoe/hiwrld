@@ -6,7 +6,7 @@ import type { AppMode } from '../types/document';
 import { ReadPane } from './ReadPane';
 import { WritePane } from './WritePane';
 
-interface SplitPaneProps {
+export interface SplitPaneProps {
   docId: string;
   mode: AppMode | null;
 }

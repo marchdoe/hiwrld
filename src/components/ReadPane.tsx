@@ -1,7 +1,7 @@
 import type { AppMode } from '../types/document';
 import { Article } from './Article';
 
-interface ReadPaneProps {
+export interface ReadPaneProps {
   body: string;
   mode: AppMode | null;
   onModeChange: (mode: AppMode | null) => void;

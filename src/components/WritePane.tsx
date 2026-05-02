@@ -6,7 +6,7 @@ import type { AppMode } from '../types/document';
 import { DocumentMenu } from './DocumentMenu';
 import { Textarea } from './Textarea';
 
-interface WritePaneProps {
+export interface WritePaneProps {
   docId: string;
   body: string;
   mode: AppMode | null;

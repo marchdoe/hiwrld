@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-interface TextareaProps {
+export interface TextareaProps {
   body: string;
   onChange: (body: string) => void;
 }
