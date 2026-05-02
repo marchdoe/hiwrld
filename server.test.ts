@@ -18,7 +18,8 @@ describe('server', () => {
     expect(csp).toBeTruthy();
     expect(csp).toContain("default-src 'self'");
     expect(csp).toContain('frame-src https://www.youtube.com');
-    expect(csp).toContain('https://*.firebaseio.com');
+    expect(csp).toContain('https://*.supabase.co');
+    expect(csp).toContain('wss://*.supabase.co');
     expect(csp).toContain("frame-ancestors 'none'");
   });
 
