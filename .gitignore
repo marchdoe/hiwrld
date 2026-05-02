@@ -1,0 +1,21 @@
+.DS_Store
+*.sublime*
+.sass-cache
+node_modules
+
+# Build output
+dist/
+.vite/
+
+# Local env files
+.env.local
+.env
+
+# Git worktrees
+.worktrees/
+
+# Test output
+coverage/
+playwright-report/
+test-results/
+.playwright/

@@ -1,0 +1,56 @@
+name: test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Build
+        run: npm run build
+
+      - name: Vitest
+        id: vitest
+        run: npm run test:coverage
+        continue-on-error: true
+
+      - name: Playwright
+        id: playwright
+        run: npm run test:e2e
+        continue-on-error: true
+
+      - name: Upload test artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-artifacts
+          path: |
+            playwright-report/
+            test-results/
+            coverage/
+          retention-days: 14
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## Test results" >> $GITHUB_STEP_SUMMARY
+          echo "- Vitest outcome: ${{ steps.vitest.outcome }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Playwright outcome: ${{ steps.playwright.outcome }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "_Failures do not block this workflow (report-only mode)._" >> $GITHUB_STEP_SUMMARY

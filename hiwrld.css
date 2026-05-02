@@ -1,0 +1,571 @@
+@charset "UTF-8";
+
+/* Icon buttons — Lucide SVG via CSS mask (replaces dead SymbolSet font) */
+.ss-rows,
+.ss-plus,
+.ss-write,
+.ss-view,
+.ss-trash {
+  mask-position: center center;
+  mask-repeat: no-repeat;
+  mask-size: 1.25rem 1.25rem;
+  -webkit-mask-position: center center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: 1.25rem 1.25rem;
+  background-color: currentColor;
+  min-width: 1.75rem;
+  min-height: 1.75rem;
+}
+
+.ss-rows {
+  mask-image: url("data:image/svg+xml;utf8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cline x1=%273%27 y1=%276%27 x2=%2721%27 y2=%276%27/%3E%3Cline x1=%273%27 y1=%2712%27 x2=%2721%27 y2=%2712%27/%3E%3Cline x1=%273%27 y1=%2718%27 x2=%2721%27 y2=%2718%27/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml;utf8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cline x1=%273%27 y1=%276%27 x2=%2721%27 y2=%276%27/%3E%3Cline x1=%273%27 y1=%2712%27 x2=%2721%27 y2=%2712%27/%3E%3Cline x1=%273%27 y1=%2718%27 x2=%2721%27 y2=%2718%27/%3E%3C/svg%3E");
+}
+.ss-plus {
+  mask-image: url("data:image/svg+xml;utf8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cline x1=%2712%27 y1=%275%27 x2=%2712%27 y2=%2719%27/%3E%3Cline x1=%275%27 y1=%2712%27 x2=%2719%27 y2=%2712%27/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml;utf8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cline x1=%2712%27 y1=%275%27 x2=%2712%27 y2=%2719%27/%3E%3Cline x1=%275%27 y1=%2712%27 x2=%2719%27 y2=%2712%27/%3E%3C/svg%3E");
+}
+.ss-write {
+  mask-image: url("data:image/svg+xml;utf8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M12 20h9%27/%3E%3Cpath d=%27M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z%27/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml;utf8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M12 20h9%27/%3E%3Cpath d=%27M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z%27/%3E%3C/svg%3E");
+}
+.ss-view {
+  mask-image: url("data:image/svg+xml;utf8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%273%27/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml;utf8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%273%27/%3E%3C/svg%3E");
+}
+.ss-trash {
+  mask-image: url("data:image/svg+xml;utf8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpolyline points=%273 6 5 6 21 6%27/%3E%3Cpath d=%27M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2%27/%3E%3Cline x1=%2710%27 y1=%2711%27 x2=%2710%27 y2=%2717%27/%3E%3Cline x1=%2714%27 y1=%2711%27 x2=%2714%27 y2=%2717%27/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml;utf8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpolyline points=%273 6 5 6 21 6%27/%3E%3Cpath d=%27M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2%27/%3E%3Cline x1=%2710%27 y1=%2711%27 x2=%2710%27 y2=%2717%27/%3E%3Cline x1=%2714%27 y1=%2711%27 x2=%2714%27 y2=%2717%27/%3E%3C/svg%3E");
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.45;
+  color: #35332e;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+@media (min-width: 1200px) {
+  html {
+    font-size: 17px;
+  }
+}
+@media (min-width: 1300px) {
+  html {
+    font-size: 18px;
+  }
+}
+@media (min-width: 1600px) {
+  html {
+    font-size: 20px;
+  }
+}
+@media (min-width: 1800px) {
+  html {
+    font-size: 22px;
+  }
+}
+
+button {
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  border: none;
+  font-size: 12px;
+  color: #35332e;
+  padding: 0.5rem;
+  cursor: pointer;
+  opacity: 0.45;
+}
+button:hover,
+button:active,
+button.pressed {
+  opacity: 1;
+}
+button:focus-visible {
+  opacity: 1;
+  outline: 2px solid #2f8a5a;
+  outline-offset: 2px;
+}
+
+article > :first-child {
+  margin-top: 0;
+}
+article > * {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+article h1 {
+  font-size: 1.5rem;
+  margin-top: 4rem;
+  margin-bottom: 2.5rem;
+  position: relative;
+  text-align: center;
+}
+article h1::after {
+  content: "";
+  width: 100px;
+  left: 50%;
+  margin-left: -50px;
+  border-bottom: 1px solid #d8d4c6;
+  top: 100%;
+  position: absolute;
+  margin-top: 1rem;
+}
+article h2 {
+  font-size: 1.25rem;
+  margin-top: 2rem;
+}
+article h3,
+article h4,
+article h5,
+article h6 {
+  font-size: 1rem;
+  margin-top: 2rem;
+  margin-bottom: -0.5rem;
+}
+article p {
+  text-align: left;
+}
+article blockquote {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+article a {
+  position: relative;
+  color: #2f8a5a;
+}
+article a:hover,
+article a:focus {
+  color: #28774d;
+}
+article a:active {
+  top: 1px;
+}
+article ul,
+article ol {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+article ul > li,
+article ol > li {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+article ul {
+  list-style-type: disc;
+}
+article pre,
+article code {
+  font-family:
+    ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+article pre {
+  font-size: 0.875em;
+  background: #f7f6f2;
+  padding: 1rem 1.25rem;
+  border-radius: 3px;
+  margin: 1.25em 0;
+}
+article pre code,
+article pre code.hljs {
+  font-size: 1em;
+  background: transparent;
+  padding: 0;
+}
+article code {
+  font-size: 0.875em;
+}
+article hr {
+  background: transparent;
+  border: none;
+  width: 100px;
+  margin: 1.5em auto;
+  border-bottom: 1px solid #eee;
+}
+article img {
+  max-width: 100%;
+}
+
+/* ── Plain textarea (React migration) — fill the write-textarea-wrap ── */
+textarea.document-textarea {
+  height: 100%;
+  width: 100%;
+  background: transparent;
+  outline: none;
+  resize: none;
+  border: none;
+  padding: 3rem;
+  box-sizing: border-box;
+}
+
+/* ── CodeMirror 6 write pane ──────────────────────────────────── */
+.cm-editor {
+  height: 100%;
+  width: 100%;
+  background: transparent;
+  outline: none;
+}
+.cm-scroller {
+  overflow: auto;
+  font-family:
+    ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+  font-size: 13px;
+  line-height: 1.4;
+}
+@media (min-width: 1200px) {
+  .cm-scroller {
+    font-size: 14px;
+  }
+}
+.cm-scroller::-webkit-scrollbar {
+  width: 7px;
+}
+.cm-scroller::-webkit-scrollbar-track {
+  margin: 3rem;
+}
+.cm-scroller::-webkit-scrollbar-thumb {
+  border-radius: 14px;
+  background: #edebe2;
+}
+.write-textarea-wrap {
+  border-radius: 4px;
+  transition:
+    box-shadow 250ms ease,
+    background-color 250ms ease;
+}
+.write-form:focus-within .write-textarea-wrap {
+  background-color: #fdfdfb;
+  box-shadow:
+    0 0 0 1px #f1f1e7,
+    0 2px 24px -8px rgba(53, 51, 46, 0.08);
+}
+.write-form:has(.cm-content:focus-visible) .write-textarea-wrap,
+.write-form:has(textarea:focus-visible) .write-textarea-wrap {
+  box-shadow:
+    0 0 0 1px #d8d4c6,
+    0 2px 24px -8px rgba(53, 51, 46, 0.12);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+}
+
+/* React root div — transparent to flex layout so .write/.read are direct flex children */
+#root {
+  display: contents;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  min-height: 100%;
+  min-width: 100%;
+}
+
+.write,
+.read {
+  position: relative;
+  overflow: hidden;
+}
+
+.write {
+  flex: 0 0 33rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.write-form {
+  position: relative;
+  flex: 1;
+}
+
+.read {
+  flex: 1;
+}
+
+.document-article {
+  padding: 3rem;
+  max-width: 32rem;
+  margin: 0 auto;
+}
+
+.write-buttons,
+.read-buttons {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.read {
+  font-family: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+  border-left: 1px solid #f1f1e7;
+  box-shadow: 0 -1px 10px #f1f1e7;
+}
+
+.read-only-button {
+  float: left;
+}
+
+/* The eye in the read pane is only needed in read-only mode
+   (write pane hidden, no toolbar access). In split + write-only
+   views the eye in the write toolbar handles it. */
+.read-buttons .read-only-button {
+  display: none;
+}
+.read-only .read-buttons .read-only-button {
+  display: block;
+}
+
+.write {
+  background: #fcfcfa;
+}
+
+.write {
+  font-family:
+    ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+  font-size: 13px;
+  line-height: 1.4;
+}
+@media (min-width: 1200px) {
+  .write {
+    font-size: 14px;
+  }
+}
+
+.write-textarea-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* Left-side slide-in drawer */
+.document-menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 199;
+  background: rgba(53, 51, 46, 0.15);
+  border: none;
+  padding: 0;
+  cursor: default;
+}
+
+.document-menu-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100vh;
+  background: #f7f6f2;
+  border-right: 1px solid #edebe2;
+  box-shadow: 4px 0 24px rgba(53, 51, 46, 0.1);
+  z-index: 200;
+  overflow-y: auto;
+  transform: translateX(-100%);
+  transition: transform 200ms ease;
+}
+
+.document-menu-drawer.open {
+  transform: translateX(0);
+}
+
+.document-menu {
+  list-style: none;
+  padding: 0.5rem 0;
+}
+.document-menu::-webkit-scrollbar {
+  width: 0;
+}
+
+.document-menu-item {
+  overflow: hidden;
+  cursor: pointer;
+}
+.document-menu-item:hover,
+.document-menu-item:focus {
+  background: rgba(53, 51, 46, 0.01);
+  outline: none;
+  color: #2f8a5a;
+}
+.document-menu-item:active {
+  color: #28774d;
+}
+
+.document-menu-item-wrap {
+  position: relative;
+  max-width: 26rem;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.document-menu-item-title {
+  padding: 0.5rem 0 0.45rem;
+  position: absolute;
+  left: 0;
+  right: 2em;
+  top: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.document-menu-item-delete-button {
+  float: right;
+  opacity: 0.15;
+}
+
+.menu-button,
+.add-button,
+.write-only-button {
+  position: relative;
+  z-index: 2;
+}
+.menu-button,
+.add-button {
+  float: left;
+}
+
+/* Both mode-toggle buttons sit on the right of the write toolbar */
+.write-only-button,
+.write-buttons .read-only-button {
+  float: right;
+}
+
+.write-only .read,
+.read-only .write {
+  display: none;
+}
+
+.write-only .write,
+.read-only .read {
+  flex: 1;
+}
+
+pre .comment {
+  color: #aba79e;
+}
+pre .constant,
+pre .storage,
+pre .tag,
+pre .keyword:not(.operator),
+pre .selector,
+pre .string:not(.value),
+pre .regexp,
+pre .function {
+  color: #4b8b8d;
+}
+
+/* ── GFM Alert boxes (markdown-it-github-alerts) ─────────────── */
+.document-article .markdown-alert {
+  border-left: 4px solid;
+  border-radius: 0 3px 3px 0;
+  padding: 0.75rem 1rem;
+  margin: 1.5rem 0;
+}
+.document-article .markdown-alert > :last-child {
+  margin-bottom: 0;
+}
+.document-article .markdown-alert-title {
+  font-size: 0.8125em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.4rem;
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+}
+.document-article .markdown-alert-note {
+  background: #f0f4f8;
+  border-left-color: #4a90c4;
+}
+.document-article .markdown-alert-note .markdown-alert-title {
+  color: #4a90c4;
+}
+.document-article .markdown-alert-tip {
+  background: #f0f7f4;
+  border-left-color: #2f8a5a;
+}
+.document-article .markdown-alert-tip .markdown-alert-title {
+  color: #2f8a5a;
+}
+.document-article .markdown-alert-important {
+  background: #f5f0f8;
+  border-left-color: #8b5cf6;
+}
+.document-article .markdown-alert-important .markdown-alert-title {
+  color: #8b5cf6;
+}
+.document-article .markdown-alert-warning {
+  background: #fdf8f0;
+  border-left-color: #d97706;
+}
+.document-article .markdown-alert-warning .markdown-alert-title {
+  color: #d97706;
+}
+.document-article .markdown-alert-caution {
+  background: #fdf0f0;
+  border-left-color: #dc2626;
+}
+.document-article .markdown-alert-caution .markdown-alert-title {
+  color: #dc2626;
+}
+
+@media print {
+  .write,
+  .read-buttons {
+    display: none;
+  }
+  .read {
+    border: none;
+    box-shadow: none;
+  }
+  .document-article {
+    margin: 0 auto;
+    max-width: 35em;
+    padding: 0;
+  }
+  @page {
+    margin: 5em 0;
+  }
+  body,
+  .write,
+  .read {
+    background: white;
+  }
+  .document-article,
+  .document-article p,
+  .document-article h1,
+  .document-article h2,
+  .document-article h3,
+  .document-article h4,
+  .document-article h5,
+  .document-article h6,
+  .document-article li,
+  .document-article blockquote {
+    color: black;
+  }
+  a {
+    text-decoration: none;
+  }
+  a[href]::after {
+    content: " (" attr(href) ")";
+  }
+  img {
+    max-width: 100%;
+  }
+}
