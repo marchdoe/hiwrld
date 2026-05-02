@@ -127,7 +127,10 @@ The multi-tab e2e tests lock in **last-write-wins** convergence — all clients 
 
 ### CI
 
-`.github/workflows/test.yml` runs Vitest + Playwright on every push and PR. The workflow is report-only — failures do not block merges while the suite stabilises. Playwright traces and coverage HTML are uploaded as artifacts (14-day retention).
+Two jobs run in parallel on every push and PR:
+
+- **Unit & E2E tests** (`test` job) — runs Vitest + Playwright. Report-only; failures do not block merges while the suite stabilises. Playwright traces and coverage HTML are uploaded as artifacts (14-day retention).
+- **Fallow analysis** (`analyze` job) — runs `fallow audit` and fails the build on any dead code, duplication, or complexity violation. This job enforces the quality gate.
 
 ## Stack
 
@@ -162,7 +165,7 @@ src/
 │   └── $docId.$mode.tsx         # /$docId/read or /$docId/write
 ├── components/
 │   ├── SplitPane.tsx            # Top-level layout: manages mode, wires document data + panes
-│   ├── WritePane.tsx            # Editor pane (CodeMirror + document menu trigger)
+│   ├── WritePane.tsx            # Editor pane (plain textarea + document menu trigger)
 │   ├── ReadPane.tsx             # Preview pane (renders sanitized markdown HTML)
 │   ├── Article.tsx              # DOMPurify sanitized markdown renderer
 │   ├── DocumentMenu.tsx         # Slide-in drawer listing saved documents
