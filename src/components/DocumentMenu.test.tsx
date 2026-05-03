@@ -45,7 +45,7 @@ describe('DocumentMenu', () => {
     render(<DocumentMenu currentDocId="a" />);
     expect(screen.getByText('First')).toBeInTheDocument();
     expect(screen.getByText('Second')).toBeInTheDocument();
-    expect(document.querySelectorAll('li.document-menu-item')).toHaveLength(2);
+    expect(document.querySelectorAll('li.dmenu__item')).toHaveLength(2);
   });
 
   it('calls remove() when delete button is clicked', async () => {

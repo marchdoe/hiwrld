@@ -1,4 +1,5 @@
 import { Link } from '@tanstack/react-router';
+import { documentMenu } from '../../styled-system/recipes';
 
 export interface DocumentMenuItemProps {
   id: string;
@@ -7,17 +8,18 @@ export interface DocumentMenuItemProps {
 }
 
 export function DocumentMenuItem({ id, title, onDelete }: DocumentMenuItemProps) {
+  const dm = documentMenu();
   return (
-    <li className="document-menu-item" data-id={id}>
-      <div className="document-menu-item-wrap">
-        <Link to="/$docId" params={{ docId: id }} className="document-menu-item-title">
+    <li className={dm.item} data-id={id}>
+      <div className={dm.itemWrap}>
+        <Link to="/$docId" params={{ docId: id }} className={dm.itemTitle}>
           {title || id}
         </Link>
         <button
           type="button"
           title="Delete Document"
           aria-label="Delete Document"
-          className="document-menu-item-delete-button ss-trash"
+          className={`${dm.deleteBtn} ss-trash`}
           onClick={(e) => {
             e.preventDefault();
             onDelete(id);

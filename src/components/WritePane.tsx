@@ -5,6 +5,7 @@ import { generateDocumentId } from '../lib/generateId';
 import type { AppMode } from '../types/document';
 import { Textarea } from './Textarea';
 import { WorkspaceDrawer } from './WorkspaceDrawer';
+import { documentMenu } from '../../styled-system/recipes';
 
 export interface WritePaneProps {
   docId: string;
@@ -18,6 +19,7 @@ export function WritePane({ docId, body, mode, onBodyChange, onModeChange }: Wri
   const [menuOpen, setMenuOpen] = useState(false);
   const { add } = useDocuments();
   const navigate = useNavigate();
+  const dm = documentMenu();
 
   const handleAddDoc = () => {
     const newId = generateDocumentId();
@@ -41,14 +43,14 @@ export function WritePane({ docId, body, mode, onBodyChange, onModeChange }: Wri
       {menuOpen && (
         <button
           type="button"
-          className="document-menu-backdrop"
+          className={dm.backdrop}
           aria-label="Close menu"
           onClick={closeMenu}
         />
       )}
 
       {/* Left-side slide-in drawer */}
-      <div className={`document-menu-drawer${menuOpen ? ' open' : ''}`}>
+      <div className={`${dm.drawer}${menuOpen ? ' open' : ''}`}>
         <WorkspaceDrawer currentDocId={docId} onClose={closeMenu} />
       </div>
 

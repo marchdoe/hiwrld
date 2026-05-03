@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { contextMenu } from '../../styled-system/recipes';
 
 export interface ContextMenuItem {
   label: string;
@@ -16,6 +17,7 @@ export interface ContextMenuProps {
 
 export function ContextMenu({ x, y, items, onClose }: ContextMenuProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const ctx = contextMenu();
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
@@ -35,7 +37,7 @@ export function ContextMenu({ x, y, items, onClose }: ContextMenuProps) {
   return (
     <div
       ref={ref}
-      className="context-menu"
+      className={ctx.root}
       style={{ position: 'fixed', top: y, left: x, zIndex: 1000 }}
       role="menu"
     >
@@ -44,13 +46,13 @@ export function ContextMenu({ x, y, items, onClose }: ContextMenuProps) {
           key={item.label}
           type="button"
           role="menuitem"
-          className={`context-menu-item${item.danger ? ' context-menu-item--danger' : ''}`}
+          className={contextMenu({ danger: item.danger }).item}
           onClick={() => {
             item.onClick();
             onClose();
           }}
         >
-          {item.icon && <span className="context-menu-icon">{item.icon}</span>}
+          {item.icon && <span className={ctx.icon}>{item.icon}</span>}
           {item.label}
         </button>
       ))}

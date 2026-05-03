@@ -6,6 +6,7 @@ import type { ContextMenuItem } from './ContextMenu';
 import { DocumentMenu } from './DocumentMenu';
 import { FolderTree } from './FolderTree';
 import { WorkspaceCreate } from './WorkspaceCreate';
+import { workspaceDrawer } from '../../styled-system/recipes';
 
 export interface WorkspaceDrawerProps {
   currentDocId: string;
@@ -24,6 +25,7 @@ export function WorkspaceDrawer({ currentDocId, onClose }: WorkspaceDrawerProps)
     deleteDocument,
   } = useWorkspace();
   const navigate = useNavigate();
+  const wsd = workspaceDrawer();
   const [confirmDelete, setConfirmDelete] = useState<{
     type: 'folder' | 'document';
     id: string;
@@ -90,21 +92,21 @@ export function WorkspaceDrawer({ currentDocId, onClose }: WorkspaceDrawerProps)
   ];
 
   return (
-    <div className="workspace-drawer">
+    <div className={wsd.root}>
       {workspace ? (
         <>
           {/* Header */}
-          <div className="workspace-drawer-header">
-            <div className="workspace-drawer-title">
-              <span className="workspace-drawer-icon">📁</span>
+          <div className={wsd.header}>
+            <div className={wsd.title}>
+              <span className={wsd.titleIcon}>📁</span>
               <span>{workspace.name}</span>
             </div>
-            <div className="workspace-drawer-actions">
+            <div className={wsd.actions}>
               <button
                 type="button"
                 title="New file"
                 aria-label="New file"
-                className="workspace-drawer-action-btn"
+                className={wsd.actionBtn}
                 onClick={() => void handleNewFile()}
               >
                 📄+
@@ -113,7 +115,7 @@ export function WorkspaceDrawer({ currentDocId, onClose }: WorkspaceDrawerProps)
                 type="button"
                 title="New folder"
                 aria-label="New folder"
-                className="workspace-drawer-action-btn"
+                className={wsd.actionBtn}
                 onClick={() => void handleNewFolder()}
               >
                 📁+
@@ -121,7 +123,7 @@ export function WorkspaceDrawer({ currentDocId, onClose }: WorkspaceDrawerProps)
             </div>
           </div>
           {/* Tree */}
-          <div className="workspace-drawer-tree">
+          <div className={wsd.tree}>
             {tree && (
               <FolderTree
                 nodes={tree.children}
@@ -133,12 +135,12 @@ export function WorkspaceDrawer({ currentDocId, onClose }: WorkspaceDrawerProps)
             )}
           </div>
           {/* Workspace key */}
-          <div className="workspace-drawer-key">
+          <div className={wsd.key}>
             <span>🔑</span>
-            <span className="workspace-key-value">{workspace.secret_key.slice(0, 12)}…</span>
+            <span className={wsd.keyValue}>{workspace.secret_key.slice(0, 12)}…</span>
             <button
               type="button"
-              className="workspace-key-copy"
+              className={wsd.keyCopy}
               onClick={() => void navigator.clipboard.writeText(workspace.secret_key)}
             >
               copy
@@ -148,11 +150,11 @@ export function WorkspaceDrawer({ currentDocId, onClose }: WorkspaceDrawerProps)
       ) : (
         <>
           {/* Flat doc list (existing behaviour) */}
-          <div className="workspace-drawer-header">
-            <span className="workspace-drawer-title">Files</span>
+          <div className={wsd.header}>
+            <span className={wsd.title}>Files</span>
           </div>
           <DocumentMenu currentDocId={currentDocId} />
-          <div className="workspace-drawer-create-cta">
+          <div className={wsd.createCta}>
             <WorkspaceCreate onCreate={createWorkspace} />
           </div>
         </>
@@ -160,19 +162,19 @@ export function WorkspaceDrawer({ currentDocId, onClose }: WorkspaceDrawerProps)
 
       {/* Delete confirmation dialog */}
       {confirmDelete && (
-        <div className="workspace-confirm-overlay" role="dialog" aria-modal="true">
-          <div className="workspace-confirm">
+        <div className={wsd.confirmOverlay} role="dialog" aria-modal="true">
+          <div className={wsd.confirm}>
             <p>
               Delete <strong>{confirmDelete.name}</strong>?
               {confirmDelete.type === 'folder' && ' All contents will be removed.'}
             </p>
-            <div className="workspace-confirm-actions">
+            <div className={wsd.confirmActions}>
               <button type="button" onClick={() => setConfirmDelete(null)}>
                 Cancel
               </button>
               <button
                 type="button"
-                className="workspace-confirm-delete"
+                className={wsd.confirmDelete}
                 onClick={async () => {
                   if (confirmDelete.type === 'folder') await deleteFolder(confirmDelete.id);
                   else await deleteDocument(confirmDelete.id);

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { workspaceCreate } from '../../styled-system/recipes';
 
 export interface WorkspaceCreateProps {
   onCreate: (name: string) => Promise<void>;
@@ -7,6 +8,7 @@ export interface WorkspaceCreateProps {
 export function WorkspaceCreate({ onCreate }: WorkspaceCreateProps) {
   const [name, setName] = useState('');
   const [creating, setCreating] = useState(false);
+  const wsc = workspaceCreate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,16 +22,16 @@ export function WorkspaceCreate({ onCreate }: WorkspaceCreateProps) {
   };
 
   return (
-    <div className="workspace-create">
-      <span className="workspace-create-icon">📁</span>
-      <p className="workspace-create-title">Create a workspace</p>
-      <p className="workspace-create-desc">
+    <div className={wsc.root}>
+      <span className={wsc.icon}>📁</span>
+      <p className={wsc.title}>Create a workspace</p>
+      <p className={wsc.desc}>
         A private space for your docs. Share the key with anyone — or an AI agent.
       </p>
-      <form onSubmit={handleSubmit} className="workspace-create-form">
+      <form onSubmit={handleSubmit} className={wsc.form}>
         <input
           type="text"
-          className="workspace-create-input"
+          className={wsc.input}
           placeholder="Workspace name"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -37,7 +39,7 @@ export function WorkspaceCreate({ onCreate }: WorkspaceCreateProps) {
         />
         <button
           type="submit"
-          className="workspace-create-btn"
+          className={wsc.btn}
           disabled={creating || !name.trim()}
           aria-label="Create workspace"
         >

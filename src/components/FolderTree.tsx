@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { TreeNode } from '../types/workspace';
 import type { ContextMenuItem } from './ContextMenu';
 import { ContextMenu } from './ContextMenu';
+import { folderTree } from '../../styled-system/recipes';
 
 export interface FolderTreeProps {
   nodes: TreeNode[];
@@ -22,6 +23,7 @@ export function FolderTree({
 }: FolderTreeProps) {
   const [openFolders, setOpenFolders] = useState<Set<string>>(new Set());
   const [menu, setMenu] = useState<{ x: number; y: number; items: ContextMenuItem[] } | null>(null);
+  const ft = folderTree();
 
   const toggleFolder = (id: string) => {
     setOpenFolders((prev) => {
@@ -42,7 +44,7 @@ export function FolderTree({
       {nodes.map((node) => (
         <div key={node.id}>
           <div
-            className={`tree-row${node.type === 'document' && node.id === activeDocId ? ' tree-row--active' : ''}`}
+            className={folderTree({ active: node.type === 'document' && node.id === activeDocId }).row}
             style={{ paddingLeft: `${12 + depth * 14}px` }}
             onContextMenu={(e) => handleContextMenu(e, node)}
             role="none"
@@ -50,17 +52,17 @@ export function FolderTree({
             {node.type === 'folder' ? (
               <button
                 type="button"
-                className="tree-folder-btn"
+                className={ft.folderBtn}
                 onClick={() => toggleFolder(node.id)}
               >
-                <span className="tree-chevron">{openFolders.has(node.id) ? '▼' : '▶'}</span>
-                <span className="tree-icon">📁</span>
-                <span className="tree-label">{node.name}</span>
+                <span className={ft.chevron}>{openFolders.has(node.id) ? '▼' : '▶'}</span>
+                <span className={ft.icon}>📁</span>
+                <span className={ft.label}>{node.name}</span>
               </button>
             ) : (
-              <button type="button" className="tree-doc-btn" onClick={() => onDocClick(node.id)}>
-                <span className="tree-icon">📄</span>
-                <span className="tree-label">{node.name}</span>
+              <button type="button" className={ft.docBtn} onClick={() => onDocClick(node.id)}>
+                <span className={ft.icon}>📄</span>
+                <span className={ft.label}>{node.name}</span>
               </button>
             )}
           </div>

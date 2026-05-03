@@ -1,6 +1,7 @@
 import { useNavigate } from '@tanstack/react-router';
 import { useDocuments } from '../hooks/useDocuments';
 import { generateDocumentId } from '../lib/generateId';
+import { documentMenu } from '../../styled-system/recipes';
 import { DocumentMenuItem } from './DocumentMenuItem';
 
 export interface DocumentMenuProps {
@@ -10,6 +11,7 @@ export interface DocumentMenuProps {
 export function DocumentMenu({ currentDocId }: DocumentMenuProps) {
   const { docs, remove, add } = useDocuments();
   const navigate = useNavigate();
+  const dm = documentMenu();
 
   const handleDelete = (id: string) => {
     const remaining = docs.filter((d) => d.id !== id);
@@ -27,7 +29,7 @@ export function DocumentMenu({ currentDocId }: DocumentMenuProps) {
   };
 
   return (
-    <ul className="document-menu">
+    <ul className={dm.list}>
       {docs.map(({ id, title }) => (
         <DocumentMenuItem key={id} id={id} title={title} onDelete={handleDelete} />
       ))}
