@@ -42,7 +42,7 @@
 html {
   font-size: 16px;
   line-height: 1.45;
-  color: #35332e;
+  color: var(--colors-g5);
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -73,7 +73,7 @@ button {
   background: transparent;
   border: none;
   font-size: 12px;
-  color: #35332e;
+  color: var(--colors-g5);
   padding: 0.5rem;
   cursor: pointer;
   opacity: 0.45;
@@ -108,7 +108,7 @@ article h1::after {
   width: 100px;
   left: 50%;
   margin-left: -50px;
-  border-bottom: 1px solid #d8d4c6;
+  border-bottom: 1px solid var(--colors-g2);
   top: 100%;
   position: absolute;
   margin-top: 1rem;
@@ -166,7 +166,7 @@ article code {
 }
 article pre {
   font-size: 0.875em;
-  background: #f7f6f2;
+  background: var(--colors-g0);
   padding: 1rem 1.25rem;
   border-radius: 3px;
   margin: 1.25em 0;
@@ -185,7 +185,7 @@ article hr {
   border: none;
   width: 100px;
   margin: 1.5em auto;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--colors-g2);
 }
 article img {
   max-width: 100%;
@@ -230,7 +230,7 @@ textarea.document-textarea {
 }
 .cm-scroller::-webkit-scrollbar-thumb {
   border-radius: 14px;
-  background: #edebe2;
+  background: var(--colors-g2);
 }
 .write-textarea-wrap {
   border-radius: 4px;
@@ -239,16 +239,16 @@ textarea.document-textarea {
     background-color 250ms ease;
 }
 .write-form:focus-within .write-textarea-wrap {
-  background-color: #fdfdfb;
+  background-color: var(--colors-g0);
   box-shadow:
-    0 0 0 1px #f1f1e7,
-    0 2px 24px -8px rgba(53, 51, 46, 0.08);
+    0 0 0 1px var(--colors-g1),
+    0 2px 24px -8px color-mix(in srgb, var(--colors-g5) 8%, transparent);
 }
 .write-form:has(.cm-content:focus-visible) .write-textarea-wrap,
 .write-form:has(textarea:focus-visible) .write-textarea-wrap {
   box-shadow:
-    0 0 0 1px #d8d4c6,
-    0 2px 24px -8px rgba(53, 51, 46, 0.12);
+    0 0 0 1px var(--colors-g2),
+    0 2px 24px -8px color-mix(in srgb, var(--colors-g5) 12%, transparent);
 }
 
 * {
@@ -311,8 +311,8 @@ body {
 
 .read {
   font-family: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
-  border-left: 1px solid #f1f1e7;
-  box-shadow: 0 -1px 10px #f1f1e7;
+  border-left: 1px solid var(--colors-g1);
+  box-shadow: 0 -1px 10px var(--colors-g1);
 }
 
 .read-only-button {
@@ -330,7 +330,7 @@ body {
 }
 
 .write {
-  background: #fcfcfa;
+  background: var(--colors-g0);
 }
 
 .write {
@@ -358,7 +358,7 @@ body {
   position: fixed;
   inset: 0;
   z-index: 199;
-  background: rgba(53, 51, 46, 0.15);
+  background: color-mix(in srgb, var(--colors-g5) 15%, transparent);
   border: none;
   padding: 0;
   cursor: default;
@@ -370,9 +370,9 @@ body {
   left: 0;
   width: 280px;
   height: 100vh;
-  background: #f7f6f2;
-  border-right: 1px solid #edebe2;
-  box-shadow: 4px 0 24px rgba(53, 51, 46, 0.1);
+  background: var(--colors-g0);
+  border-right: 1px solid var(--colors-g2);
+  box-shadow: 4px 0 24px color-mix(in srgb, var(--colors-g5) 10%, transparent);
   z-index: 200;
   overflow-y: auto;
   transform: translateX(-100%);
@@ -397,7 +397,7 @@ body {
 }
 .document-menu-item:hover,
 .document-menu-item:focus {
-  background: rgba(53, 51, 46, 0.01);
+  background: color-mix(in srgb, var(--colors-g5) 1%, transparent);
   outline: none;
   color: #2f8a5a;
 }
@@ -456,7 +456,7 @@ body {
 }
 
 pre .comment {
-  color: #aba79e;
+  color: var(--colors-g3);
 }
 pre .constant,
 pre .storage,
