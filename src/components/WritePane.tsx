@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { useDocuments } from '../hooks/useDocuments';
 import { generateDocumentId } from '../lib/generateId';
 import type { AppMode } from '../types/document';
-import { DocumentMenu } from './DocumentMenu';
 import { Textarea } from './Textarea';
+import { WorkspaceDrawer } from './WorkspaceDrawer';
 
 export interface WritePaneProps {
   docId: string;
@@ -49,7 +49,7 @@ export function WritePane({ docId, body, mode, onBodyChange, onModeChange }: Wri
 
       {/* Left-side slide-in drawer */}
       <div className={`document-menu-drawer${menuOpen ? ' open' : ''}`}>
-        <DocumentMenu currentDocId={docId} />
+        <WorkspaceDrawer currentDocId={docId} onClose={closeMenu} />
       </div>
 
       <form className="write-form">
