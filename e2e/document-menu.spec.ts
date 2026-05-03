@@ -15,7 +15,7 @@ async function createTwoDocuments(
   const firstDocUrl = page.url();
   await fillTextarea(page, firstText);
   await page.waitForTimeout(800);
-  await page.locator('.add-button').click();
+  await page.locator('.el__addButton').click();
   await page.waitForURL((u) => u.href !== firstDocUrl);
   await fillTextarea(page, secondText);
   await page.waitForTimeout(800);
@@ -24,9 +24,9 @@ async function createTwoDocuments(
 test.describe('document menu', () => {
   test('menu button toggles the drawer visible', async ({ page }) => {
     await page.goto(`/${TEST_DOC}`);
-    const menu = page.locator('.document-menu');
+    const menu = page.locator('.dmenu__list');
     // Drawer starts hidden via CSS; toggling makes it visible
-    await page.locator('.menu-button').click();
+    await page.locator('.el__menuButton').click();
     await expect(menu).toBeVisible();
   });
 
@@ -36,7 +36,7 @@ test.describe('document menu', () => {
     const firstDocUrl = page.url();
     await fillTextarea(page, 'first');
     await page.waitForTimeout(800);
-    await page.locator('.add-button').click();
+    await page.locator('.el__addButton').click();
     await page.waitForURL((u) => u.href !== firstDocUrl);
     await expect(page).not.toHaveURL(firstDocUrl);
     await expect(page.locator('.document-textarea')).toHaveValue('');
@@ -45,9 +45,9 @@ test.describe('document menu', () => {
   test('clicking a menu item switches to that document', async ({ page }) => {
     await createTwoDocuments(page, '# Doc One', '# Doc Two');
 
-    await page.locator('.menu-button').click();
-    await expect(page.locator('.document-menu')).toBeVisible();
-    const docOneItem = page.locator('.document-menu-item', { hasText: 'Doc One' });
+    await page.locator('.el__menuButton').click();
+    await expect(page.locator('.dmenu__list')).toBeVisible();
+    const docOneItem = page.locator('.dmenu__item', { hasText: 'Doc One' });
     await docOneItem.click();
     await expect(page.locator('.document-textarea')).toHaveValue('# Doc One');
   });
@@ -55,15 +55,12 @@ test.describe('document menu', () => {
   test('delete button removes a document from the menu', async ({ page }) => {
     await createTwoDocuments(page, '# Keep', '# Delete');
 
-    await page.locator('.menu-button').click();
-    await expect(page.locator('.document-menu')).toBeVisible();
-    const items = page.locator('.document-menu li.document-menu-item');
+    await page.locator('.el__menuButton').click();
+    await expect(page.locator('.dmenu__list')).toBeVisible();
+    const items = page.locator('.dmenu__list li.dmenu__item');
     await expect(items).toHaveCount(2);
 
-    await page
-      .locator('.document-menu-item', { hasText: 'Delete' })
-      .locator('.document-menu-item-delete-button')
-      .click();
+    await page.locator('.dmenu__item', { hasText: 'Delete' }).locator('.dmenu__deleteBtn').click();
     await expect(items).toHaveCount(1);
   });
 });

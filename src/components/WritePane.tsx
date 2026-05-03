@@ -18,7 +18,14 @@ export interface WritePaneProps {
   style?: React.CSSProperties;
 }
 
-export function WritePane({ docId, body, mode, onBodyChange, onModeChange, style }: WritePaneProps) {
+export function WritePane({
+  docId,
+  body,
+  mode,
+  onBodyChange,
+  onModeChange,
+  style,
+}: WritePaneProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const { add } = useDocuments();
   const navigate = useNavigate();

@@ -1,5 +1,5 @@
 import { useNavigate } from '@tanstack/react-router';
-import { FileText, FilePlus, Folder, FolderPlus, Key, Pencil, Trash2 } from 'lucide-react';
+import { FilePlus, FileText, Folder, FolderPlus, Key, Pencil, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 import { workspaceDrawer } from '../../styled-system/recipes';
 import { useWorkspace } from '../hooks/useWorkspace';

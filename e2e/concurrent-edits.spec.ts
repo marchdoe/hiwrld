@@ -12,7 +12,7 @@ test.describe('concurrent edits — last-write-wins via BroadcastChannel', () =>
     await b.goto(url);
 
     await fillTextarea(a, 'hello from A');
-    await expect(b.locator('.document-article p')).toHaveText('hello from A', { timeout: 1000 });
+    await expect(b.locator('.el__documentArticle p')).toHaveText('hello from A', { timeout: 1000 });
   });
 
   test('simultaneous typing: state converges across both clients', async ({ context }) => {
@@ -59,7 +59,7 @@ test.describe('concurrent edits — last-write-wins via BroadcastChannel', () =>
 
     const b = await context.newPage();
     await b.goto(url);
-    await expect(b.locator('.document-article p')).toHaveText('typed before B joined', {
+    await expect(b.locator('.el__documentArticle p')).toHaveText('typed before B joined', {
       timeout: 2000,
     });
   });
@@ -92,7 +92,7 @@ test.describe('concurrent edits — last-write-wins via BroadcastChannel', () =>
 
     await fillTextarea(a, 'initial');
     await a.waitForTimeout(700);
-    await expect(b.locator('.document-article p')).toHaveText('initial');
+    await expect(b.locator('.el__documentArticle p')).toHaveText('initial');
 
     await b.close();
 
@@ -101,7 +101,7 @@ test.describe('concurrent edits — last-write-wins via BroadcastChannel', () =>
 
     const b2 = await context.newPage();
     await b2.goto(url);
-    await expect(b2.locator('.document-article p')).toHaveText('typed while B was gone', {
+    await expect(b2.locator('.el__documentArticle p')).toHaveText('typed while B was gone', {
       timeout: 2000,
     });
   });

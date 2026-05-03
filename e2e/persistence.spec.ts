@@ -39,15 +39,15 @@ test.describe('persistence', () => {
     await a.waitForTimeout(800);
 
     const firstDocUrl = a.url();
-    await a.locator('.add-button').click();
+    await a.locator('.el__addButton').click();
     await a.waitForURL((u) => u.href !== firstDocUrl);
     await fillTextarea(a, 'second doc');
     await a.waitForTimeout(800);
 
     await a.reload();
-    await a.locator('.menu-button').click();
-    await expect(a.locator('.document-menu')).toBeVisible();
-    const items = a.locator('.document-menu li.document-menu-item');
+    await a.locator('.el__menuButton').click();
+    await expect(a.locator('.dmenu__list')).toBeVisible();
+    const items = a.locator('.dmenu__list li.dmenu__item');
     await expect(items).toHaveCount(2);
   });
 });

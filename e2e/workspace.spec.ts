@@ -17,12 +17,12 @@ test.describe('workspace drawer — no workspace state', () => {
     await page.reload();
     await page.waitForURL(/\/[A-Za-z0-9]{7}$/);
 
-    await page.locator('.menu-button').click();
-    await expect(page.locator('.document-menu-drawer')).toBeVisible();
+    await page.locator('.el__menuButton').click();
+    await expect(page.locator('.dmenu__drawer')).toBeVisible();
 
     // Should show the WorkspaceCreate CTA
-    await expect(page.locator('.workspace-create-title')).toBeVisible();
-    await expect(page.locator('.workspace-create-title')).toContainText(/workspace/i);
+    await expect(page.locator('.wscreate__title')).toBeVisible();
+    await expect(page.locator('.wscreate__title')).toContainText(/workspace/i);
   });
 
   test('workspace create form has name input and submit button', async ({ page }) => {
@@ -31,14 +31,14 @@ test.describe('workspace drawer — no workspace state', () => {
     await page.reload();
     await page.waitForURL(/\/[A-Za-z0-9]{7}$/);
 
-    await page.locator('.menu-button').click();
-    await expect(page.locator('.workspace-create-input')).toBeVisible();
-    await expect(page.locator('.workspace-create-btn')).toBeVisible();
+    await page.locator('.el__menuButton').click();
+    await expect(page.locator('.wscreate__input')).toBeVisible();
+    await expect(page.locator('.wscreate__btn')).toBeVisible();
     // Button should be disabled when name is empty
-    await expect(page.locator('.workspace-create-btn')).toBeDisabled();
+    await expect(page.locator('.wscreate__btn')).toBeDisabled();
     // Button should enable when name is typed
-    await page.locator('.workspace-create-input').fill('my-workspace');
-    await expect(page.locator('.workspace-create-btn')).toBeEnabled();
+    await page.locator('.wscreate__input').fill('my-workspace');
+    await expect(page.locator('.wscreate__btn')).toBeEnabled();
   });
 });
 
@@ -62,28 +62,28 @@ test.describe('workspace drawer — with workspace in localStorage', () => {
   });
 
   test('shows workspace name in drawer header', async ({ page }) => {
-    await page.locator('.menu-button').click();
-    await expect(page.locator('.document-menu-drawer')).toBeVisible();
-    await expect(page.locator('.workspace-drawer-title')).toContainText('test-workspace');
+    await page.locator('.el__menuButton').click();
+    await expect(page.locator('.dmenu__drawer')).toBeVisible();
+    await expect(page.locator('.wsdrawer__title')).toContainText('test-workspace');
   });
 
   test('new file and new folder buttons are present in header', async ({ page }) => {
-    await page.locator('.menu-button').click();
+    await page.locator('.el__menuButton').click();
     await expect(page.locator('[aria-label="New file"]')).toBeVisible();
     await expect(page.locator('[aria-label="New folder"]')).toBeVisible();
   });
 
   test('workspace key copy button is visible', async ({ page }) => {
-    await page.locator('.menu-button').click();
-    await expect(page.locator('.workspace-key-copy')).toBeVisible();
-    await expect(page.locator('.workspace-key-copy')).toHaveText('copy');
+    await page.locator('.el__menuButton').click();
+    await expect(page.locator('.wsdrawer__keyCopy')).toBeVisible();
+    await expect(page.locator('.wsdrawer__keyCopy')).toHaveText('copy');
   });
 
   test('drawer closes when backdrop is clicked', async ({ page }) => {
-    await page.locator('.menu-button').click();
-    await expect(page.locator('.document-menu-drawer')).toBeVisible();
-    await page.locator('.document-menu-backdrop').click();
-    await expect(page.locator('.document-menu-backdrop')).not.toBeVisible();
+    await page.locator('.el__menuButton').click();
+    await expect(page.locator('.dmenu__drawer')).toBeVisible();
+    await page.locator('.dmenu__backdrop').click();
+    await expect(page.locator('.dmenu__backdrop')).not.toBeVisible();
   });
 });
 
@@ -96,7 +96,7 @@ test.describe('workspace drawer — existing app behaviour unchanged', () => {
 
     // Typing still works
     await fillTextarea(page, '# Local doc');
-    const article = page.locator('.document-article');
+    const article = page.locator('.el__documentArticle');
     await expect(article.locator('h1')).toHaveText('Local doc');
   });
 
@@ -107,7 +107,7 @@ test.describe('workspace drawer — existing app behaviour unchanged', () => {
     await page.waitForURL(/\/[A-Za-z0-9]{7}$/);
 
     const firstDocUrl = page.url();
-    await page.locator('.add-button').click();
+    await page.locator('.el__addButton').click();
     await page.waitForURL((u) => u.href !== firstDocUrl);
     await expect(page.locator('.document-textarea')).toHaveValue('');
   });

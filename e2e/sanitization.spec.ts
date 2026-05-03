@@ -18,7 +18,7 @@ async function assertNotAlertedAndStripped(
   await fillTextarea(page, markdown);
   await page.waitForTimeout(500);
   expect(alerted).toBe(false);
-  const html = await page.locator('.document-article').innerHTML();
+  const html = await page.locator('.el__documentArticle').innerHTML();
   expect(html).not.toMatch(htmlPattern);
 }
 
@@ -26,7 +26,7 @@ async function assertStripped(page: Page, markdown: string, htmlPattern: RegExp)
   await page.goto(`/${TEST_DOC}`);
   await fillTextarea(page, markdown);
   await page.waitForTimeout(500);
-  const html = await page.locator('.document-article').innerHTML();
+  const html = await page.locator('.el__documentArticle').innerHTML();
   expect(html).not.toMatch(htmlPattern);
 }
 

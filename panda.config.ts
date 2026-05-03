@@ -171,7 +171,6 @@ const globalCss = defineGlobalStyles({
   '.write-only .el__read, .read-only .el__write': { display: 'none' },
   '.write-only .el__write, .read-only .el__read': { flex: '1' },
 
-
   // ── Syntax highlighting ───────────────────────────────────────────
   'pre .comment': { color: 'var(--colors-g3)' },
   'pre .constant, pre .storage, pre .tag, pre .keyword:not(.operator), pre .selector, pre .string:not(.value), pre .regexp, pre .function':
