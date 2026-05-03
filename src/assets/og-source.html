@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 1200px; height: 630px; overflow: hidden;
+    background: #f7f6f3; color: #1f1d1a;
+    font-family: "Geist", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    display: grid; grid-template-columns: 1fr 2fr;
+  }
+  .left {
+    border-right: 1px solid #dcd9d2;
+    padding: 48px 52px;
+    display: flex; flex-direction: column;
+  }
+  .right {
+    padding: 48px 52px;
+    display: flex; flex-direction: column;
+  }
+  .meta { font-family: "Geist Mono", monospace; font-size: 14px; color: #6e6a62; letter-spacing: 0.02em; }
+  .meta-right { text-align: right; }
+  .num { font-size: 128px; font-weight: 500; letter-spacing: -0.05em; line-height: 0.86; margin-top: auto; }
+  .num-ink { color: #3a4a6b; }
+  .sub { font-style: italic; font-weight: 300; font-size: 28px; color: #3d3a35; margin-top: 14px; }
+  .wm { display: inline-flex; align-items: baseline; font-size: 28px; letter-spacing: -0.04em; line-height: 1; }
+  .wm-hi { font-weight: 400; }
+  .wm-ast { color: #3a4a6b; font-size: 26px; margin: 0 1.4px 0 1.1px; }
+  .wm-wrld { font-weight: 700; }
+  .url { font-family: "Geist Mono", monospace; font-size: 12px; color: #a8a39a; margin-top: auto; text-align: right; }
+</style>
+</head>
+<body>
+  <div class="left">
+    <span class="wm"><span class="wm-hi">hi</span><span class="wm-ast">*</span><span class="wm-wrld">wrld</span><span class="wm-ast">*</span></span>
+    <div class="num">write</div>
+    <div class="sub">plain markdown.</div>
+  </div>
+  <div class="right">
+    <div class="meta meta-right">— wrld</div>
+    <div class="num num-ink">read</div>
+    <div class="sub">share the url.</div>
+    <div class="url">hiwrld.com</div>
+  </div>
+</body>
+</html>
