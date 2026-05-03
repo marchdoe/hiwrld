@@ -198,74 +198,11 @@ const globalCss = defineGlobalStyles({
     },
   },
 
-  // ── Write textarea wrap + focus states ───────────────────────────
-  '.write-textarea-wrap': {
-    borderRadius: '4px',
-    transition: 'box-shadow 250ms ease, background-color 250ms ease',
-    position: 'absolute',
-    top: '0',
-    left: '0',
-    right: '0',
-    bottom: '0',
-  },
-  '.write-form': {
-    position: 'relative',
-    flex: '1',
-    '&:focus-within .write-textarea-wrap': {
-      backgroundColor: 'var(--colors-g0)',
-      boxShadow: '0 0 0 1px var(--colors-g1), 0 2px 24px -8px color-mix(in srgb, var(--colors-g5) 8%, transparent)',
-    },
-    '&:has(.cm-content:focus-visible) .write-textarea-wrap, &:has(textarea:focus-visible) .write-textarea-wrap': {
-      boxShadow: '0 0 0 1px var(--colors-g2), 0 2px 24px -8px color-mix(in srgb, var(--colors-g5) 12%, transparent)',
-    },
-  },
-
-  // ── Layout ───────────────────────────────────────────────────────
-  '.write, .read': {
-    position: 'relative',
-    overflow: 'hidden',
-  },
-  '.write': {
-    flex: '0 0 33rem',
-    display: 'flex',
-    flexDirection: 'column',
-    background: 'var(--colors-g0)',
-    fontFamily: 'ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace',
-    fontSize: '13px',
-    lineHeight: '1.4',
-    '@media (min-width: 1200px)': { fontSize: '14px' },
-  },
-  '.read': {
-    flex: '1',
-    fontFamily: 'Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif',
-    borderLeft: '1px solid var(--colors-g1)',
-    boxShadow: '0 -1px 10px var(--colors-g1)',
-  },
-  '.document-article': {
-    padding: '3rem',
-    maxWidth: '32rem',
-    margin: '0 auto',
-  },
-  '.write-buttons, .read-buttons': {
-    position: 'relative',
-    overflow: 'hidden',
-    zIndex: '1',
-  },
-
-  // ── Mode toggle buttons ───────────────────────────────────────────
-  '.read-only-button': { float: 'left' },
-  '.read-buttons .read-only-button': { display: 'none' },
-  '.read-only .read-buttons .read-only-button': { display: 'block' },
-  '.write-only-button, .write-buttons .read-only-button': { float: 'right' },
-  '.write-only .read, .read-only .write': { display: 'none' },
-  '.write-only .write, .read-only .read': { flex: '1' },
-
-  // ── Menu + add buttons ────────────────────────────────────────────
-  '.menu-button, .add-button, .write-only-button': {
-    position: 'relative',
-    zIndex: '2',
-  },
-  '.menu-button, .add-button': { float: 'left' },
+  // ── Mode toggle — html-level class selectors (can't live in slot recipe) ──
+  '.write-only .el__read, .read-only .el__write': { display: 'none' },
+  '.write-only .el__write, .read-only .el__read': { flex: '1' },
+  '.el__readButtons .el__readOnlyButton': { display: 'none' },
+  '.read-only .el__readButtons .el__readOnlyButton': { display: 'block' },
 
   // ── Syntax highlighting ───────────────────────────────────────────
   'pre .comment': { color: 'var(--colors-g3)' },
@@ -274,14 +211,14 @@ const globalCss = defineGlobalStyles({
   },
 
   // ── GFM Alert boxes ───────────────────────────────────────────────
-  '.document-article .markdown-alert': {
+  '.el__documentArticle .markdown-alert': {
     borderLeft: '4px solid',
     borderRadius: '0 3px 3px 0',
     padding: '0.75rem 1rem',
     margin: '1.5rem 0',
     '& > :last-child': { marginBottom: '0' },
   },
-  '.document-article .markdown-alert-title': {
+  '.el__documentArticle .markdown-alert-title': {
     fontSize: '0.8125em',
     fontWeight: '700',
     textTransform: 'uppercase',
@@ -292,27 +229,27 @@ const globalCss = defineGlobalStyles({
     alignItems: 'center',
     gap: '0.4em',
   },
-  '.document-article .markdown-alert-note': {
+  '.el__documentArticle .markdown-alert-note': {
     background: '#f0f4f8',
     borderLeftColor: '#4a90c4',
     '& .markdown-alert-title': { color: '#4a90c4' },
   },
-  '.document-article .markdown-alert-tip': {
+  '.el__documentArticle .markdown-alert-tip': {
     background: '#f0f7f4',
     borderLeftColor: '#2f8a5a',
     '& .markdown-alert-title': { color: '#2f8a5a' },
   },
-  '.document-article .markdown-alert-important': {
+  '.el__documentArticle .markdown-alert-important': {
     background: '#f5f0f8',
     borderLeftColor: '#8b5cf6',
     '& .markdown-alert-title': { color: '#8b5cf6' },
   },
-  '.document-article .markdown-alert-warning': {
+  '.el__documentArticle .markdown-alert-warning': {
     background: '#fdf8f0',
     borderLeftColor: '#d97706',
     '& .markdown-alert-title': { color: '#d97706' },
   },
-  '.document-article .markdown-alert-caution': {
+  '.el__documentArticle .markdown-alert-caution': {
     background: '#fdf0f0',
     borderLeftColor: '#dc2626',
     '& .markdown-alert-title': { color: '#dc2626' },
@@ -320,12 +257,12 @@ const globalCss = defineGlobalStyles({
 
   // ── @media print ─────────────────────────────────────────────────
   '@media print': {
-    '.write, .read-buttons': { display: 'none' },
-    '.read': { border: 'none', boxShadow: 'none' },
-    '.document-article': { margin: '0 auto', maxWidth: '35em', padding: '0' },
+    '.el__write, .el__readButtons': { display: 'none' },
+    '.el__read': { border: 'none', boxShadow: 'none' },
+    '.el__documentArticle': { margin: '0 auto', maxWidth: '35em', padding: '0' },
     '@page': { margin: '5em 0' },
-    'body, .write, .read': { background: 'white' },
-    '.document-article, .document-article p, .document-article h1, .document-article h2, .document-article h3, .document-article h4, .document-article h5, .document-article h6, .document-article li, .document-article blockquote': {
+    'body, .el__write, .el__read': { background: 'white' },
+    '.el__documentArticle, .el__documentArticle p, .el__documentArticle h1, .el__documentArticle h2, .el__documentArticle h3, .el__documentArticle h4, .el__documentArticle h5, .el__documentArticle h6, .el__documentArticle li, .el__documentArticle blockquote': {
       color: 'black',
     },
     'a': { textDecoration: 'none' },
@@ -990,6 +927,92 @@ export default defineConfig({
                 borderLeft: '2px solid var(--colors-ink)',
               },
             },
+          },
+        },
+      },
+
+      editorLayout: {
+        className: 'el',
+        slots: [
+          'write', 'read', 'writeForm', 'writeButtons', 'readButtons',
+          'textareaWrap', 'menuButton', 'addButton', 'readOnlyButton',
+          'writeOnlyButton', 'documentArticle',
+        ],
+        base: {
+          write: {
+            position: 'relative',
+            overflow: 'hidden',
+            flex: '0 0 33rem',
+            display: 'flex',
+            flexDirection: 'column',
+            background: 'var(--colors-g0)',
+            fontFamily: 'ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace',
+            fontSize: '13px',
+            lineHeight: '1.4',
+            '@media (min-width: 1200px)': { fontSize: '14px' },
+          },
+          read: {
+            position: 'relative',
+            overflow: 'hidden',
+            flex: '1',
+            fontFamily: 'Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif',
+            borderLeft: '1px solid var(--colors-g1)',
+            boxShadow: '0 -1px 10px var(--colors-g1)',
+          },
+          writeForm: {
+            position: 'relative',
+            flex: '1',
+            '&:focus-within .el__textareaWrap': {
+              backgroundColor: 'var(--colors-g0)',
+              boxShadow: '0 0 0 1px var(--colors-g1), 0 2px 24px -8px color-mix(in srgb, var(--colors-g5) 8%, transparent)',
+            },
+            '&:has(.cm-content:focus-visible) .el__textareaWrap, &:has(textarea:focus-visible) .el__textareaWrap': {
+              boxShadow: '0 0 0 1px var(--colors-g2), 0 2px 24px -8px color-mix(in srgb, var(--colors-g5) 12%, transparent)',
+            },
+          },
+          writeButtons: {
+            position: 'relative',
+            overflow: 'hidden',
+            zIndex: '1',
+          },
+          readButtons: {
+            position: 'relative',
+            overflow: 'hidden',
+            zIndex: '1',
+          },
+          textareaWrap: {
+            position: 'absolute',
+            top: '0',
+            left: '0',
+            right: '0',
+            bottom: '0',
+            borderRadius: '4px',
+            transition: 'box-shadow 250ms ease, background-color 250ms ease',
+          },
+          menuButton: {
+            position: 'relative',
+            zIndex: '2',
+            float: 'left',
+          },
+          addButton: {
+            position: 'relative',
+            zIndex: '2',
+            float: 'left',
+          },
+          readOnlyButton: {
+            position: 'relative',
+            zIndex: '2',
+            float: 'left',
+          },
+          writeOnlyButton: {
+            position: 'relative',
+            zIndex: '2',
+            float: 'right',
+          },
+          documentArticle: {
+            padding: '3rem',
+            maxWidth: '32rem',
+            margin: '0 auto',
           },
         },
       },

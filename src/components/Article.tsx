@@ -1,5 +1,6 @@
 import hljs from 'highlight.js/lib/core';
 import { memo, useEffect, useRef } from 'react';
+import { editorLayout } from '../../styled-system/recipes';
 import { extractYoutubeId, renderMarkdown, youtubeEmbed } from '../lib/markdown';
 
 interface ArticleProps {
@@ -7,6 +8,7 @@ interface ArticleProps {
 }
 
 export const Article = memo(function Article({ body }: ArticleProps) {
+  const el = editorLayout();
   const ref = useRef<HTMLElement>(null);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: body is a prop dependency; re-run effect when content changes
@@ -36,7 +38,7 @@ export const Article = memo(function Article({ body }: ArticleProps) {
   return (
     <article
       ref={ref}
-      className="document-article"
+      className={el.documentArticle}
       // biome-ignore lint/security/noDangerouslySetInnerHtml: renderMarkdown runs DOMPurify internally
       dangerouslySetInnerHTML={{ __html: renderMarkdown(body) }}
     />

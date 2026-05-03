@@ -5,7 +5,7 @@ import { generateDocumentId } from '../lib/generateId';
 import type { AppMode } from '../types/document';
 import { Textarea } from './Textarea';
 import { WorkspaceDrawer } from './WorkspaceDrawer';
-import { documentMenu } from '../../styled-system/recipes';
+import { documentMenu, editorLayout } from '../../styled-system/recipes';
 
 export interface WritePaneProps {
   docId: string;
@@ -19,6 +19,7 @@ export function WritePane({ docId, body, mode, onBodyChange, onModeChange }: Wri
   const [menuOpen, setMenuOpen] = useState(false);
   const { add } = useDocuments();
   const navigate = useNavigate();
+  const el = editorLayout();
   const dm = documentMenu();
 
   const handleAddDoc = () => {
@@ -38,7 +39,7 @@ export function WritePane({ docId, body, mode, onBodyChange, onModeChange }: Wri
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <section className="write">
+    <section className={el.write}>
       {/* Backdrop — click outside to close the sidebar */}
       {menuOpen && (
         <button
@@ -54,13 +55,13 @@ export function WritePane({ docId, body, mode, onBodyChange, onModeChange }: Wri
         <WorkspaceDrawer currentDocId={docId} onClose={closeMenu} />
       </div>
 
-      <form className="write-form">
-        <div className="write-buttons">
+      <form className={el.writeForm}>
+        <div className={el.writeButtons}>
           <button
             type="button"
             title="Your Documents"
             aria-label="Your Documents"
-            className={`menu-button ss-rows${menuOpen ? ' pressed' : ''}`}
+            className={`${el.menuButton} ss-rows${menuOpen ? ' pressed' : ''}`}
             aria-pressed={menuOpen}
             onClick={() => setMenuOpen((o) => !o)}
           />
@@ -68,14 +69,14 @@ export function WritePane({ docId, body, mode, onBodyChange, onModeChange }: Wri
             type="button"
             title="New Document"
             aria-label="New Document"
-            className="add-button ss-plus"
+            className={`${el.addButton} ss-plus`}
             onClick={handleAddDoc}
           />
           <button
             type="button"
             title="Preview Mode"
             aria-label="Preview Mode"
-            className={`read-only-button ss-view${mode === 'read' ? ' pressed' : ''}`}
+            className={`${el.readOnlyButton} ss-view${mode === 'read' ? ' pressed' : ''}`}
             aria-pressed={mode === 'read'}
             onClick={handleReadOnly}
           />
@@ -83,12 +84,12 @@ export function WritePane({ docId, body, mode, onBodyChange, onModeChange }: Wri
             type="button"
             title="Write Mode"
             aria-label="Write Mode"
-            className={`write-only-button ss-write${mode === 'write' ? ' pressed' : ''}`}
+            className={`${el.writeOnlyButton} ss-write${mode === 'write' ? ' pressed' : ''}`}
             aria-pressed={mode === 'write'}
             onClick={handleWriteOnly}
           />
         </div>
-        <div className="write-textarea-wrap">
+        <div className={el.textareaWrap}>
           <Textarea body={body} onChange={onBodyChange} />
         </div>
       </form>
