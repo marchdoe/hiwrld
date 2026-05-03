@@ -11,6 +11,9 @@ dist/
 .env.local
 .env
 
+# Dev store (local JSON mock for Supabase — contains live workspace data)
+.dev-store.json
+
 # Git worktrees
 .worktrees/
 

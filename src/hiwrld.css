@@ -385,7 +385,7 @@ body {
 
 .document-menu {
   list-style: none;
-  padding: 0.5rem 0;
+  padding: 6px 0;
 }
 .document-menu::-webkit-scrollbar {
   width: 0;
@@ -394,38 +394,60 @@ body {
 .document-menu-item {
   overflow: hidden;
   cursor: pointer;
+  border-left: 2px solid transparent;
 }
 .document-menu-item:hover,
-.document-menu-item:focus {
-  background: color-mix(in srgb, var(--colors-g5) 1%, transparent);
+.document-menu-item:focus-within {
+  background: color-mix(in srgb, var(--colors-g5) 6%, transparent);
   outline: none;
-  color: #2f8a5a;
 }
 .document-menu-item:active {
-  color: #28774d;
+  background: rgba(53, 51, 46, 0.10);
+}
+.document-menu-item:has(a[aria-current="page"]) {
+  background: rgba(53, 51, 46, 0.08);
+  border-left-color: #3a4a6b;
 }
 
 .document-menu-item-wrap {
-  position: relative;
-  max-width: 26rem;
-  margin: 0 auto;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 5px 12px;
+  gap: 4px;
+  min-width: 0;
 }
 
 .document-menu-item-title {
-  padding: 0.5rem 0 0.45rem;
-  position: absolute;
-  left: 0;
-  right: 2em;
-  top: 0;
+  flex: 1;
+  min-width: 0;
+  display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #3d3a35;
+  text-decoration: none;
+  padding: 2px 0;
+}
+.document-menu-item:hover .document-menu-item-title,
+.document-menu-item:has(a[aria-current="page"]) .document-menu-item-title {
+  color: #1f1d1a;
 }
 
 .document-menu-item-delete-button {
-  float: right;
-  opacity: 0.15;
+  flex-shrink: 0;
+  opacity: 0;
+  background: none;
+  border: none;
+  color: #a8a39a;
+  cursor: pointer;
+  padding: 2px 4px;
+  font-size: 11px;
+  line-height: 1;
+}
+.document-menu-item:hover .document-menu-item-delete-button {
+  opacity: 1;
 }
 
 .menu-button,
@@ -573,12 +595,12 @@ pre .function {
 
 /* Context menu */
 .context-menu {
-  background: #2a2a3e;
-  border: 1px solid #3a3a5e;
-  border-radius: 5px;
+  background: #f7f6f3;
+  border: 1px solid #dcd9d2;
+  border-radius: 0;
   padding: 4px 0;
   min-width: 160px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 16px rgba(53, 51, 46, 0.12);
   font-size: 12px;
 }
 .context-menu-item {
@@ -589,15 +611,15 @@ pre .function {
   padding: 6px 12px;
   background: none;
   border: none;
-  color: #ccc;
+  color: #3d3a35;
   cursor: pointer;
   text-align: left;
 }
 .context-menu-item:hover {
-  background: #3a3a5e;
+  background: rgba(53, 51, 46, 0.08);
 }
 .context-menu-item--danger {
-  color: #ff6b6b;
+  color: #c0392b;
 }
 .context-menu-icon {
   font-size: 13px;
@@ -607,7 +629,7 @@ pre .function {
 .workspace-create {
   padding: 16px 12px;
   text-align: center;
-  color: #aaa;
+  color: #6e6a62;
 }
 .workspace-create-icon {
   font-size: 24px;
@@ -615,7 +637,7 @@ pre .function {
   margin-bottom: 8px;
 }
 .workspace-create-title {
-  color: #fff;
+  color: #1f1d1a;
   font-weight: 600;
   font-size: 13px;
   margin: 0 0 4px;
@@ -632,18 +654,18 @@ pre .function {
 }
 .workspace-create-input {
   padding: 6px 10px;
-  border: 1px solid #3a3a5e;
-  border-radius: 4px;
-  background: #12122a;
-  color: #fff;
+  border: 1px solid #dcd9d2;
+  border-radius: 0;
+  background: #f7f6f3;
+  color: #1f1d1a;
   font-size: 12px;
 }
 .workspace-create-btn {
   padding: 7px 12px;
-  background: #4a4aff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
+  background: #1f1d1a;
+  color: #f7f6f3;
+  border: 1px solid #1f1d1a;
+  border-radius: 0;
   font-size: 12px;
   cursor: pointer;
 }
@@ -658,8 +680,8 @@ pre .function {
   align-items: center;
 }
 .tree-row--active {
-  background: #252540;
-  border-left: 2px solid #7c9eff;
+  background: rgba(53, 51, 46, 0.08);
+  border-left: 2px solid #3a4a6b;
 }
 .tree-folder-btn,
 .tree-doc-btn {
@@ -670,18 +692,18 @@ pre .function {
   padding: 4px 8px 4px 0;
   background: none;
   border: none;
-  color: #ccc;
+  color: #3d3a35;
   cursor: pointer;
   font-size: 12px;
   text-align: left;
 }
 .tree-folder-btn:hover,
 .tree-doc-btn:hover {
-  color: #fff;
+  color: #1f1d1a;
 }
 .tree-chevron {
   font-size: 9px;
-  color: #666;
+  color: #a8a39a;
   width: 10px;
 }
 .tree-icon {
@@ -699,22 +721,22 @@ pre .function {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: #1a1a2e;
-  color: #ccc;
+  background: #f7f6f3;
+  color: #3d3a35;
 }
 .workspace-drawer-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 12px;
-  border-bottom: 1px solid #2a2a3e;
+  border-bottom: 1px solid #dcd9d2;
   flex-shrink: 0;
 }
 .workspace-drawer-title {
   display: flex;
   align-items: center;
   gap: 6px;
-  color: #fff;
+  color: #1f1d1a;
   font-weight: 600;
   font-size: 12px;
 }
@@ -728,13 +750,13 @@ pre .function {
 .workspace-drawer-action-btn {
   background: none;
   border: none;
-  color: #888;
+  color: #a8a39a;
   cursor: pointer;
   font-size: 13px;
   padding: 2px;
 }
 .workspace-drawer-action-btn:hover {
-  color: #fff;
+  color: #1f1d1a;
 }
 .workspace-drawer-tree {
   flex: 1;
@@ -743,12 +765,12 @@ pre .function {
 }
 .workspace-drawer-key {
   padding: 8px 12px;
-  border-top: 1px solid #2a2a3e;
+  border-top: 1px solid #dcd9d2;
   display: flex;
   align-items: center;
   gap: 6px;
   font-size: 10px;
-  color: #555;
+  color: #a8a39a;
   flex-shrink: 0;
 }
 .workspace-key-value {
@@ -758,35 +780,35 @@ pre .function {
 .workspace-key-copy {
   background: none;
   border: none;
-  color: #444;
+  color: #a8a39a;
   cursor: pointer;
   font-size: 10px;
   padding: 0;
 }
 .workspace-key-copy:hover {
-  color: #888;
+  color: #6e6a62;
 }
 .workspace-drawer-create-cta {
-  border-top: 1px solid #2a2a3e;
+  border-top: 1px solid #dcd9d2;
   margin-top: 8px;
 }
 /* Confirm dialog */
 .workspace-confirm-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(53, 51, 46, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 200;
 }
 .workspace-confirm {
-  background: #1e1e35;
-  border: 1px solid #3a3a5e;
-  border-radius: 8px;
+  background: #f7f6f3;
+  border: 1px solid #dcd9d2;
+  border-radius: 0;
   padding: 20px;
   max-width: 320px;
-  color: #ccc;
+  color: #3d3a35;
   font-size: 13px;
 }
 .workspace-confirm p {
@@ -799,17 +821,17 @@ pre .function {
 }
 .workspace-confirm-actions button {
   padding: 6px 14px;
-  border-radius: 4px;
-  border: 1px solid #3a3a5e;
+  border-radius: 0;
+  border: 1px solid #dcd9d2;
   background: none;
-  color: #ccc;
+  color: #3d3a35;
   cursor: pointer;
   font-size: 12px;
 }
 .workspace-confirm-actions button.workspace-confirm-delete {
-  background: #ff6b6b;
-  border-color: #ff6b6b;
-  color: #fff;
+  background: #c0392b;
+  border-color: #c0392b;
+  color: #f7f6f3;
 }
 
 /* ── Landing page responsive ─────────────────────────────── */

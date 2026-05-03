@@ -21,7 +21,10 @@ const BOOKMARKS_CHANGED = 'hiwrld:bookmarks-changed';
 
 function writeDocs(docs: BookmarkEntry[]): void {
   localStorage.setItem(BOOKMARKS_KEY, JSON.stringify(docs));
-  window.dispatchEvent(new CustomEvent(BOOKMARKS_CHANGED));
+  // Defer dispatch so it never fires inside a React state updater (which would
+  // synchronously trigger setState on sibling components and cause the
+  // "Cannot update a component while rendering a different component" warning).
+  setTimeout(() => window.dispatchEvent(new CustomEvent(BOOKMARKS_CHANGED)), 0);
 }
 
 export interface UseDocumentsResult {
