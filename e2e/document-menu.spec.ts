@@ -2,13 +2,15 @@ import type { Page } from '@playwright/test';
 import { expect, test } from '@playwright/test';
 import { fillTextarea } from './helpers';
 
+const TEST_DOC = 'e2emenu';
+
 // Sets up two documents and leaves the page on the second one.
 async function createTwoDocuments(
   page: Page,
   firstText: string,
   secondText: string
 ): Promise<void> {
-  await page.goto('/');
+  await page.goto(`/${TEST_DOC}`);
   await page.waitForURL(/\/[A-Za-z0-9]{7}$/);
   const firstDocUrl = page.url();
   await fillTextarea(page, firstText);
@@ -21,7 +23,7 @@ async function createTwoDocuments(
 
 test.describe('document menu', () => {
   test('menu button toggles the drawer visible', async ({ page }) => {
-    await page.goto('/');
+    await page.goto(`/${TEST_DOC}`);
     const menu = page.locator('.document-menu');
     // Drawer starts hidden via CSS; toggling makes it visible
     await page.locator('.menu-button').click();
@@ -29,8 +31,7 @@ test.describe('document menu', () => {
   });
 
   test('add button creates a new document and switches to it', async ({ page }) => {
-    await page.goto('/');
-    // Wait for the router redirect from / to /$docId before capturing the URL
+    await page.goto(`/${TEST_DOC}`);
     await page.waitForURL(/\/[A-Za-z0-9]{7}$/);
     const firstDocUrl = page.url();
     await fillTextarea(page, 'first');

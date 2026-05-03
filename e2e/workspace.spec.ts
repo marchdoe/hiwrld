@@ -1,6 +1,8 @@
 import { expect, test } from '@playwright/test';
 import { fillTextarea } from './helpers';
 
+const TEST_DOC = 'e2ewrks';
+
 // These tests cover UI-level behaviour of the WorkspaceDrawer.
 // Tests that require a live Supabase workspace (create workspace, folder actions)
 // are gated with a conditional skip when the REST API returns an error,
@@ -10,7 +12,7 @@ test.describe('workspace drawer — no workspace state', () => {
   test('shows flat doc list and create workspace CTA when no workspace configured', async ({
     page,
   }) => {
-    await page.goto('/');
+    await page.goto(`/${TEST_DOC}`);
     await page.evaluate(() => localStorage.removeItem('hiwrld.workspace'));
     await page.reload();
     await page.waitForURL(/\/[A-Za-z0-9]{7}$/);
@@ -24,7 +26,7 @@ test.describe('workspace drawer — no workspace state', () => {
   });
 
   test('workspace create form has name input and submit button', async ({ page }) => {
-    await page.goto('/');
+    await page.goto(`/${TEST_DOC}`);
     await page.evaluate(() => localStorage.removeItem('hiwrld.workspace'));
     await page.reload();
     await page.waitForURL(/\/[A-Za-z0-9]{7}$/);
@@ -44,7 +46,7 @@ test.describe('workspace drawer — with workspace in localStorage', () => {
   test.beforeEach(async ({ page }) => {
     // Seed localStorage with a workspace so the drawer shows the tree UI
     // without needing a live Supabase project. Tree fetch will fail gracefully.
-    await page.goto('/');
+    await page.goto(`/${TEST_DOC}`);
     await page.evaluate(() => {
       localStorage.setItem(
         'hiwrld.workspace',
@@ -87,7 +89,7 @@ test.describe('workspace drawer — with workspace in localStorage', () => {
 
 test.describe('workspace drawer — existing app behaviour unchanged', () => {
   test('local documents still work without a workspace', async ({ page }) => {
-    await page.goto('/');
+    await page.goto(`/${TEST_DOC}`);
     await page.evaluate(() => localStorage.removeItem('hiwrld.workspace'));
     await page.reload();
     await page.waitForURL(/\/[A-Za-z0-9]{7}$/);
@@ -99,7 +101,7 @@ test.describe('workspace drawer — existing app behaviour unchanged', () => {
   });
 
   test('adding a new document still works', async ({ page }) => {
-    await page.goto('/');
+    await page.goto(`/${TEST_DOC}`);
     await page.evaluate(() => localStorage.removeItem('hiwrld.workspace'));
     await page.reload();
     await page.waitForURL(/\/[A-Za-z0-9]{7}$/);
