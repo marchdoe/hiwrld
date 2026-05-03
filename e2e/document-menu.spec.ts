@@ -77,9 +77,8 @@ test.describe('document menu', () => {
     await keepItem.click();
     await expect(page.locator('.document-textarea')).toHaveValue('# Keep');
 
-    // Reopen menu and delete the Active background document
-    await page.locator('.el__menuButton').click();
-    await expect(page.locator('.dmenu__list')).toBeVisible();
+    // Drawer stays open after Link-based navigation (WritePane state persists across
+    // same-route param changes). Proceed directly to the delete step.
     const currentUrl = page.url();
     const items = page.locator('.dmenu__list li.dmenu__item');
     await expect(items).toHaveCount(2);
