@@ -650,3 +650,45 @@ pre .function {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+/* Folder tree */
+.tree-row {
+  display: flex;
+  align-items: center;
+}
+.tree-row--active {
+  background: #252540;
+  border-left: 2px solid #7c9eff;
+}
+.tree-folder-btn,
+.tree-doc-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  padding: 4px 8px 4px 0;
+  background: none;
+  border: none;
+  color: #ccc;
+  cursor: pointer;
+  font-size: 12px;
+  text-align: left;
+}
+.tree-folder-btn:hover,
+.tree-doc-btn:hover {
+  color: #fff;
+}
+.tree-chevron {
+  font-size: 9px;
+  color: #666;
+  width: 10px;
+}
+.tree-icon {
+  font-size: 12px;
+}
+.tree-label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
