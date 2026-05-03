@@ -9,6 +9,7 @@ export interface SplitProps {
   ruleColor?: string;
   padded?: string;
   style?: React.CSSProperties;
+  responsive?: boolean;
 }
 
 export function Split({
@@ -20,11 +21,13 @@ export function Split({
   ruleColor,
   padded = '32px 36px',
   style,
+  responsive,
 }: SplitProps) {
   const styles = split();
 
   return (
     <div
+      data-split={responsive ? '' : undefined}
       className={styles.root}
       style={{
         gridTemplateColumns: ratio,

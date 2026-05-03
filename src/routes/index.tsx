@@ -4,7 +4,7 @@ import { Button } from '../components/Button';
 import { Split } from '../components/Split';
 import { Wordmark } from '../components/Wordmark';
 import { generateDocumentId } from '../lib/generateId';
-import { nav, pullQuote, featureRow, stackSection, ctaSection, pageFooter } from '../../styled-system/recipes';
+import { nav, pullQuote, featureRow, stackSection, ctaSection } from '../../styled-system/recipes';
 
 const FEATURES = [
   ['01', 'split pane',    'Write left. Read right. Or hide either pane and use one column.'],
@@ -28,19 +28,18 @@ function LandingPage() {
   const f = featureRow();
   const ss = stackSection();
   const cta = ctaSection();
-  const ft = pageFooter();
 
   function openNewDoc() {
     window.location.href = `/${generateDocumentId()}`;
   }
 
   return (
-    <div style={{ background: 'var(--colors-g0)', color: 'var(--colors-g6)', fontFamily: 'var(--fonts-ui)' }}>
+    <div className="landing-page" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', background: 'var(--colors-g0)', color: 'var(--colors-g6)', fontFamily: 'var(--fonts-ui)' }}>
 
       {/* NAV */}
       <header className={n.root}>
         <Wordmark size={24} />
-        <nav className={n.links}>
+        <nav className={`${n.links} nav__links-wrap`}>
           <a className={n.link} href="#features">features</a>
           <a className={n.link} href="#stack">stack</a>
           <a className={n.link} href="https://github.com" target="_blank" rel="noreferrer">github</a>
@@ -51,19 +50,20 @@ function LandingPage() {
       {/* HERO */}
       <section style={{ borderBottom: '1px solid var(--colors-g2)' }}>
         <Split
+          responsive
           padded="80px 56px 64px"
           left={
             <>
               <div style={{ fontFamily: 'var(--fonts-mono)', fontSize: '11px', color: 'var(--colors-g4)', letterSpacing: '0.02em' }}>hi —</div>
               <div style={{ marginTop: '36px' }}>
-                <div style={{ fontFamily: 'var(--fonts-ui)', fontWeight: 500, fontSize: '132px', lineHeight: 0.86, letterSpacing: '-0.05em', color: 'var(--colors-g6)' }}>write.</div>
+                <div className="hero-numeral" style={{ fontFamily: 'var(--fonts-ui)', fontWeight: 500, lineHeight: 0.86, letterSpacing: '-0.05em', color: 'var(--colors-g6)' }}>write.</div>
                 <p style={{ marginTop: '24px', fontSize: '18px', lineHeight: 1.5, color: 'var(--colors-g5)', maxWidth: '380px', textWrap: 'pretty' } as React.CSSProperties}>
                   Open a tab, type plain markdown. The browser is the only software you need.{' '}
                   <span style={{ color: 'var(--colors-g4)' }}>No accounts, no toolbar, no nonsense.</span>
                 </p>
               </div>
               <div style={{ marginTop: '32px', display: 'flex', gap: '12px' }}>
-                <Button variant="solid" onClick={openNewDoc}>open a new document →</Button>
+                <Button variant="solid" visual="ink" onClick={openNewDoc}>open a new document →</Button>
               </div>
             </>
           }
@@ -71,7 +71,7 @@ function LandingPage() {
             <>
               <div style={{ fontFamily: 'var(--fonts-mono)', fontSize: '11px', color: 'var(--colors-g4)', letterSpacing: '0.02em', textAlign: 'right' }}>— wrld</div>
               <div style={{ marginTop: '36px' }}>
-                <div style={{ fontFamily: 'var(--fonts-ui)', fontWeight: 500, fontSize: '132px', lineHeight: 0.86, letterSpacing: '-0.05em', color: 'var(--colors-ink)' }}>read.</div>
+                <div className="hero-numeral" style={{ fontFamily: 'var(--fonts-ui)', fontWeight: 500, lineHeight: 0.86, letterSpacing: '-0.05em', color: 'var(--colors-ink)' }}>read.</div>
                 <p style={{ marginTop: '24px', fontSize: '18px', lineHeight: 1.5, color: 'var(--colors-g5)', maxWidth: '380px', textWrap: 'pretty' } as React.CSSProperties}>
                   Anyone with the URL reads along, live. Every keystroke syncs across tabs and devices.{' '}
                   <span style={{ color: 'var(--colors-g4)' }}>The link is the document.</span>
@@ -120,9 +120,10 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className={cta.root}>
+      {/* CTA — margin-top: auto pins it to the bottom when content is shorter than viewport */}
+      <section className={cta.root} style={{ marginTop: 'auto' }}>
         <Split
+          responsive
           bg="var(--colors-g6)"
           fg="var(--colors-g0)"
           ruleColor="var(--colors-g5)"
@@ -144,11 +145,6 @@ function LandingPage() {
         />
       </section>
 
-      {/* FOOTER */}
-      <footer className={ft.root}>
-        <span className={ft.left}>© 2026 · MIT</span>
-        <span className={ft.right}>est. 2012 / reprinted 2026</span>
-      </footer>
     </div>
   );
 }

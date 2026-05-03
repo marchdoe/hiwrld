@@ -11,6 +11,13 @@ export default defineConfig({
   outdir: 'styled-system',
 
   theme: {
+    breakpoints: {
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+    },
+
     tokens: {
       colors: {
         g0:      { value: '#f7f6f3', description: 'page bg, light surfaces' },
@@ -101,6 +108,12 @@ export default defineConfig({
               padding: '18px 28px',
               fontSize: '16px',
               _hover: { background: '{colors.g0}' },
+            },
+            ink: {
+              background: '{colors.ink}',
+              color: '{colors.g0}',
+              borderColor: '{colors.ink}',
+              _hover: { background: '{colors.g6}', borderColor: '{colors.g6}' },
             },
           },
         },

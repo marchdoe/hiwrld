@@ -811,3 +811,99 @@ pre .function {
   border-color: #ff6b6b;
   color: #fff;
 }
+
+/* ── Landing page responsive ─────────────────────────────── */
+
+/* Page container: max-width 1440px centered */
+.landing-page {
+  max-width: 1440px;
+  margin-inline: auto;
+  width: 100%;
+}
+
+/* Split: stack single-column on mobile */
+@media (max-width: 767px) {
+  [data-split] {
+    grid-template-columns: 1fr !important;
+  }
+  [data-split] > *:first-child {
+    border-right: none !important;
+    border-bottom: 1px solid var(--colors-g2);
+  }
+}
+
+/* Nav: hide links on mobile, keep wordmark + CTA */
+@media (max-width: 767px) {
+  .nav__links-wrap {
+    display: none;
+  }
+  .nav__root {
+    padding: 16px 20px;
+  }
+}
+
+/* Hero: responsive typography using clamp */
+.hero-numeral {
+  font-size: clamp(56px, 10vw, 132px);
+}
+
+/* Hero: mobile padding */
+@media (max-width: 767px) {
+  .hero-section {
+    /* padding is applied by Split padded prop, override on mobile */
+  }
+  [data-split] .hero-col {
+    padding: 48px 24px 40px;
+  }
+}
+
+/* Pull quote: responsive font size */
+@media (max-width: 767px) {
+  [class*="pq__text"] {
+    font-size: 28px !important;
+  }
+  [class*="pq__root"] {
+    padding: 56px 24px !important;
+  }
+}
+
+/* Feature rows: responsive */
+@media (max-width: 767px) {
+  [class*="feat__root"] {
+    grid-template-columns: 40px 1fr !important;
+    padding: 20px 24px !important;
+    gap: 16px !important;
+  }
+  [class*="feat__desc"] {
+    display: none;
+  }
+}
+
+/* Stack section: responsive */
+@media (max-width: 767px) {
+  [class*="stack__root"] {
+    padding: 40px 24px !important;
+  }
+  [class*="stack__inner"] {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+  [class*="stack__heading"] {
+    font-size: 36px !important;
+  }
+}
+
+/* CTA: responsive */
+@media (max-width: 767px) {
+  [data-cta-split] {
+    grid-template-columns: 1fr !important;
+  }
+  [data-cta-split] > *:first-child {
+    border-right: none !important;
+    border-bottom: 1px solid var(--colors-g5);
+  }
+  [class*="cta__heading"] {
+    font-size: 36px !important;
+    padding-top: 20px !important;
+  }
+}
