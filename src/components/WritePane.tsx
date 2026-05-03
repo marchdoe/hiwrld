@@ -2,6 +2,7 @@ import { useNavigate } from '@tanstack/react-router';
 import { Menu, Pencil, Plus } from 'lucide-react';
 import type React from 'react';
 import { useState } from 'react';
+import { flushSync } from 'react-dom';
 import { documentMenu, editorLayout } from '../../styled-system/recipes';
 import { useDocuments } from '../hooks/useDocuments';
 import { generateDocumentId } from '../lib/generateId';
@@ -34,7 +35,9 @@ export function WritePane({
 
   const handleAddDoc = () => {
     const newId = generateDocumentId();
-    add(newId);
+    flushSync(() => {
+      add(newId);
+    });
     void navigate({ to: '/$docId', params: { docId: newId } });
   };
 
