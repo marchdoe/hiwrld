@@ -69,19 +69,22 @@ describe('GET /api/workspaces/:key/tree', () => {
     const ws = { id: 'ws1', name: 'test', secret_key: 'sk_abc', created_at: '2026-01-01' };
     vi.mocked(getAdminClient).mockReturnValue({
       from: vi.fn((table: string) => {
-        if (table === 'workspaces') return {
-          select: vi.fn().mockReturnThis(),
-          eq: vi.fn().mockReturnThis(),
-          single: vi.fn().mockResolvedValue({ data: ws, error: null }),
-        };
-        if (table === 'folders') return {
-          select: vi.fn().mockReturnThis(),
-          eq: vi.fn().mockResolvedValue({ data: [], error: null }),
-        };
-        if (table === 'documents') return {
-          select: vi.fn().mockReturnThis(),
-          eq: vi.fn().mockResolvedValue({ data: [], error: null }),
-        };
+        if (table === 'workspaces')
+          return {
+            select: vi.fn().mockReturnThis(),
+            eq: vi.fn().mockReturnThis(),
+            single: vi.fn().mockResolvedValue({ data: ws, error: null }),
+          };
+        if (table === 'folders')
+          return {
+            select: vi.fn().mockReturnThis(),
+            eq: vi.fn().mockResolvedValue({ data: [], error: null }),
+          };
+        if (table === 'documents')
+          return {
+            select: vi.fn().mockReturnThis(),
+            eq: vi.fn().mockResolvedValue({ data: [], error: null }),
+          };
         return {};
       }),
     } as never);
@@ -97,15 +100,32 @@ describe('POST /api/workspaces/:key/folders', () => {
 
   it('creates a folder and returns it', async () => {
     const ws = { id: 'ws1', secret_key: 'sk_abc' };
-    const folder = { id: 'fld1', workspace_id: 'ws1', parent_id: null, name: 'Projects', created_at: '2026-01-01' };
+    const folder = {
+      id: 'fld1',
+      workspace_id: 'ws1',
+      parent_id: null,
+      name: 'Projects',
+      created_at: '2026-01-01',
+    };
     vi.mocked(getAdminClient).mockReturnValue({
-      from: vi.fn((table: string) => table === 'workspaces'
-        ? { select: vi.fn().mockReturnThis(), eq: vi.fn().mockReturnThis(), single: vi.fn().mockResolvedValue({ data: ws, error: null }) }
-        : { insert: vi.fn().mockReturnThis(), select: vi.fn().mockReturnThis(), single: vi.fn().mockResolvedValue({ data: folder, error: null }) }
+      from: vi.fn((table: string) =>
+        table === 'workspaces'
+          ? {
+              select: vi.fn().mockReturnThis(),
+              eq: vi.fn().mockReturnThis(),
+              single: vi.fn().mockResolvedValue({ data: ws, error: null }),
+            }
+          : {
+              insert: vi.fn().mockReturnThis(),
+              select: vi.fn().mockReturnThis(),
+              single: vi.fn().mockResolvedValue({ data: folder, error: null }),
+            }
       ),
     } as never);
 
-    const res = await request(app).post('/api/workspaces/sk_abc/folders').send({ name: 'Projects' });
+    const res = await request(app)
+      .post('/api/workspaces/sk_abc/folders')
+      .send({ name: 'Projects' });
     expect(res.status).toBe(201);
     expect(res.body.name).toBe('Projects');
   });
@@ -121,15 +141,33 @@ describe('PATCH /api/workspaces/:key/folders/:id', () => {
 
   it('renames a folder', async () => {
     const ws = { id: 'ws1', secret_key: 'sk_abc' };
-    const updated = { id: 'fld1', name: 'Renamed', workspace_id: 'ws1', parent_id: null, created_at: '2026-01-01' };
+    const updated = {
+      id: 'fld1',
+      name: 'Renamed',
+      workspace_id: 'ws1',
+      parent_id: null,
+      created_at: '2026-01-01',
+    };
     vi.mocked(getAdminClient).mockReturnValue({
-      from: vi.fn((table: string) => table === 'workspaces'
-        ? { select: vi.fn().mockReturnThis(), eq: vi.fn().mockReturnThis(), single: vi.fn().mockResolvedValue({ data: ws, error: null }) }
-        : { update: vi.fn().mockReturnThis(), eq: vi.fn().mockReturnThis(), select: vi.fn().mockReturnThis(), single: vi.fn().mockResolvedValue({ data: updated, error: null }) }
+      from: vi.fn((table: string) =>
+        table === 'workspaces'
+          ? {
+              select: vi.fn().mockReturnThis(),
+              eq: vi.fn().mockReturnThis(),
+              single: vi.fn().mockResolvedValue({ data: ws, error: null }),
+            }
+          : {
+              update: vi.fn().mockReturnThis(),
+              eq: vi.fn().mockReturnThis(),
+              select: vi.fn().mockReturnThis(),
+              single: vi.fn().mockResolvedValue({ data: updated, error: null }),
+            }
       ),
     } as never);
 
-    const res = await request(app).patch('/api/workspaces/sk_abc/folders/fld1').send({ name: 'Renamed' });
+    const res = await request(app)
+      .patch('/api/workspaces/sk_abc/folders/fld1')
+      .send({ name: 'Renamed' });
     expect(res.status).toBe(200);
     expect(res.body.name).toBe('Renamed');
   });
@@ -141,14 +179,19 @@ describe('DELETE /api/workspaces/:key/folders/:id', () => {
   it('deletes folder and returns 204', async () => {
     const ws = { id: 'ws1', secret_key: 'sk_abc' };
     vi.mocked(getAdminClient).mockReturnValue({
-      from: vi.fn((table: string) => table === 'workspaces'
-        ? { select: vi.fn().mockReturnThis(), eq: vi.fn().mockReturnThis(), single: vi.fn().mockResolvedValue({ data: ws, error: null }) }
-        : {
-            delete: vi.fn().mockReturnThis(),
-            eq: vi.fn().mockReturnValue({
-              eq: vi.fn().mockResolvedValue({ error: null }),
-            }),
-          }
+      from: vi.fn((table: string) =>
+        table === 'workspaces'
+          ? {
+              select: vi.fn().mockReturnThis(),
+              eq: vi.fn().mockReturnThis(),
+              single: vi.fn().mockResolvedValue({ data: ws, error: null }),
+            }
+          : {
+              delete: vi.fn().mockReturnThis(),
+              eq: vi.fn().mockReturnValue({
+                eq: vi.fn().mockResolvedValue({ error: null }),
+              }),
+            }
       ),
     } as never);
 
@@ -162,11 +205,28 @@ describe('POST /api/workspaces/:key/documents', () => {
 
   it('creates a document and returns 201', async () => {
     const ws = { id: 'ws1', secret_key: 'sk_abc' };
-    const doc = { id: 'doc1', workspace_id: 'ws1', folder_id: null, body: '', title: 'New', created: '2026-01-01', updated_at: null };
+    const doc = {
+      id: 'doc1',
+      workspace_id: 'ws1',
+      folder_id: null,
+      body: '',
+      title: 'New',
+      created: '2026-01-01',
+      updated_at: null,
+    };
     vi.mocked(getAdminClient).mockReturnValue({
-      from: vi.fn((table: string) => table === 'workspaces'
-        ? { select: vi.fn().mockReturnThis(), eq: vi.fn().mockReturnThis(), single: vi.fn().mockResolvedValue({ data: ws, error: null }) }
-        : { insert: vi.fn().mockReturnThis(), select: vi.fn().mockReturnThis(), single: vi.fn().mockResolvedValue({ data: doc, error: null }) }
+      from: vi.fn((table: string) =>
+        table === 'workspaces'
+          ? {
+              select: vi.fn().mockReturnThis(),
+              eq: vi.fn().mockReturnThis(),
+              single: vi.fn().mockResolvedValue({ data: ws, error: null }),
+            }
+          : {
+              insert: vi.fn().mockReturnThis(),
+              select: vi.fn().mockReturnThis(),
+              single: vi.fn().mockResolvedValue({ data: doc, error: null }),
+            }
       ),
     } as never);
 
@@ -183,11 +243,28 @@ describe('GET /api/workspaces/:key/documents/:id', () => {
 
   it('returns the document body and metadata', async () => {
     const ws = { id: 'ws1', secret_key: 'sk_abc' };
-    const doc = { id: 'doc1', workspace_id: 'ws1', body: '# Hello', title: 'Hello', folder_id: null, created: '2026-01-01', updated_at: null };
+    const doc = {
+      id: 'doc1',
+      workspace_id: 'ws1',
+      body: '# Hello',
+      title: 'Hello',
+      folder_id: null,
+      created: '2026-01-01',
+      updated_at: null,
+    };
     vi.mocked(getAdminClient).mockReturnValue({
-      from: vi.fn((table: string) => table === 'workspaces'
-        ? { select: vi.fn().mockReturnThis(), eq: vi.fn().mockReturnThis(), single: vi.fn().mockResolvedValue({ data: ws, error: null }) }
-        : { select: vi.fn().mockReturnThis(), eq: vi.fn().mockReturnThis(), single: vi.fn().mockResolvedValue({ data: doc, error: null }) }
+      from: vi.fn((table: string) =>
+        table === 'workspaces'
+          ? {
+              select: vi.fn().mockReturnThis(),
+              eq: vi.fn().mockReturnThis(),
+              single: vi.fn().mockResolvedValue({ data: ws, error: null }),
+            }
+          : {
+              select: vi.fn().mockReturnThis(),
+              eq: vi.fn().mockReturnThis(),
+              single: vi.fn().mockResolvedValue({ data: doc, error: null }),
+            }
       ),
     } as never);
 
@@ -202,11 +279,29 @@ describe('PATCH /api/workspaces/:key/documents/:id/move', () => {
 
   it('moves a document to a new folder', async () => {
     const ws = { id: 'ws1', secret_key: 'sk_abc' };
-    const doc = { id: 'doc1', workspace_id: 'ws1', folder_id: 'fld2', body: '', title: 'Test', created: '2026-01-01', updated_at: null };
+    const doc = {
+      id: 'doc1',
+      workspace_id: 'ws1',
+      folder_id: 'fld2',
+      body: '',
+      title: 'Test',
+      created: '2026-01-01',
+      updated_at: null,
+    };
     vi.mocked(getAdminClient).mockReturnValue({
-      from: vi.fn((table: string) => table === 'workspaces'
-        ? { select: vi.fn().mockReturnThis(), eq: vi.fn().mockReturnThis(), single: vi.fn().mockResolvedValue({ data: ws, error: null }) }
-        : { update: vi.fn().mockReturnThis(), eq: vi.fn().mockReturnThis(), select: vi.fn().mockReturnThis(), single: vi.fn().mockResolvedValue({ data: doc, error: null }) }
+      from: vi.fn((table: string) =>
+        table === 'workspaces'
+          ? {
+              select: vi.fn().mockReturnThis(),
+              eq: vi.fn().mockReturnThis(),
+              single: vi.fn().mockResolvedValue({ data: ws, error: null }),
+            }
+          : {
+              update: vi.fn().mockReturnThis(),
+              eq: vi.fn().mockReturnThis(),
+              select: vi.fn().mockReturnThis(),
+              single: vi.fn().mockResolvedValue({ data: doc, error: null }),
+            }
       ),
     } as never);
 

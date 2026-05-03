@@ -27,7 +27,7 @@ export interface TreeNode {
   id: string;
   name: string;
   type: 'folder' | 'document';
-  children: TreeNode[];     // always present (empty array for docs and empty folders)
+  children: TreeNode[]; // always present (empty array for docs and empty folders)
   // document-only fields:
   title?: string;
   body?: string;

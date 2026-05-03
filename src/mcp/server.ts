@@ -4,10 +4,7 @@
 // Requires: HIWRLD_API_URL (e.g. http://localhost:2000), HIWRLD_WORKSPACE_KEY
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
-import {
-  CallToolRequestSchema,
-  ListToolsRequestSchema,
-} from '@modelcontextprotocol/sdk/types.js';
+import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprotocol/sdk/types.js';
 
 const API_URL = process.env.HIWRLD_API_URL ?? 'http://localhost:2000';
 const WORKSPACE_KEY = process.env.HIWRLD_WORKSPACE_KEY ?? '';
@@ -39,7 +36,7 @@ interface TreeNodeLike {
 
 async function resolveFolderPath(segments: string[]): Promise<string | null> {
   if (segments.length === 0) return null;
-  const tree = await apiFetch('/tree') as TreeNodeLike;
+  const tree = (await apiFetch('/tree')) as TreeNodeLike;
   let current: TreeNodeLike = tree;
   for (const seg of segments) {
     const child = current.children.find((c) => c.name === seg && c.type === 'folder');
@@ -52,7 +49,7 @@ async function resolveFolderPath(segments: string[]): Promise<string | null> {
 async function ensureFolderPath(segments: string[]): Promise<string | null> {
   let parentId: string | null = null;
   for (const seg of segments) {
-    const tree = await apiFetch('/tree') as TreeNodeLike;
+    const tree = (await apiFetch('/tree')) as TreeNodeLike;
     function findFolder(node: TreeNodeLike, name: string): string | null {
       for (const c of node.children) {
         if (c.name === name && c.type === 'folder') return c.id;
@@ -65,10 +62,10 @@ async function ensureFolderPath(segments: string[]): Promise<string | null> {
     if (existing) {
       parentId = existing;
     } else {
-      const folder = await apiFetch('/folders', {
+      const folder = (await apiFetch('/folders', {
         method: 'POST',
         body: JSON.stringify({ name: seg, parent_id: parentId }),
-      }) as { id: string };
+      })) as { id: string };
       parentId = folder.id;
     }
   }
@@ -97,10 +94,7 @@ function findItem(node: TreeNodeLike, name: string): { id: string; type: string 
   return null;
 }
 
-const server = new Server(
-  { name: 'hiwrld', version: '1.0.0' },
-  { capabilities: { tools: {} } }
-);
+const server = new Server({ name: 'hiwrld', version: '1.0.0' }, { capabilities: { tools: {} } });
 
 server.setRequestHandler(ListToolsRequestSchema, async () => ({
   tools: [
@@ -120,7 +114,8 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     },
     {
       name: 'write_document',
-      description: 'Create or update a document at a path. Creates intermediate folders automatically.',
+      description:
+        'Create or update a document at a path. Creates intermediate folders automatically.',
       inputSchema: {
         type: 'object',
         properties: {
@@ -175,9 +170,13 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         const { path } = args as { path: string };
         const parts = path.replace(/^\//, '').split('/');
         const docName = parts.pop()!;
-        const tree = await apiFetch('/tree') as TreeNodeLike;
+        const tree = (await apiFetch('/tree')) as TreeNodeLike;
         const docId = findDocId(tree, docName);
-        if (!docId) return { content: [{ type: 'text', text: `Document not found: ${path}` }], isError: true };
+        if (!docId)
+          return {
+            content: [{ type: 'text', text: `Document not found: ${path}` }],
+            isError: true,
+          };
         const doc = await apiFetch(`/documents/${docId}`);
         return { content: [{ type: 'text', text: JSON.stringify(doc, null, 2) }] };
       }
@@ -186,13 +185,19 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         const parts = path.replace(/^\//, '').split('/');
         const title = parts.pop()!;
         const folderId = await ensureFolderPath(parts);
-        const tree = await apiFetch('/tree') as TreeNodeLike;
+        const tree = (await apiFetch('/tree')) as TreeNodeLike;
         const existing = findDocId(tree, title);
         let doc;
         if (existing) {
-          doc = await apiFetch(`/documents/${existing}`, { method: 'PATCH', body: JSON.stringify({ title, body }) });
+          doc = await apiFetch(`/documents/${existing}`, {
+            method: 'PATCH',
+            body: JSON.stringify({ title, body }),
+          });
         } else {
-          doc = await apiFetch('/documents', { method: 'POST', body: JSON.stringify({ title, body, folder_id: folderId }) });
+          doc = await apiFetch('/documents', {
+            method: 'POST',
+            body: JSON.stringify({ title, body, folder_id: folderId }),
+          });
         }
         return { content: [{ type: 'text', text: JSON.stringify(doc, null, 2) }] };
       }
@@ -208,19 +213,24 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         const docName = fromParts.pop()!;
         const toParts = to.replace(/^\//, '').split('/').filter(Boolean);
         const newFolderId = await ensureFolderPath(toParts);
-        const tree = await apiFetch('/tree') as TreeNodeLike;
+        const tree = (await apiFetch('/tree')) as TreeNodeLike;
         const docId = findDocId(tree, docName);
-        if (!docId) return { content: [{ type: 'text', text: `Item not found: ${from}` }], isError: true };
-        await apiFetch(`/documents/${docId}/move`, { method: 'PATCH', body: JSON.stringify({ folder_id: newFolderId }) });
+        if (!docId)
+          return { content: [{ type: 'text', text: `Item not found: ${from}` }], isError: true };
+        await apiFetch(`/documents/${docId}/move`, {
+          method: 'PATCH',
+          body: JSON.stringify({ folder_id: newFolderId }),
+        });
         return { content: [{ type: 'text', text: `Moved ${from} to ${to}` }] };
       }
       case 'delete_item': {
         const { path } = args as { path: string };
         const parts = path.replace(/^\//, '').split('/');
         const itemName = parts.pop()!;
-        const tree = await apiFetch('/tree') as TreeNodeLike;
+        const tree = (await apiFetch('/tree')) as TreeNodeLike;
         const item = findItem(tree, itemName);
-        if (!item) return { content: [{ type: 'text', text: `Item not found: ${path}` }], isError: true };
+        if (!item)
+          return { content: [{ type: 'text', text: `Item not found: ${path}` }], isError: true };
         const endpoint = item.type === 'folder' ? `/folders/${item.id}` : `/documents/${item.id}`;
         await apiFetch(endpoint, { method: 'DELETE' });
         return { content: [{ type: 'text', text: `Deleted: ${path}` }] };

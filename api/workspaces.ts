@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import { generateDocumentId, generateWorkspaceKey } from '../src/lib/generateId';
-import type { Folder, WorkspaceDoc } from '../src/types/workspace';
-import type { TreeNode } from '../src/types/workspace';
+import type { Folder, TreeNode, WorkspaceDoc } from '../src/types/workspace';
 import { getAdminClient } from './supabaseAdmin';
 
 export const workspacesRouter = Router();
@@ -21,7 +20,9 @@ workspacesRouter.post('/', async (req, res, next) => {
       .single();
     if (error) return next(error);
     res.status(201).json(data);
-  } catch (err) { next(err); }
+  } catch (err) {
+    next(err);
+  }
 });
 
 // GET /api/workspaces/:key
@@ -36,7 +37,9 @@ workspacesRouter.get('/:key', async (req, res, next) => {
     if (error?.code === 'PGRST116' || !data) return res.status(404).json({ error: 'not found' });
     if (error) return next(error);
     res.json(data);
-  } catch (err) { next(err); }
+  } catch (err) {
+    next(err);
+  }
 });
 
 // GET /api/workspaces/:key/tree
@@ -44,7 +47,10 @@ workspacesRouter.get('/:key/tree', async (req, res, next) => {
   try {
     const db = getAdminClient();
     const { data: ws, error: wsErr } = await db
-      .from('workspaces').select('id').eq('secret_key', req.params.key).single();
+      .from('workspaces')
+      .select('id')
+      .eq('secret_key', req.params.key)
+      .single();
     if (wsErr?.code === 'PGRST116' || !ws) return res.status(404).json({ error: 'not found' });
     if (wsErr) return next(wsErr);
 
@@ -57,7 +63,9 @@ workspacesRouter.get('/:key/tree', async (req, res, next) => {
 
     const tree = buildTree(ws.id, (folders ?? []) as Folder[], (docs ?? []) as WorkspaceDoc[]);
     res.json(tree);
-  } catch (err) { next(err); }
+  } catch (err) {
+    next(err);
+  }
 });
 
 function buildTree(workspaceId: string, folders: Folder[], docs: WorkspaceDoc[]): TreeNode {
@@ -70,7 +78,13 @@ function buildTree(workspaceId: string, folders: Folder[], docs: WorkspaceDoc[])
     folderMap.set(f.parent_id, siblings);
   }
   for (const d of docs) {
-    const node: TreeNode = { id: d.id, name: d.title || d.id, type: 'document', title: d.title, children: [] };
+    const node: TreeNode = {
+      id: d.id,
+      name: d.title || d.id,
+      type: 'document',
+      title: d.title,
+      children: [],
+    };
     const siblings = folderMap.get(d.folder_id ?? null) ?? [];
     siblings.push(node);
     folderMap.set(d.folder_id ?? null, siblings);

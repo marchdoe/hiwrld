@@ -3,9 +3,9 @@ import { fileURLToPath } from 'node:url';
 import compression from 'compression';
 import express, { json } from 'express';
 import helmet from 'helmet';
-import { workspacesRouter } from './api/workspaces';
-import { foldersRouter } from './api/folders';
 import { documentsRouter } from './api/documents';
+import { foldersRouter } from './api/folders';
+import { workspacesRouter } from './api/workspaces';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 

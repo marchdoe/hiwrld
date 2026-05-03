@@ -1,4 +1,4 @@
-import { renderHook, act, waitFor } from '@testing-library/react';
+import { act, renderHook, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { useWorkspace } from './useWorkspace';
 
@@ -21,7 +21,10 @@ describe('useWorkspace', () => {
   });
 
   it('loads workspace from localStorage and fetches tree', async () => {
-    localStorage.setItem('hiwrld.workspace', JSON.stringify({ id: 'ws1', name: 'test', secret_key: 'sk_abc' }));
+    localStorage.setItem(
+      'hiwrld.workspace',
+      JSON.stringify({ id: 'ws1', name: 'test', secret_key: 'sk_abc' })
+    );
     const tree = { id: 'ws1', name: 'root', type: 'folder', children: [] };
     fetchOk(tree);
 
@@ -36,8 +39,12 @@ describe('useWorkspace', () => {
     fetchOk({ id: 'ws2', name: 'root', type: 'folder', children: [] });
 
     const { result } = renderHook(() => useWorkspace());
-    await act(async () => { await result.current.createWorkspace('new'); });
+    await act(async () => {
+      await result.current.createWorkspace('new');
+    });
     expect(result.current.workspace?.secret_key).toBe('sk_xyz');
-    expect(JSON.parse(localStorage.getItem('hiwrld.workspace') ?? '{}')).toMatchObject({ secret_key: 'sk_xyz' });
+    expect(JSON.parse(localStorage.getItem('hiwrld.workspace') ?? '{}')).toMatchObject({
+      secret_key: 'sk_xyz',
+    });
   });
 });
