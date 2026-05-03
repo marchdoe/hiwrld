@@ -34,12 +34,12 @@ export default defineConfig({
     textStyles: {
       heroNum:      { value: { fontFamily: 'var(--fonts-ui)', fontWeight: '500', fontSize: '132px', letterSpacing: '-0.05em', lineHeight: '0.86' } },
       h1:           { value: { fontFamily: 'var(--fonts-display)', fontStyle: 'italic', fontWeight: '300', fontSize: '56px', letterSpacing: '-0.03em', lineHeight: '0.95' } },
-      sectionTitle: { value: { fontFamily: 'var(--fonts-ui)', fontWeight: '500', fontSize: '28px', letterSpacing: '-0.03em', lineHeight: '1.0' } },
+      sectionTitle: { value: { fontFamily: 'var(--fonts-ui)', fontWeight: '500', fontSize: '28px', letterSpacing: '-0.03em', lineHeight: '1' } },
       bodyLg:       { value: { fontFamily: 'var(--fonts-ui)', fontWeight: '400', fontSize: '18px', lineHeight: '1.5' } },
       body:         { value: { fontFamily: 'var(--fonts-ui)', fontWeight: '400', fontSize: '16px', lineHeight: '1.5' } },
-      uiBtn:        { value: { fontFamily: 'var(--fonts-ui)', fontWeight: '500', fontSize: '14px', lineHeight: '1.0' } },
+      uiBtn:        { value: { fontFamily: 'var(--fonts-ui)', fontWeight: '500', fontSize: '14px', lineHeight: '1' } },
       caption:      { value: { fontFamily: 'var(--fonts-ui)', fontWeight: '400', fontSize: '12px', lineHeight: '1.4' } },
-      meta:         { value: { fontFamily: 'var(--fonts-mono)', fontWeight: '400', fontSize: '11px', letterSpacing: '0.02em', lineHeight: '1.0' } },
+      meta:         { value: { fontFamily: 'var(--fonts-mono)', fontWeight: '400', fontSize: '11px', letterSpacing: '0.02em', lineHeight: '1' } },
     },
 
     recipes: {
@@ -180,7 +180,7 @@ export default defineConfig({
 
       nav: {
         className: 'nav',
-        slots: ['root', 'logo', 'links', 'link', 'cta'],
+        slots: ['root', 'links', 'link', 'cta'],
         base: {
           root: {
             position: 'sticky',
@@ -261,7 +261,7 @@ export default defineConfig({
           },
           num:   { fontFamily: 'var(--fonts-mono)', fontSize: '12px', color: 'var(--colors-g3)' },
           title: { fontFamily: 'var(--fonts-ui)', fontWeight: '500', fontSize: '28px', letterSpacing: '-0.03em' },
-          desc:  { fontFamily: 'var(--fonts-ui)', fontSize: '16px', color: 'var(--colors-g4)', lineHeight: '1.5', textWrap: 'pretty' as const },
+          desc:  { fontFamily: 'var(--fonts-ui)', fontSize: '16px', color: 'var(--colors-g4)', lineHeight: '1.5', textWrap: 'pretty' as const }, // cast required: not in PandaCSS 1.x type union but valid CSS
         },
       },
 
