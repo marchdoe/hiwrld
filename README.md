@@ -6,6 +6,8 @@ Best edited by one person at a time, but anyone with the URL can read along in r
 
 <img width="1575" height="1087" alt="Screenshot 2026-05-03 at 1 29 34 PM" src="https://github.com/user-attachments/assets/7bc98c68-78d5-4fd5-9bcc-e1b0a4b314f1" />
 
+<img width="1717" height="1200" alt="Screenshot 2026-05-03 at 1 30 44 PM" src="https://github.com/user-attachments/assets/5c97b7e6-0cff-45dd-8977-689b2fbf39da" />
+
 
 ## Features
 
