@@ -48,25 +48,28 @@ export function useDocuments(): UseDocumentsResult {
   }, []);
 
   const add = useCallback((id: string) => {
-    setDocs((prev) => {
-      if (prev.some((d) => d.id === id)) return prev;
-      const next = [...prev, { id, title: '' }];
+    setDocs(() => {
+      const current = readDocs();
+      if (current.some((d) => d.id === id)) return current;
+      const next = [...current, { id, title: '' }];
       writeDocs(next);
       return next;
     });
   }, []);
 
   const remove = useCallback((id: string) => {
-    setDocs((prev) => {
-      const next = prev.filter((d) => d.id !== id);
+    setDocs(() => {
+      const current = readDocs();
+      const next = current.filter((d) => d.id !== id);
       writeDocs(next);
       return next;
     });
   }, []);
 
   const setTitle = useCallback((id: string, title: string) => {
-    setDocs((prev) => {
-      const next = prev.map((d) => (d.id === id ? { ...d, title } : d));
+    setDocs(() => {
+      const current = readDocs();
+      const next = current.map((d) => (d.id === id ? { ...d, title } : d));
       writeDocs(next);
       return next;
     });

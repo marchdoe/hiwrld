@@ -60,7 +60,10 @@ test.describe('document menu', () => {
     const items = page.locator('.dmenu__list li.dmenu__item');
     await expect(items).toHaveCount(2);
 
+    const urlBeforeDelete = page.url();
     await page.locator('.dmenu__item', { hasText: 'Delete' }).locator('.dmenu__deleteBtn').click();
+    // Deleting the current document navigates away — wait for that before asserting count
+    await page.waitForURL((u) => u.href !== urlBeforeDelete);
     await expect(items).toHaveCount(1);
   });
 });

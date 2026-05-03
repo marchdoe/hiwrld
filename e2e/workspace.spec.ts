@@ -1,4 +1,4 @@
-import { type Page, expect, test } from '@playwright/test';
+import { expect, type Page, test } from '@playwright/test';
 import { fillTextarea } from './helpers';
 
 const TEST_DOC = 'e2ewrks';

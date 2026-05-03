@@ -9,7 +9,14 @@
     "api/utils.ts",
     "src/mcp/server.ts"
   ],
-  "ignorePatterns": ["src/routeTree.gen.ts", "**/*.d.ts", "__mocks__/**", "docs/**", "scripts/**", "src/design/**"],
+  "ignorePatterns": [
+    "src/routeTree.gen.ts",
+    "**/*.d.ts",
+    "__mocks__/**",
+    "docs/**",
+    "scripts/**",
+    "src/design/**"
+  ],
   "ignoreExports": [{ "file": "api/supabaseAdmin.ts", "exports": ["_resetAdminClient"] }],
   "ignoreDependencies": [
     "@codemirror/commands",

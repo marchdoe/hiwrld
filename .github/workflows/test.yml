@@ -5,10 +5,65 @@ on:
   pull_request:
 
 jobs:
-  test:
-    name: Unit & E2E tests
+  biome:
+    name: Biome
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Biome check
+        run: pnpm check
+
+  vitest:
+    name: Vitest
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      - name: Unit tests
+        run: pnpm test:coverage
+
+      - name: Upload coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage/
+          retention-days: 14
+
+  playwright:
+    name: Playwright
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
 
@@ -30,37 +85,21 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - name: Vitest
-        id: vitest
-        run: pnpm test:coverage
-
-      - name: Playwright
-        id: playwright
+      - name: E2E tests
         run: pnpm test:e2e
-        continue-on-error: true
 
       - name: Upload test artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-artifacts
+          name: playwright-report
           path: |
             playwright-report/
             test-results/
-            coverage/
           retention-days: 14
 
-      - name: Summary
-        if: always()
-        run: |
-          echo "## Test results" >> $GITHUB_STEP_SUMMARY
-          echo "- Vitest outcome: ${{ steps.vitest.outcome }}" >> $GITHUB_STEP_SUMMARY
-          echo "- Playwright outcome: ${{ steps.playwright.outcome }}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "_Failures do not block this workflow (report-only mode)._" >> $GITHUB_STEP_SUMMARY
-
-  analyze:
-    name: Fallow analysis
+  fallow:
+    name: Fallow
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:

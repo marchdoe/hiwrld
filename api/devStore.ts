@@ -120,7 +120,11 @@ class QueryBuilder {
     return { data: null, error: null };
   }
 
-  private _executeUpdate(store: Store, rows: Row[], table: keyof Store): { data: unknown; error: unknown } {
+  private _executeUpdate(
+    store: Store,
+    rows: Row[],
+    table: keyof Store
+  ): { data: unknown; error: unknown } {
     let updated: Row | null = null;
     store[table] = rows.map((row) => {
       if (!this._matches(row)) return row;
@@ -148,7 +152,11 @@ class QueryBuilder {
     return toDelete;
   }
 
-  private _executeDelete(store: Store, rows: Row[], table: keyof Store): { data: unknown; error: unknown } {
+  private _executeDelete(
+    store: Store,
+    rows: Row[],
+    table: keyof Store
+  ): { data: unknown; error: unknown } {
     if (table === 'folders') {
       const rootIds = rows.filter((r) => this._matches(r)).map((r) => r.id as string);
       const toDelete = this._collectFolderIds(store, rootIds);
