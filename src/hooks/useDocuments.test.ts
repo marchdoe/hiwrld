@@ -1,5 +1,5 @@
 import { act, renderHook } from '@testing-library/react';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { useDocuments } from './useDocuments';
 
 describe('useDocuments', () => {
@@ -50,5 +50,60 @@ describe('useDocuments', () => {
     const { result } = renderHook(() => useDocuments());
     act(() => result.current.setTitle('aaa', 'My Doc'));
     expect(result.current.docs[0]?.title).toBe('My Doc');
+  });
+});
+
+const KEY = 'hiwrld.bookmarks';
+
+describe('useDocuments — multi-instance isolation', () => {
+  afterEach(() => localStorage.clear());
+
+  it('remove() on one instance is not overwritten by setTitle() on another', () => {
+    localStorage.setItem(
+      KEY,
+      JSON.stringify([
+        { id: 'a', title: 'A' },
+        { id: 'b', title: 'B' },
+      ])
+    );
+
+    const { result: r1 } = renderHook(() => useDocuments());
+    const { result: r2 } = renderHook(() => useDocuments());
+
+    act(() => {
+      r1.current.remove('a');
+    });
+    act(() => {
+      r2.current.setTitle('b', 'Updated B');
+    });
+
+    const stored = JSON.parse(localStorage.getItem(KEY) ?? '[]') as Array<{
+      id: string;
+      title: string;
+    }>;
+    expect(stored).toHaveLength(1);
+    expect(stored[0]).toEqual({ id: 'b', title: 'Updated B' });
+  });
+
+  it('add() on one instance is visible to setTitle() on another', () => {
+    localStorage.setItem(KEY, JSON.stringify([{ id: 'a', title: 'A' }]));
+
+    const { result: r1 } = renderHook(() => useDocuments());
+    const { result: r2 } = renderHook(() => useDocuments());
+
+    act(() => {
+      r1.current.add('b');
+    });
+    act(() => {
+      r2.current.setTitle('a', 'Updated A');
+    });
+
+    const stored = JSON.parse(localStorage.getItem(KEY) ?? '[]') as Array<{
+      id: string;
+      title: string;
+    }>;
+    expect(stored).toHaveLength(2);
+    expect(stored.find((d) => d.id === 'a')?.title).toBe('Updated A');
+    expect(stored.find((d) => d.id === 'b')).toBeDefined();
   });
 });

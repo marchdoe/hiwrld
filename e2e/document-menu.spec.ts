@@ -66,4 +66,29 @@ test.describe('document menu', () => {
     await page.waitForURL((u) => u.href !== urlBeforeDelete);
     await expect(items).toHaveCount(1);
   });
+
+  test('delete button removes a background document without navigating', async ({ page }) => {
+    await createTwoDocuments(page, '# Keep', '# Active');
+
+    // Navigate to Keep so Active is the background document
+    await page.locator('.el__menuButton').click();
+    await expect(page.locator('.dmenu__list')).toBeVisible();
+    const keepItem = page.locator('.dmenu__item', { hasText: 'Keep' });
+    await keepItem.click();
+    await expect(page.locator('.document-textarea')).toHaveValue('# Keep');
+
+    // Reopen menu and delete the Active background document
+    await page.locator('.el__menuButton').click();
+    await expect(page.locator('.dmenu__list')).toBeVisible();
+    const currentUrl = page.url();
+    const items = page.locator('.dmenu__list li.dmenu__item');
+    await expect(items).toHaveCount(2);
+
+    await page.locator('.dmenu__item', { hasText: 'Active' }).locator('.dmenu__deleteBtn').click();
+
+    // No navigation should happen — URL stays the same
+    await expect(page).toHaveURL(currentUrl);
+    await expect(items).toHaveCount(1);
+    await expect(page.locator('.dmenu__item', { hasText: 'Keep' })).toBeVisible();
+  });
 });
