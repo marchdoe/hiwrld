@@ -4,6 +4,9 @@
 
 Best edited by one person at a time, but anyone with the URL can read along in realtime. No account, no signup, no toolbar — just markdown.
 
+<img width="1575" height="1087" alt="Screenshot 2026-05-03 at 1 29 34 PM" src="https://github.com/user-attachments/assets/7bc98c68-78d5-4fd5-9bcc-e1b0a4b314f1" />
+
+
 ## Features
 
 - **Live preview** — split-pane layout, write on the left, rendered on the right. Switch to read-only or write-only via the toolbar.
