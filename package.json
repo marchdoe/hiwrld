@@ -9,6 +9,7 @@
     "node": ">=20"
   },
   "scripts": {
+    "prepare": "panda codegen",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
