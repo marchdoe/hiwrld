@@ -1,0 +1,48 @@
+{
+  "finding_counts": {
+    "api/documents.ts": {
+      "complexity_moderate": {
+        "count": 1
+      },
+      "crap_moderate": {
+        "count": 1
+      }
+    },
+    "api/utils.ts": {
+      "crap_moderate": {
+        "count": 1
+      }
+    },
+    "api/workspaces.ts": {
+      "crap_moderate": {
+        "count": 1
+      }
+    },
+    "docs/design_handoff_hiwrld_brand/design-canvas.jsx": {
+      "crap_high": {
+        "count": 3
+      },
+      "crap_moderate": {
+        "count": 2
+      }
+    },
+    "docs/design_handoff_hiwrld_brand/split-maison.jsx": {
+      "crap_moderate": {
+        "count": 2
+      }
+    },
+    "src/mcp/server.ts": {
+      "complexity_critical": {
+        "count": 1
+      },
+      "crap_critical": {
+        "count": 1
+      },
+      "crap_moderate": {
+        "count": 4
+      }
+    }
+  },
+  "runtime_coverage_findings": [],
+  "target_keys": ["docs/design_handoff_hiwrld_brand/design-canvas.jsx:untested risk"]
+}

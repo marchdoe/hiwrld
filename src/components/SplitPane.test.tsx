@@ -1,9 +1,9 @@
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { mockWorkspace } from '../../test/workspace-mock';
 import * as useDocumentModule from '../hooks/useDocument';
 import * as useDocumentsModule from '../hooks/useDocuments';
-import * as useWorkspaceModule from '../hooks/useWorkspace';
 import { SplitPane } from './SplitPane';
 
 vi.mock('@tanstack/react-router', async (importOriginal) => {
@@ -43,22 +43,6 @@ function mockDocuments() {
     add: vi.fn(),
     remove: vi.fn(),
     setTitle: vi.fn(),
-  });
-}
-
-function mockWorkspace() {
-  vi.spyOn(useWorkspaceModule, 'useWorkspace').mockReturnValue({
-    workspace: null,
-    tree: null,
-    isLoading: false,
-    createWorkspace: vi.fn(),
-    refreshTree: vi.fn(),
-    createFolder: vi.fn(),
-    renameFolder: vi.fn(),
-    deleteFolder: vi.fn(),
-    createDocument: vi.fn(),
-    moveDocument: vi.fn(),
-    deleteDocument: vi.fn(),
   });
 }
 

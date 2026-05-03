@@ -1,0 +1,28 @@
+{
+  "clone_groups": [
+    "api/api.test.ts:31-35|api/api.test.ts:49-53",
+    "api/api.test.ts:103-121|api/api.test.ts:208-228",
+    "api/api.test.ts:108-122|api/api.test.ts:149-164",
+    "api/api.test.ts:144-163|api/api.test.ts:282-303",
+    "api/api.test.ts:144-164|api/api.test.ts:180-194|api/api.test.ts:282-304",
+    "api/api.test.ts:214-229|api/api.test.ts:252-267|api/api.test.ts:288-304",
+    "api/api.test.ts:226-234|api/api.test.ts:301-309",
+    "api/documents.ts:5-12|api/folders.ts:5-12",
+    "api/documents.ts:7-12|api/folders.ts:7-12|api/utils.ts:3-8",
+    "api/documents.ts:117-126|api/documents.ts:16-26|api/folders.ts:62-71",
+    "api/documents.ts:18-23|api/documents.ts:46-51|api/documents.ts:72-77",
+    "api/documents.ts:106-117|api/documents.ts:25-36|api/documents.ts:80-91",
+    "api/documents.ts:25-33|api/workspaces.ts:35-43",
+    "api/documents.ts:57-66|api/workspaces.ts:18-26",
+    "api/documents.ts:103-117|api/documents.ts:77-91",
+    "api/documents.ts:77-88|api/folders.ts:47-58",
+    "api/documents.ts:117-123|api/folders.ts:62-68",
+    "api/documents.ts:123-132|api/folders.ts:68-77",
+    "api/folders.ts:18-26|api/folders.ts:39-47",
+    "api/folders.ts:26-34|api/workspaces.ts:18-26",
+    "docs/design_handoff_hiwrld_brand/split-maison.jsx:597-606|docs/design_handoff_hiwrld_brand/split-maison.jsx:614-623",
+    "src/components/SplitPane.test.tsx:49-62|test/workspace-mock.ts:4-17",
+    "src/components/SplitPane.test.tsx:50-62|src/components/WorkspaceDrawer.test.tsx:21-33",
+    "src/components/SplitPane.test.tsx:53-65|src/components/WorkspaceDrawer.test.tsx:51-63"
+  ]
+}

@@ -23,6 +23,20 @@ function mockDb(overrides: Record<string, unknown> = {}) {
   return chain;
 }
 
+function mockTwoTableDb(workspaceData: unknown, otherBuilder: (table: string) => unknown) {
+  vi.mocked(getAdminClient).mockReturnValue({
+    from: vi.fn((table: string) =>
+      table === 'workspaces'
+        ? {
+            select: vi.fn().mockReturnThis(),
+            eq: vi.fn().mockReturnThis(),
+            single: vi.fn().mockResolvedValue({ data: workspaceData, error: null }),
+          }
+        : otherBuilder(table)
+    ),
+  } as never);
+}
+
 const app = createApp();
 
 describe('POST /api/workspaces', () => {
@@ -107,21 +121,11 @@ describe('POST /api/workspaces/:key/folders', () => {
       name: 'Projects',
       created_at: '2026-01-01',
     };
-    vi.mocked(getAdminClient).mockReturnValue({
-      from: vi.fn((table: string) =>
-        table === 'workspaces'
-          ? {
-              select: vi.fn().mockReturnThis(),
-              eq: vi.fn().mockReturnThis(),
-              single: vi.fn().mockResolvedValue({ data: ws, error: null }),
-            }
-          : {
-              insert: vi.fn().mockReturnThis(),
-              select: vi.fn().mockReturnThis(),
-              single: vi.fn().mockResolvedValue({ data: folder, error: null }),
-            }
-      ),
-    } as never);
+    mockTwoTableDb(ws, () => ({
+      insert: vi.fn().mockReturnThis(),
+      select: vi.fn().mockReturnThis(),
+      single: vi.fn().mockResolvedValue({ data: folder, error: null }),
+    }));
 
     const res = await request(app)
       .post('/api/workspaces/sk_abc/folders')
@@ -148,22 +152,12 @@ describe('PATCH /api/workspaces/:key/folders/:id', () => {
       parent_id: null,
       created_at: '2026-01-01',
     };
-    vi.mocked(getAdminClient).mockReturnValue({
-      from: vi.fn((table: string) =>
-        table === 'workspaces'
-          ? {
-              select: vi.fn().mockReturnThis(),
-              eq: vi.fn().mockReturnThis(),
-              single: vi.fn().mockResolvedValue({ data: ws, error: null }),
-            }
-          : {
-              update: vi.fn().mockReturnThis(),
-              eq: vi.fn().mockReturnThis(),
-              select: vi.fn().mockReturnThis(),
-              single: vi.fn().mockResolvedValue({ data: updated, error: null }),
-            }
-      ),
-    } as never);
+    mockTwoTableDb(ws, () => ({
+      update: vi.fn().mockReturnThis(),
+      eq: vi.fn().mockReturnThis(),
+      select: vi.fn().mockReturnThis(),
+      single: vi.fn().mockResolvedValue({ data: updated, error: null }),
+    }));
 
     const res = await request(app)
       .patch('/api/workspaces/sk_abc/folders/fld1')
@@ -178,22 +172,12 @@ describe('DELETE /api/workspaces/:key/folders/:id', () => {
 
   it('deletes folder and returns 204', async () => {
     const ws = { id: 'ws1', secret_key: 'sk_abc' };
-    vi.mocked(getAdminClient).mockReturnValue({
-      from: vi.fn((table: string) =>
-        table === 'workspaces'
-          ? {
-              select: vi.fn().mockReturnThis(),
-              eq: vi.fn().mockReturnThis(),
-              single: vi.fn().mockResolvedValue({ data: ws, error: null }),
-            }
-          : {
-              delete: vi.fn().mockReturnThis(),
-              eq: vi.fn().mockReturnValue({
-                eq: vi.fn().mockResolvedValue({ error: null }),
-              }),
-            }
-      ),
-    } as never);
+    mockTwoTableDb(ws, () => ({
+      delete: vi.fn().mockReturnThis(),
+      eq: vi.fn().mockReturnValue({
+        eq: vi.fn().mockResolvedValue({ error: null }),
+      }),
+    }));
 
     const res = await request(app).delete('/api/workspaces/sk_abc/folders/fld1');
     expect(res.status).toBe(204);
@@ -214,21 +198,11 @@ describe('POST /api/workspaces/:key/documents', () => {
       created: '2026-01-01',
       updated_at: null,
     };
-    vi.mocked(getAdminClient).mockReturnValue({
-      from: vi.fn((table: string) =>
-        table === 'workspaces'
-          ? {
-              select: vi.fn().mockReturnThis(),
-              eq: vi.fn().mockReturnThis(),
-              single: vi.fn().mockResolvedValue({ data: ws, error: null }),
-            }
-          : {
-              insert: vi.fn().mockReturnThis(),
-              select: vi.fn().mockReturnThis(),
-              single: vi.fn().mockResolvedValue({ data: doc, error: null }),
-            }
-      ),
-    } as never);
+    mockTwoTableDb(ws, () => ({
+      insert: vi.fn().mockReturnThis(),
+      select: vi.fn().mockReturnThis(),
+      single: vi.fn().mockResolvedValue({ data: doc, error: null }),
+    }));
 
     const res = await request(app)
       .post('/api/workspaces/sk_abc/documents')
@@ -252,21 +226,11 @@ describe('GET /api/workspaces/:key/documents/:id', () => {
       created: '2026-01-01',
       updated_at: null,
     };
-    vi.mocked(getAdminClient).mockReturnValue({
-      from: vi.fn((table: string) =>
-        table === 'workspaces'
-          ? {
-              select: vi.fn().mockReturnThis(),
-              eq: vi.fn().mockReturnThis(),
-              single: vi.fn().mockResolvedValue({ data: ws, error: null }),
-            }
-          : {
-              select: vi.fn().mockReturnThis(),
-              eq: vi.fn().mockReturnThis(),
-              single: vi.fn().mockResolvedValue({ data: doc, error: null }),
-            }
-      ),
-    } as never);
+    mockTwoTableDb(ws, () => ({
+      select: vi.fn().mockReturnThis(),
+      eq: vi.fn().mockReturnThis(),
+      single: vi.fn().mockResolvedValue({ data: doc, error: null }),
+    }));
 
     const res = await request(app).get('/api/workspaces/sk_abc/documents/doc1');
     expect(res.status).toBe(200);
@@ -288,22 +252,12 @@ describe('PATCH /api/workspaces/:key/documents/:id/move', () => {
       created: '2026-01-01',
       updated_at: null,
     };
-    vi.mocked(getAdminClient).mockReturnValue({
-      from: vi.fn((table: string) =>
-        table === 'workspaces'
-          ? {
-              select: vi.fn().mockReturnThis(),
-              eq: vi.fn().mockReturnThis(),
-              single: vi.fn().mockResolvedValue({ data: ws, error: null }),
-            }
-          : {
-              update: vi.fn().mockReturnThis(),
-              eq: vi.fn().mockReturnThis(),
-              select: vi.fn().mockReturnThis(),
-              single: vi.fn().mockResolvedValue({ data: doc, error: null }),
-            }
-      ),
-    } as never);
+    mockTwoTableDb(ws, () => ({
+      update: vi.fn().mockReturnThis(),
+      eq: vi.fn().mockReturnThis(),
+      select: vi.fn().mockReturnThis(),
+      single: vi.fn().mockResolvedValue({ data: doc, error: null }),
+    }));
 
     const res = await request(app)
       .patch('/api/workspaces/sk_abc/documents/doc1/move')

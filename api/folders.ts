@@ -1,16 +1,9 @@
 import { Router } from 'express';
 import { generateDocumentId } from '../src/lib/generateId';
 import { getAdminClient } from './supabaseAdmin';
+import { resolveWorkspace } from './utils';
 
 export const foldersRouter = Router({ mergeParams: true });
-
-async function resolveWorkspace(key: string) {
-  const db = getAdminClient();
-  const { data, error } = await db.from('workspaces').select('id').eq('secret_key', key).single();
-  if (error?.code === 'PGRST116' || !data) return null;
-  if (error) throw error;
-  return data;
-}
 
 // POST /api/workspaces/:key/folders
 foldersRouter.post('/', async (req, res, next) => {

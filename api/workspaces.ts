@@ -43,6 +43,7 @@ workspacesRouter.get('/:key', async (req, res, next) => {
 });
 
 // GET /api/workspaces/:key/tree
+// fallow-ignore-next-line complexity
 workspacesRouter.get('/:key/tree', async (req, res, next) => {
   try {
     const db = getAdminClient();

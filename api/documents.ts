@@ -1,16 +1,9 @@
 import { Router } from 'express';
 import { generateDocumentId } from '../src/lib/generateId';
 import { getAdminClient } from './supabaseAdmin';
+import { resolveWorkspace } from './utils';
 
 export const documentsRouter = Router({ mergeParams: true });
-
-async function resolveWorkspace(key: string) {
-  const db = getAdminClient();
-  const { data, error } = await db.from('workspaces').select('id').eq('secret_key', key).single();
-  if (error?.code === 'PGRST116' || !data) return null;
-  if (error) throw error;
-  return data;
-}
 
 // GET /api/workspaces/:key/documents/:id
 documentsRouter.get('/:id', async (req, res, next) => {
@@ -88,6 +81,7 @@ documentsRouter.patch('/:id/move', async (req, res, next) => {
 });
 
 // PATCH /api/workspaces/:key/documents/:id
+// fallow-ignore-next-line complexity
 documentsRouter.patch('/:id', async (req, res, next) => {
   try {
     const { title, body } = req.body as { title?: string; body?: string };
