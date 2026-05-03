@@ -14,5 +14,5 @@
     "noEmit": true,
     "baseUrl": "."
   },
-  "include": ["src", "test", "e2e", "server.ts", "playwright.config.ts"]
+  "include": ["src", "test", "e2e", "api", "server.ts", "playwright.config.ts"]
 }
