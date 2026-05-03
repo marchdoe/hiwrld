@@ -1,4 +1,5 @@
 import { useNavigate } from '@tanstack/react-router';
+import { flushSync } from 'react-dom';
 import { documentMenu } from '../../styled-system/recipes';
 import { useDocuments } from '../hooks/useDocuments';
 import { generateDocumentId } from '../lib/generateId';
@@ -15,14 +16,16 @@ export function DocumentMenu({ currentDocId }: DocumentMenuProps) {
 
   const handleDelete = (id: string) => {
     const remaining = docs.filter((d) => d.id !== id);
-    remove(id);
+    flushSync(() => {
+      remove(id);
+    });
     if (id === currentDocId) {
       const next =
         remaining[remaining.length - 1]?.id ??
         (() => {
-          const id = generateDocumentId();
-          add(id);
-          return id;
+          const newId = generateDocumentId();
+          add(newId);
+          return newId;
         })();
       void navigate({ to: '/$docId', params: { docId: next } });
     }
