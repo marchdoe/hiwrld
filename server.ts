@@ -1,8 +1,9 @@
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import compression from 'compression';
-import express from 'express';
+import express, { json } from 'express';
 import helmet from 'helmet';
+import { workspacesRouter } from './api/workspaces';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -30,6 +31,9 @@ export function createApp({ distDir = join(__dirname, 'dist') } = {}) {
       crossOriginEmbedderPolicy: false,
     })
   );
+
+  app.use(json());
+  app.use('/api/workspaces', workspacesRouter);
 
   app.use((req, res, next) => {
     if (req.path.endsWith('.map')) return res.status(404).end();
