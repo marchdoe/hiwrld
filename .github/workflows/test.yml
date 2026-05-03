@@ -83,4 +83,5 @@ jobs:
 
       - uses: fallow-rs/fallow@v2
         with:
+          command: audit
           format: sarif
