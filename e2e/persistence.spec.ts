@@ -39,9 +39,6 @@ test.describe('persistence', () => {
     await a.waitForTimeout(800);
 
     const firstDocUrl = a.url();
-    // Open the menu, click "new doc"
-    await a.locator('.menu-button').click();
-    await expect(a.locator('.document-menu')).toBeVisible();
     await a.locator('.add-button').click();
     await a.waitForURL((u) => u.href !== firstDocUrl);
     await fillTextarea(a, 'second doc');
