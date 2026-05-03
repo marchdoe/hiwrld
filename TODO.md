@@ -11,41 +11,22 @@ Pre-launch follow-ups for [hiwrld.com](https://hiwrld.com).
 
 ## Branding assets
 
-- [ ] **Design and add the hiwrld favicon**
-  - Currently the page has no favicon (placeholder `<link rel="icon" href="data:," />` in `index.html` to suppress the browser's default `/favicon.ico` request).
-  - Deliverables: `favicon.svg` (modern browsers), `favicon.ico` 32×32 (legacy/Windows), `apple-touch-icon.png` 180×180.
-  - Drop them at the repo root; update `index.html` to reference each:
-    ```html
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    ```
-  - [realfavicongenerator.net](https://realfavicongenerator.net) handles all sizes if you have a single source SVG.
+- [x] **Design and add the hiwrld favicon** — `hi*` mark, graphite bg. SVG master + PNG set at 16/32/48/64/96/128/180/192/512px + maskable variant. See `src/assets/favicon.svg` and `scripts/render-favicons.ts`.
 
-- [ ] **Add Open Graph + Twitter Card metadata**
-  - Currently `index.html` has only `<meta name="description">`. Sharing on Slack / iMessage / Twitter / LinkedIn shows no preview card.
-  - Add to `<head>` in `index.html`:
-    ```html
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="hiwrld" />
-    <meta property="og:title" content="hiwrld" />
-    <meta property="og:description" content="Realtime Markdown editor — write on the left, read on the right, share the URL." />
-    <meta property="og:url" content="https://hiwrld.com" />
-    <meta property="og:image" content="https://hiwrld.com/og.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="hiwrld" />
-    <meta name="twitter:description" content="Realtime Markdown editor — write on the left, read on the right, share the URL." />
-    <meta name="twitter:image" content="https://hiwrld.com/og.png" />
-    ```
-  - Design and add the OG image: `og.png`, 1200×630, drop at repo root.
-  - Test with [opengraph.xyz](https://www.opengraph.xyz) and Twitter's [Card Validator](https://cards-dev.twitter.com/validator) once deployed.
+- [x] **Add Open Graph + Twitter Card metadata** — OG card at 1200×630 (`public/og.png`). Rendered via Playwright from `src/assets/og-source.html`. Tags added to `index.html`.
 
 ## Code quality
 
 - [ ] **Remove `useWindowWidth` dead code** — `src/hooks/useWindowWidth.ts` is not imported anywhere; leftover from the removed narrow-screen auto-force-write mode.
 - [ ] **Drawer close on document navigation** — `closeMenu` exists in `WritePane` but is not passed into `DocumentMenu`. Pass it as an `onClose` prop to `<DocumentMenu currentDocId={docId} onClose={closeMenu} />`, thread it through to `DocumentMenuItem`, and call it on the `<Link onClick>` handler.
+
+## Branding — deferred
+
+- [ ] **Landing page copy** — all text on `hiwrld.com` (hero, pull quote, features, CTA) is first-pass placeholder. Edit copy in `src/routes/index.tsx` before launch.
+
+- [ ] **License Maison Neue + Editorial New** — the brand typefaces (Milieu Grotesque + Pangram Pangram). Currently using Geist as a free first-pass. Swap is a one-line token change in `panda.config.ts` under `theme.tokens.fonts`.
+
+- [ ] **Workspace API — direct doc URL 404** — navigating directly to `/:docId` returns "Not Found" when the workspace Express API (added in `vite.config.ts`) intercepts the request. Needs route-scoping fix so `/api/*` requests go to Express and all other URLs fall through to the SPA. Tracked separately with the workspace feature work.
 
 ## Upcoming features
 
