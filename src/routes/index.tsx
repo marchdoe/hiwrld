@@ -43,7 +43,7 @@ function LandingPage() {
           <a className={n.link} href="#features">features</a>
           <a className={n.link} href="#stack">stack</a>
           <a className={n.link} href="https://github.com" target="_blank" rel="noreferrer">github</a>
-          <a className={n.cta} onClick={openNewDoc} style={{ cursor: 'pointer' }}>open editor →</a>
+          <button type="button" className={n.cta} onClick={openNewDoc}>open editor →</button>
         </nav>
       </header>
 
@@ -77,7 +77,7 @@ function LandingPage() {
                 </p>
               </div>
               <div style={{ marginTop: '32px', display: 'flex', gap: '12px' }}>
-                <Button variant="line" href="/sample">view a sample ↗</Button>
+                <Button variant="line" onClick={openNewDoc}>view a sample ↗</Button>
               </div>
             </>
           }
