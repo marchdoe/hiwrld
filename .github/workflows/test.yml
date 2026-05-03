@@ -46,6 +46,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Build
+        run: pnpm build
+
       - name: Unit tests
         run: pnpm test:coverage
 
@@ -121,6 +124,5 @@ jobs:
 
       - uses: fallow-rs/fallow@v2
         with:
-          command: audit
           format: sarif
           changed-since: ${{ github.event.pull_request.base.sha || github.event.before }}
