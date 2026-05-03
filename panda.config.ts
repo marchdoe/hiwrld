@@ -51,6 +51,7 @@ export default defineConfig({
           fontSize: '14px',
           lineHeight: '1',
           letterSpacing: '-0.01em',
+          opacity: '1',
           cursor: 'pointer',
           borderRadius: '0',
           display: 'inline-block',

@@ -25,6 +25,7 @@ const STACK = [
 function LandingPage() {
   const n = nav();
   const pq = pullQuote();
+  const f = featureRow();
   const ss = stackSection();
   const cta = ctaSection();
   const ft = pageFooter();
@@ -77,7 +78,7 @@ function LandingPage() {
                 </p>
               </div>
               <div style={{ marginTop: '32px', display: 'flex', gap: '12px' }}>
-                <Button variant="line" onClick={openNewDoc}>view a sample ↗</Button>
+                <Button variant="line" onClick={openNewDoc}>open a document →</Button>
               </div>
             </>
           }
@@ -94,16 +95,13 @@ function LandingPage() {
 
       {/* FEATURES */}
       <section id="features" style={{ borderBottom: '1px solid var(--colors-g2)' }}>
-        {FEATURES.map(([num, title, desc]) => {
-          const f = featureRow();
-          return (
-            <div key={num} className={f.root}>
-              <span className={f.num}>{num}</span>
-              <span className={f.title}>{title}</span>
-              <span className={f.desc}>{desc}</span>
-            </div>
-          );
-        })}
+        {FEATURES.map(([num, title, desc]) => (
+          <div key={num} className={f.root}>
+            <span className={f.num}>{num}</span>
+            <span className={f.title}>{title}</span>
+            <span className={f.desc}>{desc}</span>
+          </div>
+        ))}
       </section>
 
       {/* STACK */}
