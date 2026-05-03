@@ -15,6 +15,7 @@ import yaml from 'highlight.js/lib/languages/yaml';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { routeTree } from './routeTree.gen';
+import './global.css';
 import 'highlight.js/styles/github.css';
 
 hljs.registerLanguage('javascript', javascript);
