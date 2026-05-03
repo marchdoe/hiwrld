@@ -91,7 +91,7 @@ export function WorkspaceDrawer({ currentDocId, onClose }: WorkspaceDrawerProps)
 
   return (
     <div className="workspace-drawer">
-      {workspace && tree ? (
+      {workspace ? (
         <>
           {/* Header */}
           <div className="workspace-drawer-header">
@@ -122,13 +122,15 @@ export function WorkspaceDrawer({ currentDocId, onClose }: WorkspaceDrawerProps)
           </div>
           {/* Tree */}
           <div className="workspace-drawer-tree">
-            <FolderTree
-              nodes={tree.children}
-              activeDocId={currentDocId}
-              onDocClick={handleDocClick}
-              onFolderMenu={folderMenuItems}
-              onDocMenu={docMenuItems}
-            />
+            {tree && (
+              <FolderTree
+                nodes={tree.children}
+                activeDocId={currentDocId}
+                onDocClick={handleDocClick}
+                onFolderMenu={folderMenuItems}
+                onDocMenu={docMenuItems}
+              />
+            )}
           </div>
           {/* Workspace key */}
           <div className="workspace-drawer-key">
