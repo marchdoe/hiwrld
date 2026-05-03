@@ -1,7 +1,8 @@
 import { vi } from 'vitest';
+import type { UseWorkspaceResult } from '../src/hooks/useWorkspace';
 import * as useWorkspaceModule from '../src/hooks/useWorkspace';
 
-export function mockWorkspace() {
+export function mockWorkspace(overrides: Partial<UseWorkspaceResult> = {}) {
   vi.spyOn(useWorkspaceModule, 'useWorkspace').mockReturnValue({
     workspace: null,
     tree: null,
@@ -14,5 +15,6 @@ export function mockWorkspace() {
     createDocument: vi.fn(),
     moveDocument: vi.fn(),
     deleteDocument: vi.fn(),
+    ...overrides,
   });
 }

@@ -22,6 +22,47 @@ const STACK = [
   ['bundler', 'Vite 7 · Biome 2'],
 ] as const;
 
+interface HeroColumnProps {
+  word: string;
+  wordColor: string;
+  body: React.ReactNode;
+  button: React.ReactNode;
+}
+
+function HeroColumn({ word, wordColor, body, button }: HeroColumnProps) {
+  return (
+    <div style={{ marginTop: '36px' }}>
+      <div
+        className="hero-numeral"
+        style={{
+          fontFamily: 'var(--fonts-ui)',
+          fontWeight: 500,
+          lineHeight: 0.86,
+          letterSpacing: '-0.05em',
+          color: wordColor,
+        }}
+      >
+        {word}
+      </div>
+      <p
+        style={
+          {
+            marginTop: '24px',
+            fontSize: '18px',
+            lineHeight: 1.5,
+            color: 'var(--colors-g5)',
+            maxWidth: '380px',
+            textWrap: 'pretty',
+          } as React.CSSProperties
+        }
+      >
+        {body}
+      </p>
+      <div style={{ marginTop: '32px', display: 'flex', gap: '12px' }}>{button}</div>
+    </div>
+  );
+}
+
 function LandingPage() {
   const n = nav();
   const pq = pullQuote();
@@ -81,42 +122,23 @@ function LandingPage() {
               >
                 hi —
               </div>
-              <div style={{ marginTop: '36px' }}>
-                <div
-                  className="hero-numeral"
-                  style={{
-                    fontFamily: 'var(--fonts-ui)',
-                    fontWeight: 500,
-                    lineHeight: 0.86,
-                    letterSpacing: '-0.05em',
-                    color: 'var(--colors-g6)',
-                  }}
-                >
-                  write.
-                </div>
-                <p
-                  style={
-                    {
-                      marginTop: '24px',
-                      fontSize: '18px',
-                      lineHeight: 1.5,
-                      color: 'var(--colors-g5)',
-                      maxWidth: '380px',
-                      textWrap: 'pretty',
-                    } as React.CSSProperties
-                  }
-                >
-                  Open a tab, type plain markdown. The browser is the only software you need.{' '}
-                  <span style={{ color: 'var(--colors-g4)' }}>
-                    No accounts, no toolbar, no nonsense.
-                  </span>
-                </p>
-              </div>
-              <div style={{ marginTop: '32px', display: 'flex', gap: '12px' }}>
-                <Button variant="solid" visual="ink" onClick={openNewDoc}>
-                  open a new document →
-                </Button>
-              </div>
+              <HeroColumn
+                word="write."
+                wordColor="var(--colors-g6)"
+                body={
+                  <>
+                    Open a tab, type plain markdown. The browser is the only software you need.{' '}
+                    <span style={{ color: 'var(--colors-g4)' }}>
+                      No accounts, no toolbar, no nonsense.
+                    </span>
+                  </>
+                }
+                button={
+                  <Button variant="solid" visual="ink" onClick={openNewDoc}>
+                    open a new document →
+                  </Button>
+                }
+              />
             </>
           }
           right={
@@ -132,41 +154,22 @@ function LandingPage() {
               >
                 — wrld
               </div>
-              <div style={{ marginTop: '36px' }}>
-                <div
-                  className="hero-numeral"
-                  style={{
-                    fontFamily: 'var(--fonts-ui)',
-                    fontWeight: 500,
-                    lineHeight: 0.86,
-                    letterSpacing: '-0.05em',
-                    color: 'var(--colors-ink)',
-                  }}
-                >
-                  read.
-                </div>
-                <p
-                  style={
-                    {
-                      marginTop: '24px',
-                      fontSize: '18px',
-                      lineHeight: 1.5,
-                      color: 'var(--colors-g5)',
-                      maxWidth: '380px',
-                      textWrap: 'pretty',
-                    } as React.CSSProperties
-                  }
-                >
-                  Anyone with the URL reads along, live. Every keystroke syncs across tabs and
-                  devices.{' '}
-                  <span style={{ color: 'var(--colors-g4)' }}>The link is the document.</span>
-                </p>
-              </div>
-              <div style={{ marginTop: '32px', display: 'flex', gap: '12px' }}>
-                <Button variant="line" onClick={openNewDoc}>
-                  open a document →
-                </Button>
-              </div>
+              <HeroColumn
+                word="read."
+                wordColor="var(--colors-ink)"
+                body={
+                  <>
+                    Anyone with the URL reads along, live. Every keystroke syncs across tabs and
+                    devices.{' '}
+                    <span style={{ color: 'var(--colors-g4)' }}>The link is the document.</span>
+                  </>
+                }
+                button={
+                  <Button variant="line" onClick={openNewDoc}>
+                    open a document →
+                  </Button>
+                }
+              />
             </>
           }
         />

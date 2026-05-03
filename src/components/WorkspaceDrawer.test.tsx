@@ -2,7 +2,6 @@ import { render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { mockWorkspace } from '../../test/workspace-mock';
 import * as useDocumentsModule from '../hooks/useDocuments';
-import * as useWorkspaceModule from '../hooks/useWorkspace';
 import { WorkspaceDrawer } from './WorkspaceDrawer';
 
 vi.mock('@tanstack/react-router', async (importOriginal) => {
@@ -29,7 +28,7 @@ function mockNoWorkspace() {
 }
 
 function mockWithWorkspace() {
-  vi.spyOn(useWorkspaceModule, 'useWorkspace').mockReturnValue({
+  mockWorkspace({
     workspace: { id: 'ws1', name: 'test', secret_key: 'sk_abc', created_at: '2026-01-01' },
     tree: {
       id: 'ws1',
@@ -37,15 +36,6 @@ function mockWithWorkspace() {
       type: 'folder',
       children: [{ id: 'fld1', name: 'Projects', type: 'folder', children: [] }],
     },
-    isLoading: false,
-    createWorkspace: vi.fn(),
-    refreshTree: vi.fn(),
-    createFolder: vi.fn(),
-    renameFolder: vi.fn(),
-    deleteFolder: vi.fn(),
-    createDocument: vi.fn(),
-    moveDocument: vi.fn(),
-    deleteDocument: vi.fn(),
   });
 }
 
