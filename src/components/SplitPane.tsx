@@ -52,8 +52,14 @@ export function SplitPane({ docId, mode }: SplitPaneProps) {
         mode={mode}
         onBodyChange={setBody}
         onModeChange={handleModeChange}
+        style={mode === 'read' ? { display: 'none' } : mode === 'write' ? { flex: 1 } : undefined}
       />
-      <ReadPane body={body} mode={mode} onModeChange={handleModeChange} />
+      <ReadPane
+        body={body}
+        mode={mode}
+        onModeChange={handleModeChange}
+        style={mode === 'write' ? { display: 'none' } : undefined}
+      />
     </>
   );
 }

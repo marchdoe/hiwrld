@@ -1,3 +1,4 @@
+import { FolderOpen } from 'lucide-react';
 import { useState } from 'react';
 import { workspaceCreate } from '../../styled-system/recipes';
 
@@ -23,7 +24,9 @@ export function WorkspaceCreate({ onCreate }: WorkspaceCreateProps) {
 
   return (
     <div className={wsc.root}>
-      <span className={wsc.icon}>📁</span>
+      <span className={wsc.icon}>
+        <FolderOpen size={24} strokeWidth={1.5} />
+      </span>
       <p className={wsc.title}>Create a workspace</p>
       <p className={wsc.desc}>
         A private space for your docs. Share the key with anyone — or an AI agent.

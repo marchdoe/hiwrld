@@ -1,4 +1,5 @@
 import { Link } from '@tanstack/react-router';
+import { Trash2 } from 'lucide-react';
 import { documentMenu } from '../../styled-system/recipes';
 
 export interface DocumentMenuItemProps {
@@ -19,12 +20,14 @@ export function DocumentMenuItem({ id, title, onDelete }: DocumentMenuItemProps)
           type="button"
           title="Delete Document"
           aria-label="Delete Document"
-          className={`${dm.deleteBtn} ss-trash`}
+          className={dm.deleteBtn}
           onClick={(e) => {
             e.preventDefault();
             onDelete(id);
           }}
-        />
+        >
+          <Trash2 size={12} strokeWidth={2} />
+        </button>
       </div>
     </li>
   );

@@ -1,11 +1,13 @@
 import { useNavigate } from '@tanstack/react-router';
+import { Menu, Pencil, Plus } from 'lucide-react';
+import type React from 'react';
 import { useState } from 'react';
+import { documentMenu, editorLayout } from '../../styled-system/recipes';
 import { useDocuments } from '../hooks/useDocuments';
 import { generateDocumentId } from '../lib/generateId';
 import type { AppMode } from '../types/document';
 import { Textarea } from './Textarea';
 import { WorkspaceDrawer } from './WorkspaceDrawer';
-import { documentMenu, editorLayout } from '../../styled-system/recipes';
 
 export interface WritePaneProps {
   docId: string;
@@ -13,9 +15,10 @@ export interface WritePaneProps {
   mode: AppMode | null;
   onBodyChange: (body: string) => void;
   onModeChange: (mode: AppMode | null) => void;
+  style?: React.CSSProperties;
 }
 
-export function WritePane({ docId, body, mode, onBodyChange, onModeChange }: WritePaneProps) {
+export function WritePane({ docId, body, mode, onBodyChange, onModeChange, style }: WritePaneProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const { add } = useDocuments();
   const navigate = useNavigate();
@@ -32,22 +35,13 @@ export function WritePane({ docId, body, mode, onBodyChange, onModeChange }: Wri
     onModeChange(mode === 'write' ? null : 'write');
   };
 
-  const handleReadOnly = () => {
-    onModeChange(mode === 'read' ? null : 'read');
-  };
-
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <section className={el.write}>
+    <section className={el.write} style={style}>
       {/* Backdrop — click outside to close the sidebar */}
       {menuOpen && (
-        <button
-          type="button"
-          className={dm.backdrop}
-          aria-label="Close menu"
-          onClick={closeMenu}
-        />
+        <button type="button" className={dm.backdrop} aria-label="Close menu" onClick={closeMenu} />
       )}
 
       {/* Left-side slide-in drawer */}
@@ -61,33 +55,31 @@ export function WritePane({ docId, body, mode, onBodyChange, onModeChange }: Wri
             type="button"
             title="Your Documents"
             aria-label="Your Documents"
-            className={`${el.menuButton} ss-rows${menuOpen ? ' pressed' : ''}`}
+            className={`${el.menuButton}${menuOpen ? ' pressed' : ''}`}
             aria-pressed={menuOpen}
             onClick={() => setMenuOpen((o) => !o)}
-          />
+          >
+            <Menu size={16} strokeWidth={2} />
+          </button>
           <button
             type="button"
             title="New Document"
             aria-label="New Document"
-            className={`${el.addButton} ss-plus`}
+            className={el.addButton}
             onClick={handleAddDoc}
-          />
-          <button
-            type="button"
-            title="Preview Mode"
-            aria-label="Preview Mode"
-            className={`${el.readOnlyButton} ss-view${mode === 'read' ? ' pressed' : ''}`}
-            aria-pressed={mode === 'read'}
-            onClick={handleReadOnly}
-          />
+          >
+            <Plus size={16} strokeWidth={2} />
+          </button>
           <button
             type="button"
             title="Write Mode"
             aria-label="Write Mode"
-            className={`${el.writeOnlyButton} ss-write${mode === 'write' ? ' pressed' : ''}`}
+            className={`${el.writeOnlyButton}${mode === 'write' ? ' pressed' : ''}`}
             aria-pressed={mode === 'write'}
             onClick={handleWriteOnly}
-          />
+          >
+            <Pencil size={16} strokeWidth={2} />
+          </button>
         </div>
         <div className={el.textareaWrap}>
           <Textarea body={body} onChange={onBodyChange} />

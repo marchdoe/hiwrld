@@ -23,8 +23,9 @@ export default defineConfig({
         api.use('/api/workspaces/:key/documents', documentsRouter);
         server.middlewares.use(api);
       },
-      transformIndexHtml() {
-        // Auto-provision the dev workspace on first load so the app starts in a working state.
+      transformIndexHtml(_html, ctx) {
+        // Auto-provision the dev workspace — dev mode only, never baked into production builds.
+        if (!ctx.server) return [];
         return [
           {
             tag: 'script',

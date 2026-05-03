@@ -29,14 +29,16 @@ export function Split({
     <div
       data-split={responsive ? '' : undefined}
       className={styles.root}
-      style={{
-        gridTemplateColumns: ratio,
-        background: bg,
-        color: fg,
-        // ruleColor is read by the slot recipe via CSS custom property
-        '--split-rule': ruleColor ?? 'var(--colors-g2)',
-        ...style,
-      } as React.CSSProperties}
+      style={
+        {
+          gridTemplateColumns: ratio,
+          background: bg,
+          color: fg,
+          // ruleColor is read by the slot recipe via CSS custom property
+          '--split-rule': ruleColor ?? 'var(--colors-g2)',
+          ...style,
+        } as React.CSSProperties
+      }
     >
       <div className={styles.left} style={{ padding: padded }}>
         {left}

@@ -1,9 +1,9 @@
+import { copyFileSync, mkdirSync } from 'node:fs';
+import { join } from 'node:path';
 import sharp from 'sharp';
-import { copyFileSync, mkdirSync } from 'fs';
-import { join } from 'path';
 
 const SVG_SRC = join(process.cwd(), 'src/assets/favicon.svg');
-const PUBLIC  = join(process.cwd(), 'public');
+const PUBLIC = join(process.cwd(), 'public');
 
 mkdirSync(PUBLIC, { recursive: true });
 
@@ -14,9 +14,12 @@ const sizes = [16, 32, 48, 64, 96, 128, 180, 192, 512];
 
 async function main() {
   for (const size of sizes) {
-    const name = size === 180 ? 'favicon-180.png'    // apple-touch-icon
-               : size === 32  ? 'favicon.ico'         // browsers prefer .ico at 32px
-               : `favicon-${size}.png`;
+    const name =
+      size === 180
+        ? 'favicon-180.png' // apple-touch-icon
+        : size === 32
+          ? 'favicon.ico' // browsers prefer .ico at 32px
+          : `favicon-${size}.png`;
 
     await sharp(SVG_SRC)
       .resize(size, size)
@@ -28,7 +31,7 @@ async function main() {
 
   // Maskable variant: 512px with 20% safe-zone padding (80% content area)
   await sharp(SVG_SRC)
-    .resize(410, 410)           // 80% of 512
+    .resize(410, 410) // 80% of 512
     .extend({ top: 51, bottom: 51, left: 51, right: 51, background: '#1f1d1a' })
     .png()
     .toFile(join(PUBLIC, 'favicon-512-maskable.png'));

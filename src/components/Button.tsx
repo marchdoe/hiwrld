@@ -24,7 +24,11 @@ export function Button({
   const combined = [cls, className].filter(Boolean).join(' ');
 
   if (href) {
-    return <a href={href} className={combined}>{children}</a>;
+    return (
+      <a href={href} className={combined}>
+        {children}
+      </a>
+    );
   }
   return (
     <button type="button" onClick={onClick} className={combined}>

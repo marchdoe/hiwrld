@@ -9,7 +9,11 @@ describe('Button', () => {
   });
 
   it('renders as anchor when href provided', () => {
-    render(<Button variant="solid" href="/foo">go</Button>);
+    render(
+      <Button variant="solid" href="/foo">
+        go
+      </Button>
+    );
     expect(screen.getByRole('link', { name: 'go' })).toHaveAttribute('href', '/foo');
   });
 
@@ -23,7 +27,11 @@ describe('Button', () => {
   });
 
   it('applies inverted visual modifier', () => {
-    render(<Button variant="solid" visual="inverted">cta</Button>);
+    render(
+      <Button variant="solid" visual="inverted">
+        cta
+      </Button>
+    );
     expect(screen.getByText('cta')).toBeInTheDocument();
   });
 });

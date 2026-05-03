@@ -1,8 +1,9 @@
+import { ChevronDown, ChevronRight, FileText, Folder } from 'lucide-react';
 import { useState } from 'react';
+import { folderTree } from '../../styled-system/recipes';
 import type { TreeNode } from '../types/workspace';
 import type { ContextMenuItem } from './ContextMenu';
 import { ContextMenu } from './ContextMenu';
-import { folderTree } from '../../styled-system/recipes';
 
 export interface FolderTreeProps {
   nodes: TreeNode[];
@@ -44,24 +45,32 @@ export function FolderTree({
       {nodes.map((node) => (
         <div key={node.id}>
           <div
-            className={folderTree({ active: node.type === 'document' && node.id === activeDocId }).row}
+            className={
+              folderTree({ active: node.type === 'document' && node.id === activeDocId }).row
+            }
             style={{ paddingLeft: `${12 + depth * 14}px` }}
             onContextMenu={(e) => handleContextMenu(e, node)}
             role="none"
           >
             {node.type === 'folder' ? (
-              <button
-                type="button"
-                className={ft.folderBtn}
-                onClick={() => toggleFolder(node.id)}
-              >
-                <span className={ft.chevron}>{openFolders.has(node.id) ? '▼' : '▶'}</span>
-                <span className={ft.icon}>📁</span>
+              <button type="button" className={ft.folderBtn} onClick={() => toggleFolder(node.id)}>
+                <span className={ft.chevron}>
+                  {openFolders.has(node.id) ? (
+                    <ChevronDown size={10} strokeWidth={2} />
+                  ) : (
+                    <ChevronRight size={10} strokeWidth={2} />
+                  )}
+                </span>
+                <span className={ft.icon}>
+                  <Folder size={12} strokeWidth={1.5} />
+                </span>
                 <span className={ft.label}>{node.name}</span>
               </button>
             ) : (
               <button type="button" className={ft.docBtn} onClick={() => onDocClick(node.id)}>
-                <span className={ft.icon}>📄</span>
+                <span className={ft.icon}>
+                  <FileText size={12} strokeWidth={1.5} />
+                </span>
                 <span className={ft.label}>{node.name}</span>
               </button>
             )}

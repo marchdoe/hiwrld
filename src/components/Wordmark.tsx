@@ -33,11 +33,15 @@ export function Wordmark({
   return (
     <span className={[styles.root, className].filter(Boolean).join(' ')} style={{ fontSize: size }}>
       <span className={styles.hi}>hi</span>
-      <span className={styles.ast} style={astStyle}>*</span>
+      <span className={styles.ast} style={astStyle}>
+        *
+      </span>
       {variant !== 'short' && (
         <>
           <span className={styles.wrld}>wrld</span>
-          <span className={styles.ast} style={closeAstStyle}>*</span>
+          <span className={styles.ast} style={closeAstStyle}>
+            *
+          </span>
         </>
       )}
     </span>

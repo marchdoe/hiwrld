@@ -1,12 +1,13 @@
 import { useNavigate } from '@tanstack/react-router';
+import { FileText, FilePlus, Folder, FolderPlus, Key, Pencil, Trash2 } from 'lucide-react';
 import { useState } from 'react';
+import { workspaceDrawer } from '../../styled-system/recipes';
 import { useWorkspace } from '../hooks/useWorkspace';
 import type { TreeNode } from '../types/workspace';
 import type { ContextMenuItem } from './ContextMenu';
 import { DocumentMenu } from './DocumentMenu';
 import { FolderTree } from './FolderTree';
 import { WorkspaceCreate } from './WorkspaceCreate';
-import { workspaceDrawer } from '../../styled-system/recipes';
 
 export interface WorkspaceDrawerProps {
   currentDocId: string;
@@ -52,7 +53,7 @@ export function WorkspaceDrawer({ currentDocId, onClose }: WorkspaceDrawerProps)
   const folderMenuItems = (node: TreeNode): ContextMenuItem[] => [
     {
       label: 'New file here',
-      icon: '📄',
+      icon: <FileText size={12} strokeWidth={1.5} />,
       onClick: async () => {
         const doc = await createDocument('Untitled', node.id);
         void navigate({ to: '/$docId', params: { docId: doc.id } });
@@ -60,7 +61,7 @@ export function WorkspaceDrawer({ currentDocId, onClose }: WorkspaceDrawerProps)
     },
     {
       label: 'New folder here',
-      icon: '📁',
+      icon: <Folder size={12} strokeWidth={1.5} />,
       onClick: async () => {
         const name = prompt('Folder name:');
         if (name?.trim()) await createFolder(name.trim(), node.id);
@@ -68,7 +69,7 @@ export function WorkspaceDrawer({ currentDocId, onClose }: WorkspaceDrawerProps)
     },
     {
       label: 'Rename',
-      icon: '✏️',
+      icon: <Pencil size={12} strokeWidth={1.5} />,
       onClick: async () => {
         const name = prompt('New name:', node.name);
         if (name?.trim()) await renameFolder(node.id, name.trim());
@@ -76,7 +77,7 @@ export function WorkspaceDrawer({ currentDocId, onClose }: WorkspaceDrawerProps)
     },
     {
       label: 'Delete folder',
-      icon: '🗑️',
+      icon: <Trash2 size={12} strokeWidth={1.5} />,
       danger: true,
       onClick: () => setConfirmDelete({ type: 'folder', id: node.id, name: node.name }),
     },
@@ -85,7 +86,7 @@ export function WorkspaceDrawer({ currentDocId, onClose }: WorkspaceDrawerProps)
   const docMenuItems = (node: TreeNode): ContextMenuItem[] => [
     {
       label: 'Delete',
-      icon: '🗑️',
+      icon: <Trash2 size={12} strokeWidth={1.5} />,
       danger: true,
       onClick: () => setConfirmDelete({ type: 'document', id: node.id, name: node.name }),
     },
@@ -98,7 +99,9 @@ export function WorkspaceDrawer({ currentDocId, onClose }: WorkspaceDrawerProps)
           {/* Header */}
           <div className={wsd.header}>
             <div className={wsd.title}>
-              <span className={wsd.titleIcon}>📁</span>
+              <span className={wsd.titleIcon}>
+                <Folder size={12} strokeWidth={1.5} />
+              </span>
               <span>{workspace.name}</span>
             </div>
             <div className={wsd.actions}>
@@ -109,7 +112,7 @@ export function WorkspaceDrawer({ currentDocId, onClose }: WorkspaceDrawerProps)
                 className={wsd.actionBtn}
                 onClick={() => void handleNewFile()}
               >
-                📄+
+                <FilePlus size={14} strokeWidth={2} />
               </button>
               <button
                 type="button"
@@ -118,7 +121,7 @@ export function WorkspaceDrawer({ currentDocId, onClose }: WorkspaceDrawerProps)
                 className={wsd.actionBtn}
                 onClick={() => void handleNewFolder()}
               >
-                📁+
+                <FolderPlus size={14} strokeWidth={2} />
               </button>
             </div>
           </div>
@@ -136,7 +139,7 @@ export function WorkspaceDrawer({ currentDocId, onClose }: WorkspaceDrawerProps)
           </div>
           {/* Workspace key */}
           <div className={wsd.key}>
-            <span>🔑</span>
+            <Key size={10} strokeWidth={1.5} />
             <span className={wsd.keyValue}>{workspace.secret_key.slice(0, 12)}…</span>
             <button
               type="button"

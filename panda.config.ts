@@ -1,39 +1,6 @@
 import { defineConfig, defineGlobalStyles } from '@pandacss/dev';
 
 const globalCss = defineGlobalStyles({
-  // ── Icon buttons — Lucide SVG via CSS mask ───────────────────────
-  '.ss-rows, .ss-plus, .ss-write, .ss-view, .ss-trash': {
-    maskPosition: 'center center',
-    maskRepeat: 'no-repeat',
-    maskSize: '1.25rem 1.25rem',
-    WebkitMaskPosition: 'center center',
-    WebkitMaskRepeat: 'no-repeat',
-    WebkitMaskSize: '1.25rem 1.25rem',
-    backgroundColor: 'currentColor',
-    minWidth: '1.75rem',
-    minHeight: '1.75rem',
-  },
-  '.ss-rows': {
-    maskImage: 'url("data:image/svg+xml;utf8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cline x1=%273%27 y1=%276%27 x2=%2721%27 y2=%276%27/%3E%3Cline x1=%273%27 y1=%2712%27 x2=%2721%27 y2=%2712%27/%3E%3Cline x1=%273%27 y1=%2718%27 x2=%2721%27 y2=%2718%27/%3E%3C/svg%3E")',
-    WebkitMaskImage: 'url("data:image/svg+xml;utf8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cline x1=%273%27 y1=%276%27 x2=%2721%27 y2=%276%27/%3E%3Cline x1=%273%27 y1=%2712%27 x2=%2721%27 y2=%2712%27/%3E%3Cline x1=%273%27 y1=%2718%27 x2=%2721%27 y2=%2718%27/%3E%3C/svg%3E")',
-  },
-  '.ss-plus': {
-    maskImage: 'url("data:image/svg+xml;utf8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cline x1=%2712%27 y1=%275%27 x2=%2712%27 y2=%2719%27/%3E%3Cline x1=%275%27 y1=%2712%27 x2=%2719%27 y2=%2712%27/%3E%3C/svg%3E")',
-    WebkitMaskImage: 'url("data:image/svg+xml;utf8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cline x1=%2712%27 y1=%275%27 x2=%2712%27 y2=%2719%27/%3E%3Cline x1=%275%27 y1=%2712%27 x2=%2719%27 y2=%2712%27/%3E%3C/svg%3E")',
-  },
-  '.ss-write': {
-    maskImage: 'url("data:image/svg+xml;utf8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M12 20h9%27/%3E%3Cpath d=%27M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z%27/%3E%3C/svg%3E")',
-    WebkitMaskImage: 'url("data:image/svg+xml;utf8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M12 20h9%27/%3E%3Cpath d=%27M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z%27/%3E%3C/svg%3E")',
-  },
-  '.ss-view': {
-    maskImage: 'url("data:image/svg+xml;utf8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%273%27/%3E%3C/svg%3E")',
-    WebkitMaskImage: 'url("data:image/svg+xml;utf8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%273%27/%3E%3C/svg%3E")',
-  },
-  '.ss-trash': {
-    maskImage: 'url("data:image/svg+xml;utf8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpolyline points=%273 6 5 6 21 6%27/%3E%3Cpath d=%27M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2%27/%3E%3Cline x1=%2710%27 y1=%2711%27 x2=%2710%27 y2=%2717%27/%3E%3Cline x1=%2714%27 y1=%2711%27 x2=%2714%27 y2=%2717%27/%3E%3C/svg%3E")',
-    WebkitMaskImage: 'url("data:image/svg+xml;utf8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpolyline points=%273 6 5 6 21 6%27/%3E%3Cpath d=%27M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2%27/%3E%3Cline x1=%2710%27 y1=%2711%27 x2=%2710%27 y2=%2717%27/%3E%3Cline x1=%2714%27 y1=%2711%27 x2=%2714%27 y2=%2717%27/%3E%3C/svg%3E")',
-  },
-
   // ── Reset ────────────────────────────────────────────────────────
   '*': {
     margin: '0',
@@ -138,7 +105,8 @@ const globalCss = defineGlobalStyles({
     },
     '& ul': { listStyleType: 'disc' },
     '& pre, & code': {
-      fontFamily: 'ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace',
+      fontFamily:
+        'ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace',
       marginTop: '1.5rem',
       marginBottom: '1.5rem',
     },
@@ -186,7 +154,8 @@ const globalCss = defineGlobalStyles({
   },
   '.cm-scroller': {
     overflow: 'auto',
-    fontFamily: 'ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace',
+    fontFamily:
+      'ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace',
     fontSize: '13px',
     lineHeight: '1.4',
     '@media (min-width: 1200px)': { fontSize: '14px' },
@@ -201,14 +170,14 @@ const globalCss = defineGlobalStyles({
   // ── Mode toggle — html-level class selectors (can't live in slot recipe) ──
   '.write-only .el__read, .read-only .el__write': { display: 'none' },
   '.write-only .el__write, .read-only .el__read': { flex: '1' },
-  '.el__readButtons .el__readOnlyButton': { display: 'none' },
-  '.read-only .el__readButtons .el__readOnlyButton': { display: 'block' },
+
 
   // ── Syntax highlighting ───────────────────────────────────────────
   'pre .comment': { color: 'var(--colors-g3)' },
-  'pre .constant, pre .storage, pre .tag, pre .keyword:not(.operator), pre .selector, pre .string:not(.value), pre .regexp, pre .function': {
-    color: '#4b8b8d',
-  },
+  'pre .constant, pre .storage, pre .tag, pre .keyword:not(.operator), pre .selector, pre .string:not(.value), pre .regexp, pre .function':
+    {
+      color: '#4b8b8d',
+    },
 
   // ── GFM Alert boxes ───────────────────────────────────────────────
   '.el__documentArticle .markdown-alert': {
@@ -262,12 +231,13 @@ const globalCss = defineGlobalStyles({
     '.el__documentArticle': { margin: '0 auto', maxWidth: '35em', padding: '0' },
     '@page': { margin: '5em 0' },
     'body, .el__write, .el__read': { background: 'white' },
-    '.el__documentArticle, .el__documentArticle p, .el__documentArticle h1, .el__documentArticle h2, .el__documentArticle h3, .el__documentArticle h4, .el__documentArticle h5, .el__documentArticle h6, .el__documentArticle li, .el__documentArticle blockquote': {
-      color: 'black',
-    },
-    'a': { textDecoration: 'none' },
+    '.el__documentArticle, .el__documentArticle p, .el__documentArticle h1, .el__documentArticle h2, .el__documentArticle h3, .el__documentArticle h4, .el__documentArticle h5, .el__documentArticle h6, .el__documentArticle li, .el__documentArticle blockquote':
+      {
+        color: 'black',
+      },
+    a: { textDecoration: 'none' },
     'a[href]::after': { content: '" (" attr(href) ")"' },
-    'img': { maxWidth: '100%' },
+    img: { maxWidth: '100%' },
   },
 
   // ── Landing page ─────────────────────────────────────────────────
@@ -341,33 +311,94 @@ export default defineConfig({
 
     tokens: {
       colors: {
-        g0:      { value: '#f7f6f3', description: 'page bg, light surfaces' },
-        g1:      { value: '#ecebe7', description: 'panel bg, alt sections' },
-        g2:      { value: '#dcd9d2', description: 'hairline rules, borders' },
-        g3:      { value: '#a8a39a', description: 'tertiary text, captions' },
-        g4:      { value: '#6e6a62', description: 'secondary text' },
-        g5:      { value: '#3d3a35', description: 'body on light, secondary on dark' },
-        g6:      { value: '#1f1d1a', description: 'primary text, dark surfaces' },
-        ink:     { value: '#3a4a6b', description: 'graphite-blue — the only accent' },
+        g0: { value: '#f7f6f3', description: 'page bg, light surfaces' },
+        g1: { value: '#ecebe7', description: 'panel bg, alt sections' },
+        g2: { value: '#dcd9d2', description: 'hairline rules, borders' },
+        g3: { value: '#a8a39a', description: 'tertiary text, captions' },
+        g4: { value: '#6e6a62', description: 'secondary text' },
+        g5: { value: '#3d3a35', description: 'body on light, secondary on dark' },
+        g6: { value: '#1f1d1a', description: 'primary text, dark surfaces' },
+        ink: { value: '#3a4a6b', description: 'graphite-blue — the only accent' },
         inkSoft: { value: '#b8c2d4', description: 'accent on dark, soft variant' },
       },
       fonts: {
-        ui:      { value: '"Geist", "Helvetica Neue", Helvetica, Arial, sans-serif' },
-        mono:    { value: '"Geist Mono", ui-monospace, "SF Mono", Menlo, monospace' },
+        ui: { value: '"Geist", "Helvetica Neue", Helvetica, Arial, sans-serif' },
+        mono: { value: '"Geist Mono", ui-monospace, "SF Mono", Menlo, monospace' },
         // Same stack as ui for now; swap to Editorial New when licensed
         display: { value: '"Geist", "Helvetica Neue", Helvetica, Arial, sans-serif' },
       },
     },
 
     textStyles: {
-      heroNum:      { value: { fontFamily: 'var(--fonts-ui)', fontWeight: '500', fontSize: '132px', letterSpacing: '-0.05em', lineHeight: '0.86' } },
-      h1:           { value: { fontFamily: 'var(--fonts-display)', fontStyle: 'italic', fontWeight: '300', fontSize: '56px', letterSpacing: '-0.03em', lineHeight: '0.95' } },
-      sectionTitle: { value: { fontFamily: 'var(--fonts-ui)', fontWeight: '500', fontSize: '28px', letterSpacing: '-0.03em', lineHeight: '1' } },
-      bodyLg:       { value: { fontFamily: 'var(--fonts-ui)', fontWeight: '400', fontSize: '18px', lineHeight: '1.5' } },
-      body:         { value: { fontFamily: 'var(--fonts-ui)', fontWeight: '400', fontSize: '16px', lineHeight: '1.5' } },
-      uiBtn:        { value: { fontFamily: 'var(--fonts-ui)', fontWeight: '500', fontSize: '14px', lineHeight: '1' } },
-      caption:      { value: { fontFamily: 'var(--fonts-ui)', fontWeight: '400', fontSize: '12px', lineHeight: '1.4' } },
-      meta:         { value: { fontFamily: 'var(--fonts-mono)', fontWeight: '400', fontSize: '11px', letterSpacing: '0.02em', lineHeight: '1' } },
+      heroNum: {
+        value: {
+          fontFamily: 'var(--fonts-ui)',
+          fontWeight: '500',
+          fontSize: '132px',
+          letterSpacing: '-0.05em',
+          lineHeight: '0.86',
+        },
+      },
+      h1: {
+        value: {
+          fontFamily: 'var(--fonts-display)',
+          fontStyle: 'italic',
+          fontWeight: '300',
+          fontSize: '56px',
+          letterSpacing: '-0.03em',
+          lineHeight: '0.95',
+        },
+      },
+      sectionTitle: {
+        value: {
+          fontFamily: 'var(--fonts-ui)',
+          fontWeight: '500',
+          fontSize: '28px',
+          letterSpacing: '-0.03em',
+          lineHeight: '1',
+        },
+      },
+      bodyLg: {
+        value: {
+          fontFamily: 'var(--fonts-ui)',
+          fontWeight: '400',
+          fontSize: '18px',
+          lineHeight: '1.5',
+        },
+      },
+      body: {
+        value: {
+          fontFamily: 'var(--fonts-ui)',
+          fontWeight: '400',
+          fontSize: '16px',
+          lineHeight: '1.5',
+        },
+      },
+      uiBtn: {
+        value: {
+          fontFamily: 'var(--fonts-ui)',
+          fontWeight: '500',
+          fontSize: '14px',
+          lineHeight: '1',
+        },
+      },
+      caption: {
+        value: {
+          fontFamily: 'var(--fonts-ui)',
+          fontWeight: '400',
+          fontSize: '12px',
+          lineHeight: '1.4',
+        },
+      },
+      meta: {
+        value: {
+          fontFamily: 'var(--fonts-mono)',
+          fontWeight: '400',
+          fontSize: '11px',
+          letterSpacing: '0.02em',
+          lineHeight: '1',
+        },
+      },
     },
 
     recipes: {
@@ -454,32 +485,32 @@ export default defineConfig({
             letterSpacing: '-0.04em',
             lineHeight: '1',
           },
-          hi:   { fontWeight: '400' },
-          ast:  { fontWeight: '400', fontSize: '95%' },
+          hi: { fontWeight: '400' },
+          ast: { fontWeight: '400', fontSize: '95%' },
           wrld: { fontWeight: '700' },
         },
         variants: {
           variant: {
             primary: {
-              hi:   { color: '{colors.g6}' },
-              ast:  { color: '{colors.ink}' },
+              hi: { color: '{colors.g6}' },
+              ast: { color: '{colors.ink}' },
               wrld: { color: '{colors.g6}' },
             },
             mono: {
-              hi:   { color: '{colors.g6}' },
-              ast:  { color: '{colors.g6}' },
+              hi: { color: '{colors.g6}' },
+              ast: { color: '{colors.g6}' },
               wrld: { color: '{colors.g6}' },
             },
             short: {
-              hi:   { color: '{colors.g6}', fontWeight: '700' },
-              ast:  { color: '{colors.ink}' },
+              hi: { color: '{colors.g6}', fontWeight: '700' },
+              ast: { color: '{colors.ink}' },
               wrld: { display: 'none' },
             },
           },
           reversed: {
             true: {
-              hi:   { color: '{colors.g0}' },
-              ast:  { color: '{colors.inkSoft}' },
+              hi: { color: '{colors.g0}' },
+              ast: { color: '{colors.inkSoft}' },
               wrld: { color: '{colors.g0}' },
             },
           },
@@ -594,9 +625,20 @@ export default defineConfig({
             borderBottom: '1px solid var(--colors-g2)',
             '&:last-child': { borderBottom: 'none' },
           },
-          num:   { fontFamily: 'var(--fonts-mono)', fontSize: '12px', color: 'var(--colors-g3)' },
-          title: { fontFamily: 'var(--fonts-ui)', fontWeight: '500', fontSize: '28px', letterSpacing: '-0.03em' },
-          desc:  { fontFamily: 'var(--fonts-ui)', fontSize: '16px', color: 'var(--colors-g4)', lineHeight: '1.5', textWrap: 'pretty' as const }, // cast required: not in PandaCSS 1.x type union but valid CSS
+          num: { fontFamily: 'var(--fonts-mono)', fontSize: '12px', color: 'var(--colors-g3)' },
+          title: {
+            fontFamily: 'var(--fonts-ui)',
+            fontWeight: '500',
+            fontSize: '28px',
+            letterSpacing: '-0.03em',
+          },
+          desc: {
+            fontFamily: 'var(--fonts-ui)',
+            fontSize: '16px',
+            color: 'var(--colors-g4)',
+            lineHeight: '1.5',
+            textWrap: 'pretty' as const,
+          }, // cast required: not in PandaCSS 1.x type union but valid CSS
         },
       },
 
@@ -604,8 +646,8 @@ export default defineConfig({
         className: 'stack',
         slots: ['root', 'inner', 'heading', 'accent', 'table', 'row', 'key', 'val', 'idx'],
         base: {
-          root:    { padding: '56px 32px', borderBottom: '1px solid var(--colors-g2)' },
-          inner:   { display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '36px' },
+          root: { padding: '56px 32px', borderBottom: '1px solid var(--colors-g2)' },
+          inner: { display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '36px' },
           heading: {
             fontFamily: 'var(--fonts-display)',
             fontStyle: 'italic',
@@ -626,7 +668,12 @@ export default defineConfig({
           },
           key: { fontFamily: 'var(--fonts-mono)', fontSize: '11px', color: 'var(--colors-g4)' },
           val: { fontFamily: 'var(--fonts-ui)', fontSize: '15px' },
-          idx: { textAlign: 'right', fontFamily: 'var(--fonts-mono)', fontSize: '10px', color: 'var(--colors-g3)' },
+          idx: {
+            textAlign: 'right',
+            fontFamily: 'var(--fonts-mono)',
+            fontSize: '10px',
+            color: 'var(--colors-g3)',
+          },
         },
       },
 
@@ -634,10 +681,31 @@ export default defineConfig({
         className: 'cta',
         slots: ['root', 'metaLeft', 'metaRight', 'heading'],
         base: {
-          root:      { background: 'var(--colors-g6)', color: 'var(--colors-g0)', borderBottom: '1px solid var(--colors-g5)' },
-          metaLeft:  { fontFamily: 'var(--fonts-mono)', fontSize: '11px', color: 'var(--colors-g3)', letterSpacing: '0.02em' },
-          metaRight: { fontFamily: 'var(--fonts-mono)', fontSize: '11px', color: 'var(--colors-g3)', letterSpacing: '0.02em', textAlign: 'right' },
-          heading:   { fontFamily: 'var(--fonts-ui)', fontWeight: '500', fontSize: '64px', letterSpacing: '-0.04em', lineHeight: '0.95' },
+          root: {
+            background: 'var(--colors-g6)',
+            color: 'var(--colors-g0)',
+            borderBottom: '1px solid var(--colors-g5)',
+          },
+          metaLeft: {
+            fontFamily: 'var(--fonts-mono)',
+            fontSize: '11px',
+            color: 'var(--colors-g3)',
+            letterSpacing: '0.02em',
+          },
+          metaRight: {
+            fontFamily: 'var(--fonts-mono)',
+            fontSize: '11px',
+            color: 'var(--colors-g3)',
+            letterSpacing: '0.02em',
+            textAlign: 'right',
+          },
+          heading: {
+            fontFamily: 'var(--fonts-ui)',
+            fontWeight: '500',
+            fontSize: '64px',
+            letterSpacing: '-0.04em',
+            lineHeight: '0.95',
+          },
         },
       },
 
@@ -645,8 +713,15 @@ export default defineConfig({
         className: 'footer',
         slots: ['root', 'left', 'right'],
         base: {
-          root:  { padding: '14px 32px', fontFamily: 'var(--fonts-mono)', fontSize: '11px', color: 'var(--colors-g4)', display: 'flex', justifyContent: 'space-between' },
-          left:  {},
+          root: {
+            padding: '14px 32px',
+            fontFamily: 'var(--fonts-mono)',
+            fontSize: '11px',
+            color: 'var(--colors-g4)',
+            display: 'flex',
+            justifyContent: 'space-between',
+          },
+          left: {},
           right: {},
         },
       },
@@ -779,7 +854,12 @@ export default defineConfig({
         base: {
           root: { padding: '16px 12px', textAlign: 'center', color: 'var(--colors-g4)' },
           icon: { fontSize: '24px', display: 'block', marginBottom: '8px' },
-          title: { color: 'var(--colors-g6)', fontWeight: '600', fontSize: '13px', margin: '0 0 4px' },
+          title: {
+            color: 'var(--colors-g6)',
+            fontWeight: '600',
+            fontSize: '13px',
+            margin: '0 0 4px',
+          },
           desc: { fontSize: '11px', margin: '0 0 12px', lineHeight: '1.5' },
           form: { display: 'flex', flexDirection: 'column', gap: '8px' },
           input: {
@@ -806,12 +886,30 @@ export default defineConfig({
       workspaceDrawer: {
         className: 'wsdrawer',
         slots: [
-          'root', 'header', 'title', 'titleIcon', 'actions', 'actionBtn',
-          'tree', 'key', 'keyValue', 'keyCopy', 'createCta',
-          'confirmOverlay', 'confirm', 'confirmActions', 'confirmDelete',
+          'root',
+          'header',
+          'title',
+          'titleIcon',
+          'actions',
+          'actionBtn',
+          'tree',
+          'key',
+          'keyValue',
+          'keyCopy',
+          'createCta',
+          'confirmOverlay',
+          'confirm',
+          'confirmActions',
+          'confirmDelete',
         ],
         base: {
-          root: { display: 'flex', flexDirection: 'column', height: '100%', background: 'var(--colors-g0)', color: 'var(--colors-g5)' },
+          root: {
+            display: 'flex',
+            flexDirection: 'column',
+            height: '100%',
+            background: 'var(--colors-g0)',
+            color: 'var(--colors-g5)',
+          },
           header: {
             display: 'flex',
             justifyContent: 'space-between',
@@ -820,7 +918,14 @@ export default defineConfig({
             borderBottom: '1px solid var(--colors-g2)',
             flexShrink: '0',
           },
-          title: { display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--colors-g6)', fontWeight: '600', fontSize: '12px' },
+          title: {
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            color: 'var(--colors-g6)',
+            fontWeight: '600',
+            fontSize: '12px',
+          },
           titleIcon: { fontSize: '10px' },
           actions: { display: 'flex', gap: '10px' },
           actionBtn: {
@@ -876,7 +981,11 @@ export default defineConfig({
             '& p': { margin: '0 0 16px' },
           },
           confirmActions: { display: 'flex', gap: '8px', justifyContent: 'flex-end' },
-          confirmDelete: { background: '#c0392b', borderColor: '#c0392b', color: 'var(--colors-g0)' },
+          confirmDelete: {
+            background: '#c0392b',
+            borderColor: '#c0392b',
+            color: 'var(--colors-g0)',
+          },
         },
       },
 
@@ -934,9 +1043,17 @@ export default defineConfig({
       editorLayout: {
         className: 'el',
         slots: [
-          'write', 'read', 'writeForm', 'writeButtons', 'readButtons',
-          'textareaWrap', 'menuButton', 'addButton', 'readOnlyButton',
-          'writeOnlyButton', 'documentArticle',
+          'write',
+          'read',
+          'writeForm',
+          'writeButtons',
+          'readButtons',
+          'textareaWrap',
+          'menuButton',
+          'addButton',
+          'readOnlyButton',
+          'writeOnlyButton',
+          'documentArticle',
         ],
         base: {
           write: {
@@ -946,7 +1063,8 @@ export default defineConfig({
             display: 'flex',
             flexDirection: 'column',
             background: 'var(--colors-g0)',
-            fontFamily: 'ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace',
+            fontFamily:
+              'ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace',
             fontSize: '13px',
             lineHeight: '1.4',
             '@media (min-width: 1200px)': { fontSize: '14px' },
@@ -964,11 +1082,14 @@ export default defineConfig({
             flex: '1',
             '&:focus-within .el__textareaWrap': {
               backgroundColor: 'var(--colors-g0)',
-              boxShadow: '0 0 0 1px var(--colors-g1), 0 2px 24px -8px color-mix(in srgb, var(--colors-g5) 8%, transparent)',
+              boxShadow:
+                '0 0 0 1px var(--colors-g1), 0 2px 24px -8px color-mix(in srgb, var(--colors-g5) 8%, transparent)',
             },
-            '&:has(.cm-content:focus-visible) .el__textareaWrap, &:has(textarea:focus-visible) .el__textareaWrap': {
-              boxShadow: '0 0 0 1px var(--colors-g2), 0 2px 24px -8px color-mix(in srgb, var(--colors-g5) 12%, transparent)',
-            },
+            '&:has(.cm-content:focus-visible) .el__textareaWrap, &:has(textarea:focus-visible) .el__textareaWrap':
+              {
+                boxShadow:
+                  '0 0 0 1px var(--colors-g2), 0 2px 24px -8px color-mix(in srgb, var(--colors-g5) 12%, transparent)',
+              },
           },
           writeButtons: {
             position: 'relative',

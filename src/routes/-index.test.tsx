@@ -4,8 +4,9 @@ import { describe, expect, it, vi } from 'vitest';
 // Mock TanStack Router — we only test the page renders, not routing
 vi.mock('@tanstack/react-router', () => ({
   createFileRoute: () => (config: { component: React.ComponentType }) => config,
-  Link: ({ children, ...props }: { children: React.ReactNode; to: string }) =>
-    <a href={props.to}>{children}</a>,
+  Link: ({ children, ...props }: { children: React.ReactNode; to: string }) => (
+    <a href={props.to}>{children}</a>
+  ),
 }));
 
 vi.mock('../lib/generateId', () => ({

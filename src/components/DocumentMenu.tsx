@@ -1,7 +1,7 @@
 import { useNavigate } from '@tanstack/react-router';
+import { documentMenu } from '../../styled-system/recipes';
 import { useDocuments } from '../hooks/useDocuments';
 import { generateDocumentId } from '../lib/generateId';
-import { documentMenu } from '../../styled-system/recipes';
 import { DocumentMenuItem } from './DocumentMenuItem';
 
 export interface DocumentMenuProps {
