@@ -204,3 +204,4 @@ src/
 
 The deployed page makes **zero** external runtime requests by default — no CDN fonts, no analytics, no trackers. The only external traffic is Supabase, and only when you configure it.
 
+protection-test
