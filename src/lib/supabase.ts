@@ -7,12 +7,12 @@ export interface Database {
   public: {
     Tables: {
       documents: {
-        Row: Document & { workspace_id: string | null; folder_id: string | null };
+        Row: Document & { workspace_id?: string | null; folder_id?: string | null };
         Insert: Omit<Document, 'created' | 'updated_at'> & {
           workspace_id?: string | null;
           folder_id?: string | null;
         };
-        Update: Partial<Document & { workspace_id: string | null; folder_id: string | null }>;
+        Update: Partial<Document & { workspace_id?: string | null; folder_id?: string | null }>;
       };
       workspaces: {
         Row: Workspace;
