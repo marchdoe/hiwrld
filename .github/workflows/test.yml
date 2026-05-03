@@ -65,6 +65,8 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: pnpm/action-setup@v4
         with:
@@ -83,5 +85,5 @@ jobs:
 
       - uses: fallow-rs/fallow@v2
         with:
-          command: audit
           format: sarif
+          changed-since: ${{ github.event.pull_request.base.sha || github.event.before }}
