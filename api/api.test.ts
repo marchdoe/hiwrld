@@ -156,3 +156,64 @@ describe('DELETE /api/workspaces/:key/folders/:id', () => {
     expect(res.status).toBe(204);
   });
 });
+
+describe('POST /api/workspaces/:key/documents', () => {
+  beforeEach(() => vi.clearAllMocks());
+
+  it('creates a document and returns 201', async () => {
+    const ws = { id: 'ws1', secret_key: 'sk_abc' };
+    const doc = { id: 'doc1', workspace_id: 'ws1', folder_id: null, body: '', title: 'New', created: '2026-01-01', updated_at: null };
+    vi.mocked(getAdminClient).mockReturnValue({
+      from: vi.fn((table: string) => table === 'workspaces'
+        ? { select: vi.fn().mockReturnThis(), eq: vi.fn().mockReturnThis(), single: vi.fn().mockResolvedValue({ data: ws, error: null }) }
+        : { insert: vi.fn().mockReturnThis(), select: vi.fn().mockReturnThis(), single: vi.fn().mockResolvedValue({ data: doc, error: null }) }
+      ),
+    } as never);
+
+    const res = await request(app)
+      .post('/api/workspaces/sk_abc/documents')
+      .send({ title: 'New', body: '' });
+    expect(res.status).toBe(201);
+    expect(res.body.id).toBe('doc1');
+  });
+});
+
+describe('GET /api/workspaces/:key/documents/:id', () => {
+  beforeEach(() => vi.clearAllMocks());
+
+  it('returns the document body and metadata', async () => {
+    const ws = { id: 'ws1', secret_key: 'sk_abc' };
+    const doc = { id: 'doc1', workspace_id: 'ws1', body: '# Hello', title: 'Hello', folder_id: null, created: '2026-01-01', updated_at: null };
+    vi.mocked(getAdminClient).mockReturnValue({
+      from: vi.fn((table: string) => table === 'workspaces'
+        ? { select: vi.fn().mockReturnThis(), eq: vi.fn().mockReturnThis(), single: vi.fn().mockResolvedValue({ data: ws, error: null }) }
+        : { select: vi.fn().mockReturnThis(), eq: vi.fn().mockReturnThis(), single: vi.fn().mockResolvedValue({ data: doc, error: null }) }
+      ),
+    } as never);
+
+    const res = await request(app).get('/api/workspaces/sk_abc/documents/doc1');
+    expect(res.status).toBe(200);
+    expect(res.body.body).toBe('# Hello');
+  });
+});
+
+describe('PATCH /api/workspaces/:key/documents/:id/move', () => {
+  beforeEach(() => vi.clearAllMocks());
+
+  it('moves a document to a new folder', async () => {
+    const ws = { id: 'ws1', secret_key: 'sk_abc' };
+    const doc = { id: 'doc1', workspace_id: 'ws1', folder_id: 'fld2', body: '', title: 'Test', created: '2026-01-01', updated_at: null };
+    vi.mocked(getAdminClient).mockReturnValue({
+      from: vi.fn((table: string) => table === 'workspaces'
+        ? { select: vi.fn().mockReturnThis(), eq: vi.fn().mockReturnThis(), single: vi.fn().mockResolvedValue({ data: ws, error: null }) }
+        : { update: vi.fn().mockReturnThis(), eq: vi.fn().mockReturnThis(), select: vi.fn().mockReturnThis(), single: vi.fn().mockResolvedValue({ data: doc, error: null }) }
+      ),
+    } as never);
+
+    const res = await request(app)
+      .patch('/api/workspaces/sk_abc/documents/doc1/move')
+      .send({ folder_id: 'fld2' });
+    expect(res.status).toBe(200);
+    expect(res.body.folder_id).toBe('fld2');
+  });
+});

@@ -5,6 +5,7 @@ import express, { json } from 'express';
 import helmet from 'helmet';
 import { workspacesRouter } from './api/workspaces';
 import { foldersRouter } from './api/folders';
+import { documentsRouter } from './api/documents';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -36,6 +37,7 @@ export function createApp({ distDir = join(__dirname, 'dist') } = {}) {
   app.use(json());
   app.use('/api/workspaces', workspacesRouter);
   app.use('/api/workspaces/:key/folders', foldersRouter);
+  app.use('/api/workspaces/:key/documents', documentsRouter);
 
   app.use((req, res, next) => {
     if (req.path.endsWith('.map')) return res.status(404).end();
