@@ -16,7 +16,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { routeTree } from './routeTree.gen';
 import 'highlight.js/styles/github.css';
-import './hiwrld.css';
 
 hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('js', javascript);
