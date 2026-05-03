@@ -91,3 +91,63 @@ describe('GET /api/workspaces/:key/tree', () => {
     expect(res.body).toHaveProperty('children');
   });
 });
+
+describe('POST /api/workspaces/:key/folders', () => {
+  beforeEach(() => vi.clearAllMocks());
+
+  it('creates a folder and returns it', async () => {
+    const ws = { id: 'ws1', secret_key: 'sk_abc' };
+    const folder = { id: 'fld1', workspace_id: 'ws1', parent_id: null, name: 'Projects', created_at: '2026-01-01' };
+    vi.mocked(getAdminClient).mockReturnValue({
+      from: vi.fn((table: string) => table === 'workspaces'
+        ? { select: vi.fn().mockReturnThis(), eq: vi.fn().mockReturnThis(), single: vi.fn().mockResolvedValue({ data: ws, error: null }) }
+        : { insert: vi.fn().mockReturnThis(), select: vi.fn().mockReturnThis(), single: vi.fn().mockResolvedValue({ data: folder, error: null }) }
+      ),
+    } as never);
+
+    const res = await request(app).post('/api/workspaces/sk_abc/folders').send({ name: 'Projects' });
+    expect(res.status).toBe(201);
+    expect(res.body.name).toBe('Projects');
+  });
+
+  it('returns 400 when name is missing', async () => {
+    const res = await request(app).post('/api/workspaces/sk_abc/folders').send({});
+    expect(res.status).toBe(400);
+  });
+});
+
+describe('PATCH /api/workspaces/:key/folders/:id', () => {
+  beforeEach(() => vi.clearAllMocks());
+
+  it('renames a folder', async () => {
+    const ws = { id: 'ws1', secret_key: 'sk_abc' };
+    const updated = { id: 'fld1', name: 'Renamed', workspace_id: 'ws1', parent_id: null, created_at: '2026-01-01' };
+    vi.mocked(getAdminClient).mockReturnValue({
+      from: vi.fn((table: string) => table === 'workspaces'
+        ? { select: vi.fn().mockReturnThis(), eq: vi.fn().mockReturnThis(), single: vi.fn().mockResolvedValue({ data: ws, error: null }) }
+        : { update: vi.fn().mockReturnThis(), eq: vi.fn().mockReturnThis(), select: vi.fn().mockReturnThis(), single: vi.fn().mockResolvedValue({ data: updated, error: null }) }
+      ),
+    } as never);
+
+    const res = await request(app).patch('/api/workspaces/sk_abc/folders/fld1').send({ name: 'Renamed' });
+    expect(res.status).toBe(200);
+    expect(res.body.name).toBe('Renamed');
+  });
+});
+
+describe('DELETE /api/workspaces/:key/folders/:id', () => {
+  beforeEach(() => vi.clearAllMocks());
+
+  it('deletes folder and returns 204', async () => {
+    const ws = { id: 'ws1', secret_key: 'sk_abc' };
+    vi.mocked(getAdminClient).mockReturnValue({
+      from: vi.fn((table: string) => table === 'workspaces'
+        ? { select: vi.fn().mockReturnThis(), eq: vi.fn().mockReturnThis(), single: vi.fn().mockResolvedValue({ data: ws, error: null }) }
+        : { delete: vi.fn().mockReturnThis(), eq: vi.fn().mockResolvedValue({ error: null }) }
+      ),
+    } as never);
+
+    const res = await request(app).delete('/api/workspaces/sk_abc/folders/fld1');
+    expect(res.status).toBe(204);
+  });
+});
