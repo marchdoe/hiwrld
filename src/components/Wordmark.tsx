@@ -1,6 +1,6 @@
 import { wordmark } from '../../styled-system/recipes';
 
-type WordmarkVariant = 'primary' | 'mono' | 'short';
+export type WordmarkVariant = 'primary' | 'mono' | 'short';
 
 export interface WordmarkProps {
   size?: number;

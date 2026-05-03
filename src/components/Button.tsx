@@ -1,7 +1,7 @@
 import { button } from '../../styled-system/recipes';
 
-type ButtonVariant = 'solid' | 'line' | 'ghost' | 'link';
-type ButtonVisual = 'default' | 'inverted' | 'ink';
+export type ButtonVariant = 'solid' | 'line' | 'ghost' | 'link';
+export type ButtonVisual = 'default' | 'inverted' | 'ink';
 
 export interface ButtonProps {
   variant?: ButtonVariant;

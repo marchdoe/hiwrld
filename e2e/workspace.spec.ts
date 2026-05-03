@@ -1,7 +1,14 @@
-import { expect, test } from '@playwright/test';
+import { type Page, expect, test } from '@playwright/test';
 import { fillTextarea } from './helpers';
 
 const TEST_DOC = 'e2ewrks';
+
+async function resetWorkspace(page: Page): Promise<void> {
+  await page.goto(`/${TEST_DOC}`);
+  await page.evaluate(() => localStorage.removeItem('hiwrld.workspace'));
+  await page.reload();
+  await page.waitForURL(/\/[A-Za-z0-9]{7}$/);
+}
 
 // These tests cover UI-level behaviour of the WorkspaceDrawer.
 // Tests that require a live Supabase workspace (create workspace, folder actions)
@@ -12,10 +19,7 @@ test.describe('workspace drawer — no workspace state', () => {
   test('shows flat doc list and create workspace CTA when no workspace configured', async ({
     page,
   }) => {
-    await page.goto(`/${TEST_DOC}`);
-    await page.evaluate(() => localStorage.removeItem('hiwrld.workspace'));
-    await page.reload();
-    await page.waitForURL(/\/[A-Za-z0-9]{7}$/);
+    await resetWorkspace(page);
 
     await page.locator('.el__menuButton').click();
     await expect(page.locator('.dmenu__drawer')).toBeVisible();
@@ -26,10 +30,7 @@ test.describe('workspace drawer — no workspace state', () => {
   });
 
   test('workspace create form has name input and submit button', async ({ page }) => {
-    await page.goto(`/${TEST_DOC}`);
-    await page.evaluate(() => localStorage.removeItem('hiwrld.workspace'));
-    await page.reload();
-    await page.waitForURL(/\/[A-Za-z0-9]{7}$/);
+    await resetWorkspace(page);
 
     await page.locator('.el__menuButton').click();
     await expect(page.locator('.wscreate__input')).toBeVisible();
@@ -89,10 +90,7 @@ test.describe('workspace drawer — with workspace in localStorage', () => {
 
 test.describe('workspace drawer — existing app behaviour unchanged', () => {
   test('local documents still work without a workspace', async ({ page }) => {
-    await page.goto(`/${TEST_DOC}`);
-    await page.evaluate(() => localStorage.removeItem('hiwrld.workspace'));
-    await page.reload();
-    await page.waitForURL(/\/[A-Za-z0-9]{7}$/);
+    await resetWorkspace(page);
 
     // Typing still works
     await fillTextarea(page, '# Local doc');
@@ -101,10 +99,7 @@ test.describe('workspace drawer — existing app behaviour unchanged', () => {
   });
 
   test('adding a new document still works', async ({ page }) => {
-    await page.goto(`/${TEST_DOC}`);
-    await page.evaluate(() => localStorage.removeItem('hiwrld.workspace'));
-    await page.reload();
-    await page.waitForURL(/\/[A-Za-z0-9]{7}$/);
+    await resetWorkspace(page);
 
     const firstDocUrl = page.url();
     await page.locator('.el__addButton').click();
