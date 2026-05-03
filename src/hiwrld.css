@@ -402,11 +402,11 @@ body {
   outline: none;
 }
 .document-menu-item:active {
-  background: rgba(53, 51, 46, 0.10);
+  background: color-mix(in srgb, var(--colors-g5) 10%, transparent);
 }
 .document-menu-item:has(a[aria-current="page"]) {
-  background: rgba(53, 51, 46, 0.08);
-  border-left-color: #3a4a6b;
+  background: color-mix(in srgb, var(--colors-g5) 8%, transparent);
+  border-left-color: var(--colors-ink);
 }
 
 .document-menu-item-wrap {
@@ -426,13 +426,13 @@ body {
   white-space: nowrap;
   font-size: 12px;
   line-height: 1.5;
-  color: #3d3a35;
+  color: var(--colors-g5);
   text-decoration: none;
   padding: 2px 0;
 }
 .document-menu-item:hover .document-menu-item-title,
 .document-menu-item:has(a[aria-current="page"]) .document-menu-item-title {
-  color: #1f1d1a;
+  color: var(--colors-g6);
 }
 
 .document-menu-item-delete-button {
@@ -440,7 +440,7 @@ body {
   opacity: 0;
   background: none;
   border: none;
-  color: #a8a39a;
+  color: var(--colors-g3);
   cursor: pointer;
   padding: 2px 4px;
   font-size: 11px;
@@ -595,8 +595,8 @@ pre .function {
 
 /* Context menu */
 .context-menu {
-  background: #f7f6f3;
-  border: 1px solid #dcd9d2;
+  background: var(--colors-g0);
+  border: 1px solid var(--colors-g2);
   border-radius: 0;
   padding: 4px 0;
   min-width: 160px;
@@ -611,12 +611,12 @@ pre .function {
   padding: 6px 12px;
   background: none;
   border: none;
-  color: #3d3a35;
+  color: var(--colors-g5);
   cursor: pointer;
   text-align: left;
 }
 .context-menu-item:hover {
-  background: rgba(53, 51, 46, 0.08);
+  background: color-mix(in srgb, var(--colors-g5) 8%, transparent);
 }
 .context-menu-item--danger {
   color: #c0392b;
@@ -629,7 +629,7 @@ pre .function {
 .workspace-create {
   padding: 16px 12px;
   text-align: center;
-  color: #6e6a62;
+  color: var(--colors-g4);
 }
 .workspace-create-icon {
   font-size: 24px;
@@ -637,7 +637,7 @@ pre .function {
   margin-bottom: 8px;
 }
 .workspace-create-title {
-  color: #1f1d1a;
+  color: var(--colors-g6);
   font-weight: 600;
   font-size: 13px;
   margin: 0 0 4px;
@@ -654,17 +654,17 @@ pre .function {
 }
 .workspace-create-input {
   padding: 6px 10px;
-  border: 1px solid #dcd9d2;
+  border: 1px solid var(--colors-g2);
   border-radius: 0;
-  background: #f7f6f3;
-  color: #1f1d1a;
+  background: var(--colors-g0);
+  color: var(--colors-g6);
   font-size: 12px;
 }
 .workspace-create-btn {
   padding: 7px 12px;
-  background: #1f1d1a;
-  color: #f7f6f3;
-  border: 1px solid #1f1d1a;
+  background: var(--colors-g6);
+  color: var(--colors-g0);
+  border: 1px solid var(--colors-g6);
   border-radius: 0;
   font-size: 12px;
   cursor: pointer;
@@ -680,8 +680,8 @@ pre .function {
   align-items: center;
 }
 .tree-row--active {
-  background: rgba(53, 51, 46, 0.08);
-  border-left: 2px solid #3a4a6b;
+  background: color-mix(in srgb, var(--colors-g5) 8%, transparent);
+  border-left: 2px solid var(--colors-ink);
 }
 .tree-folder-btn,
 .tree-doc-btn {
@@ -692,18 +692,18 @@ pre .function {
   padding: 4px 8px 4px 0;
   background: none;
   border: none;
-  color: #3d3a35;
+  color: var(--colors-g5);
   cursor: pointer;
   font-size: 12px;
   text-align: left;
 }
 .tree-folder-btn:hover,
 .tree-doc-btn:hover {
-  color: #1f1d1a;
+  color: var(--colors-g6);
 }
 .tree-chevron {
   font-size: 9px;
-  color: #a8a39a;
+  color: var(--colors-g3);
   width: 10px;
 }
 .tree-icon {
@@ -721,22 +721,22 @@ pre .function {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: #f7f6f3;
-  color: #3d3a35;
+  background: var(--colors-g0);
+  color: var(--colors-g5);
 }
 .workspace-drawer-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 12px;
-  border-bottom: 1px solid #dcd9d2;
+  border-bottom: 1px solid var(--colors-g2);
   flex-shrink: 0;
 }
 .workspace-drawer-title {
   display: flex;
   align-items: center;
   gap: 6px;
-  color: #1f1d1a;
+  color: var(--colors-g6);
   font-weight: 600;
   font-size: 12px;
 }
@@ -750,13 +750,13 @@ pre .function {
 .workspace-drawer-action-btn {
   background: none;
   border: none;
-  color: #a8a39a;
+  color: var(--colors-g3);
   cursor: pointer;
   font-size: 13px;
   padding: 2px;
 }
 .workspace-drawer-action-btn:hover {
-  color: #1f1d1a;
+  color: var(--colors-g6);
 }
 .workspace-drawer-tree {
   flex: 1;
@@ -765,12 +765,12 @@ pre .function {
 }
 .workspace-drawer-key {
   padding: 8px 12px;
-  border-top: 1px solid #dcd9d2;
+  border-top: 1px solid var(--colors-g2);
   display: flex;
   align-items: center;
   gap: 6px;
   font-size: 10px;
-  color: #a8a39a;
+  color: var(--colors-g3);
   flex-shrink: 0;
 }
 .workspace-key-value {
@@ -780,35 +780,35 @@ pre .function {
 .workspace-key-copy {
   background: none;
   border: none;
-  color: #a8a39a;
+  color: var(--colors-g3);
   cursor: pointer;
   font-size: 10px;
   padding: 0;
 }
 .workspace-key-copy:hover {
-  color: #6e6a62;
+  color: var(--colors-g4);
 }
 .workspace-drawer-create-cta {
-  border-top: 1px solid #dcd9d2;
+  border-top: 1px solid var(--colors-g2);
   margin-top: 8px;
 }
 /* Confirm dialog */
 .workspace-confirm-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(53, 51, 46, 0.5);
+  background: color-mix(in srgb, var(--colors-g5) 50%, transparent);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 200;
 }
 .workspace-confirm {
-  background: #f7f6f3;
-  border: 1px solid #dcd9d2;
+  background: var(--colors-g0);
+  border: 1px solid var(--colors-g2);
   border-radius: 0;
   padding: 20px;
   max-width: 320px;
-  color: #3d3a35;
+  color: var(--colors-g5);
   font-size: 13px;
 }
 .workspace-confirm p {
@@ -822,16 +822,16 @@ pre .function {
 .workspace-confirm-actions button {
   padding: 6px 14px;
   border-radius: 0;
-  border: 1px solid #dcd9d2;
+  border: 1px solid var(--colors-g2);
   background: none;
-  color: #3d3a35;
+  color: var(--colors-g5);
   cursor: pointer;
   font-size: 12px;
 }
 .workspace-confirm-actions button.workspace-confirm-delete {
   background: #c0392b;
   border-color: #c0392b;
-  color: #f7f6f3;
+  color: var(--colors-g0);
 }
 
 /* ── Landing page responsive ─────────────────────────────── */
