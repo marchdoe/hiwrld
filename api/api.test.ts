@@ -143,7 +143,12 @@ describe('DELETE /api/workspaces/:key/folders/:id', () => {
     vi.mocked(getAdminClient).mockReturnValue({
       from: vi.fn((table: string) => table === 'workspaces'
         ? { select: vi.fn().mockReturnThis(), eq: vi.fn().mockReturnThis(), single: vi.fn().mockResolvedValue({ data: ws, error: null }) }
-        : { delete: vi.fn().mockReturnThis(), eq: vi.fn().mockResolvedValue({ error: null }) }
+        : {
+            delete: vi.fn().mockReturnThis(),
+            eq: vi.fn().mockReturnValue({
+              eq: vi.fn().mockResolvedValue({ error: null }),
+            }),
+          }
       ),
     } as never);
 

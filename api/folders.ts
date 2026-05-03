@@ -57,7 +57,8 @@ foldersRouter.delete('/:id', async (req, res, next) => {
     const db = getAdminClient();
     const { error } = await db
       .from('folders').delete()
-      .eq('id', req.params.id);
+      .eq('id', req.params.id)
+      .eq('workspace_id', ws.id);
     if (error) return next(error);
     res.status(204).end();
   } catch (err) { next(err); }
