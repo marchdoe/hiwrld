@@ -47,6 +47,11 @@ Pre-launch follow-ups for [hiwrld.com](https://hiwrld.com).
 - [ ] **Remove `useWindowWidth` dead code** — `src/hooks/useWindowWidth.ts` is not imported anywhere; leftover from the removed narrow-screen auto-force-write mode.
 - [ ] **Drawer close on document navigation** — `closeMenu` exists in `WritePane` but is not passed into `DocumentMenu`. Pass it as an `onClose` prop to `<DocumentMenu currentDocId={docId} onClose={closeMenu} />`, thread it through to `DocumentMenuItem`, and call it on the `<Link onClick>` handler.
 
+## Upcoming features
+
+- [ ] **Dark mode** — full app dark theme (write pane, read pane, toolbar, drawer). CSS custom properties on `:root` toggled via a `data-theme` attribute, persisted to localStorage. Design separately before implementing.
+- [ ] **Markdown editor keyboard shortcuts** — Tier 3 shortcut set (Cmd+B bold, Cmd+I italic, Cmd+K link, Cmd+` code, Cmd+Shift+H heading, Cmd+Shift+. blockquote). Insert placeholder text when no selection, wrap selection when text is selected. Design in progress.
+
 ## Out of scope for v1 (parking-lot ideas)
 
 - **MathJax** — removed for first release; can re-add via pnpm + dynamic-import on first `$$…$$` detection.
