@@ -1,3 +1,4 @@
+@layer reset, base, tokens, recipes, utilities;
 @charset "UTF-8";
 
 /* Icon buttons — Lucide SVG via CSS mask (replaces dead SymbolSet font) */
