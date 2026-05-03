@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" fill="#1f1d1a"/>
+  <text
+    x="256"
+    y="310"
+    text-anchor="middle"
+    font-family="Geist, Helvetica Neue, Helvetica, Arial, sans-serif"
+    font-weight="700"
+    font-size="256"
+    fill="#f7f6f3"
+    letter-spacing="-10"
+  >hi</text>
+  <text
+    x="400"
+    y="310"
+    text-anchor="start"
+    font-family="Geist, Helvetica Neue, Helvetica, Arial, sans-serif"
+    font-weight="400"
+    font-size="243"
+    fill="#b8c2d4"
+  >*</text>
+</svg>

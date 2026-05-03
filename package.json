@@ -27,7 +27,9 @@
     "test:e2e:ui": "playwright test --ui",
     "test:all": "pnpm test && pnpm test:e2e",
     "analyze": "fallow audit",
-    "analyze:ci": "fallow audit --format json --quiet"
+    "analyze:ci": "fallow audit --format json --quiet",
+    "render:favicons": "tsx scripts/render-favicons.ts",
+    "render:og": "tsx scripts/render-og.ts"
   },
   "dependencies": {
     "@codemirror/commands": "^6.10.3",
